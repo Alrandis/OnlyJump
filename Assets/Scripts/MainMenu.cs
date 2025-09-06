@@ -5,42 +5,48 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    //[SerializeField] private Button _continueButton;
-    //[SerializeField] private Button _newGameButton;
-    //[SerializeField] private Button _scoreButton;
-    //[SerializeField] private Button _quitGameButton;
-
+    [Header("Panels")]
     [SerializeField] private GameObject _scorePanel;
+
+    [Header("Scene")]
     [SerializeField] private string _sceneName = "GameScene";
 
-    private GameObject _menuPanel;
+    [Header("Scriptable Objects")]
+    [SerializeField] private GameDataSO _scoreDataSO;
 
-    private void Awake()
+    [Header("UI")]
+    [SerializeField] private Button _continueButton; 
+
+    private void Start()
     {
-        _menuPanel = GetComponent<GameObject>();
+        // Отключаем кнопку Continue, если сохранения нет
+        _continueButton.interactable = _scoreDataSO.IsExistSave;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
+    /// <summary>
+    /// Открыть окно счета
+    /// </summary>
     public void OpenScore()
     {
-        _menuPanel.SetActive(false);
+        gameObject.SetActive(false);
         _scorePanel.SetActive(true);
     }
 
     public void ContinueGame()
     {
+        //if (_scoreDataSO.IsExistSave)
+        //{
+        //    SceneManager.LoadScene(_sceneName);
+        //}
+
         SceneManager.LoadScene(_sceneName);
     }
 
     public void StartNewGame()
     {
+        _scoreDataSO.Clear();
+        _scoreDataSO.IsExistSave = true;
         SceneManager.LoadScene(_sceneName);
-        // Добавить обработку уничтожения прогресса
     }
 
     public void QuitGame()
