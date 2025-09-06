@@ -2551,7 +2551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01dd86be15891354ca0711ff8c59a554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bestScoreText: {fileID: 0}
+  _bestScoreText: {fileID: 328575700}
   _menuPanel: {fileID: 1840507536}
 --- !u!1 &1797890315
 GameObject:

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,19 +6,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameDataSO", menuName = "Scriptable Objects/GameDataSO")]
 public class GameDataSO : ScriptableObject
 {
+    public const int c_MaxAttemptsStored = 20;
+
     [SerializeField] private int _highScore; // Не забыть убрать SerializeField в конце разработки
+    public bool IsExistSave { get; set; } = false;
 
-    public List<Attempt> Attempts;
+    public List<Attempt> Attempts = new List<Attempt>();
 
-    public void AddAttempt(Attempt attempt)
+    public void AddAttempt(int score, int height, int time)
     {
+        var attempt = new Attempt(score, height, time);
         Attempts.Insert(0, attempt);
 
         _highScore = (_highScore < attempt.Score) ? attempt.Score : _highScore;
 
-        if (Attempts.Count >= Attempt.c_MaxAttemptsStored)
+        if (Attempts.Count >= c_MaxAttemptsStored)
         {
-            Attempts.RemoveAt(Attempt.c_MaxAttemptsStored);
+            Attempts.RemoveAt(Attempts.Count - 1);
         }
     }
 
@@ -26,7 +31,7 @@ public class GameDataSO : ScriptableObject
         return _highScore.ToString();
     }
 
-    public void Cliar()
+    public void Clear()
     {
         Attempts.Clear();
         _highScore = 0;
@@ -34,10 +39,16 @@ public class GameDataSO : ScriptableObject
 
 }
 
-public struct Attempt
+public class Attempt
 {
-    public int Score;
-    public int Height;
-    public string Timestamp;
-    public const int c_MaxAttemptsStored = 10;
+    public int Score { get; private set; }
+    public int Height { get; private set; }
+    public string Timestamp { get; private set; }
+
+    public Attempt(int score, int height, int time)
+    {
+        Score = score;
+        Height = height;
+        Timestamp = time.ToString();
+    }
 }
