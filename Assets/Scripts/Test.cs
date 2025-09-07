@@ -1,9 +1,9 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-public class PlayerJumpController : MonoBehaviour
+public class test : MonoBehaviour
 {
-    [Header("РќР°СЃС‚СЂРѕР№РєРё РїСЂС‹Р¶РєР°")]
+    [Header("Настройки прыжка")]
     [SerializeField] private float _jumpTime = 0.4f;
     [SerializeField] private float _maxJumpX = 8f;
     [SerializeField] private float _maxJumpY = 4f;
@@ -13,11 +13,7 @@ public class PlayerJumpController : MonoBehaviour
     [SerializeField] private float _groundRadius = 0.2f;
     [SerializeField] private LayerMask _groundLayer;
 
-    [Header("РЎРєРѕР»СЊР·РєРёРµ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё")]
-    [SerializeField] private LayerMask _slipperyLayer;
-    [SerializeField] private float _slideDamping = 0.95f;
-
-    [Header("РЎС‚РµРЅС‹")]
+    [Header("Стены")]
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private float _wallSlideSpeed = 2f;
 
@@ -27,7 +23,6 @@ public class PlayerJumpController : MonoBehaviour
 
     private bool _isGrounded;
     private bool _isJumping;
-    private bool _isOnSlippery;
     private bool _isTouchingWall;
     private int _wallDirection;
     private Vector2 _jumpTarget;
@@ -41,13 +36,10 @@ public class PlayerJumpController : MonoBehaviour
 
     private void Update()
     {
-        // РџСЂРѕРІРµСЂРєР° Р·РµРјР»Рё
+        // Проверка земли
         _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundRadius, _groundLayer);
 
-        // РџСЂРѕРІРµСЂРєР° СЃРєРѕР»СЊР·РєРѕР№ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё
-        _isOnSlippery = Physics2D.OverlapCircle(_groundCheck.position, _groundRadius, _slipperyLayer);
-
-        // РџСЂС‹Р¶РѕРє СЃ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё (Р·РµРјР»СЏ РёР»Рё СЃС‚РµРЅР°)
+        // Прыжок с поверхности (земля или стена)
         if (Input.GetMouseButtonDown(0) && (_isGrounded || _isTouchingWall))
         {
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -59,7 +51,7 @@ public class PlayerJumpController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Р”РІРёР¶РµРЅРёРµ Рє С†РµР»Рё РїСЂС‹Р¶РєР°
+        // Движение к цели прыжка
         if (_isJumping)
         {
             Vector2 currentPos = _rb.position;
@@ -67,9 +59,8 @@ public class PlayerJumpController : MonoBehaviour
 
             if (distance < 0.2f)
             {
-                // СЌС‚Р° СЃС‚СЂРѕРєР° РІР°Р¶РЅР°, РѕСЃС‚Р°РІР»СЏРµРј РєР°Рє РµСЃС‚СЊ
+                // эта строка важна, оставляем как есть
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x * 0.2f, _rb.linearVelocity.y * 0.01f);
-                _rb.position = _jumpTarget;
                 _isJumping = false;
 
                 if (_animator != null)
@@ -77,18 +68,13 @@ public class PlayerJumpController : MonoBehaviour
             }
         }
 
-        // РЎРєРѕР»СЊР·РєРёРµ РїР»Р°С‚С„РѕСЂРјС‹ Рё СЃС‚РµРЅС‹ РїСЂРёРјРµРЅСЏРµРј С‚РѕР»СЊРєРѕ РµСЃР»Рё РёРіСЂРѕРє РЅРµ РїСЂС‹РіР°РµС‚
-        if (!_isJumping)
+        // Скользим по стене только если:
+        // - не стоим на земле
+        // - касаемся стены
+        // - падаем вниз
+        if (!_isGrounded && _isTouchingWall && _rb.linearVelocity.y < 0)
         {
-            if (_isOnSlippery)
-            {
-                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x * _slideDamping, _rb.linearVelocity.y);
-            }
-
-            if (_isTouchingWall && !_isGrounded && _rb.linearVelocity.y < 0)
-            {
-                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, -_wallSlideSpeed);
-            }
+            _rb.linearVelocity = new Vector2(0, -_wallSlideSpeed);
         }
     }
 
@@ -114,25 +100,35 @@ public class PlayerJumpController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        _isTouchingWall = false;
-
         foreach (ContactPoint2D contact in collision.contacts)
         {
-            // РџСЂРѕРІРµСЂРєР° СЃС‚РµРЅ
+            // Проверка стен
             if (((1 << collision.gameObject.layer) & _wallLayer) != 0)
             {
                 if (Mathf.Abs(contact.normal.x) > 0.9f)
                 {
                     _isTouchingWall = true;
                     _wallDirection = contact.normal.x > 0 ? 1 : -1;
-                    // РѕСЃС‚Р°РЅР°РІР»РёРІР°РµРј РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕРµ РґРІРёР¶РµРЅРёРµ РїСЂРё РєРѕРЅС‚Р°РєС‚Рµ СЃ РѕР±С‹С‡РЅРѕР№ СЃС‚РµРЅРѕР№
+
+                    // останавливаем горизонтальное движение при контакте со стеной
                     _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
+
+                    // ВАЖНО: прерываем "траекторию прыжка"
+                    _isJumping = false;
                 }
             }
         }
 
         if (_animator != null && _isGrounded)
             _animator.SetTrigger("Idle");
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (((1 << collision.gameObject.layer) & _wallLayer) != 0)
+        {
+            _isTouchingWall = false;
+        }
     }
 
     private void OnDrawGizmosSelected()
