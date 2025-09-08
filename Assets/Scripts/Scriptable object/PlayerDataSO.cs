@@ -21,4 +21,5 @@ public class PlayerDataSO : ScriptableObject
     public bool IsTouchingWall;
     public bool IsJumping;
     public Vector2 CurrentVelocity;
+    public bool IsKnockedBack;
 }

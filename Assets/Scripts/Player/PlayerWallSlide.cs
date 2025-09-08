@@ -17,7 +17,8 @@ public class PlayerWallSlide : MonoBehaviour
         // Скользим только если:
         // 1. Игрок касается стены
         // 2. Не на земле
-        // 3. Падает вниз
+        // 3. Не прыгает
+        // 4. Падает вниз
         if (PlayerData.IsTouchingWall && !PlayerData.IsGrounded && !PlayerData.IsJumping && _rb.linearVelocity.y < 0)
         {
             _rb.linearVelocity = new Vector2(0, -PlayerData.WallSlideSpeed);
