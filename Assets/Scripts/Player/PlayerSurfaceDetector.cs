@@ -14,16 +14,20 @@ public class PlayerSurfaceDetector : MonoBehaviour
     [SerializeField] private LayerMask WallLayer;
 
     private Rigidbody2D _rb;
+    private PlayerAirControl _playerAirControl;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _playerAirControl = GetComponent<PlayerAirControl>();
     }
 
     private void Update()
     {
         // Проверка земли
         PlayerData.IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, GroundRadius, GroundLayer);
+        if (PlayerData.IsGrounded)
+            _playerAirControl.ResetAirControl();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -44,6 +48,7 @@ public class PlayerSurfaceDetector : MonoBehaviour
     {
         if (((1 << collision.gameObject.layer) & WallLayer) != 0)
         {
+            _playerAirControl.ResetAirControl();
             foreach (ContactPoint2D contact in collision.contacts)
             {
                 if (Mathf.Abs(contact.normal.x) > 0.9f)
