@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] private GameObject prefab;
-    [SerializeField] private int initialSize = 10;
-    [SerializeField] private bool expandable = true;
+    public GameObject Prefab;
+    public int InitialSize = 10;
+    public bool Expandable = true;
 
     private Queue<GameObject> pool = new Queue<GameObject>();
 
     private void Awake()
     {
         // Заполняем пул начальными объектами
-        for (int i = 0; i < initialSize; i++)
+        for (int i = 0; i < InitialSize; i++)
         {
             CreateObject();
         }
@@ -20,7 +20,7 @@ public class ObjectPool : MonoBehaviour
 
     private GameObject CreateObject()
     {
-        var obj = Instantiate(prefab, transform);
+        var obj = Instantiate(Prefab, transform);
         obj.SetActive(false);
 
         var platform = obj.GetComponent<PlatformBase>();
@@ -40,7 +40,7 @@ public class ObjectPool : MonoBehaviour
     {
         if (pool.Count == 0)
         {
-            if (expandable)
+            if (Expandable)
             {
                 CreateObject();
             }

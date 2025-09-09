@@ -2,11 +2,11 @@ using UnityEngine;
 
 public abstract class PlatformBase : MonoBehaviour
 {
-    protected ObjectPool _pool;
+    public ObjectPool Pool;
 
     public void Init(ObjectPool pool)
     {
-        _pool = pool;
+        Pool = pool;
         OnInit();
     }
 
@@ -15,8 +15,8 @@ public abstract class PlatformBase : MonoBehaviour
 
     protected void ReturnToPool()
     {
-        if (_pool != null)
-            _pool.ReturnObject(gameObject);
+        if (Pool != null)
+            Pool.ReturnObject(gameObject);
         else
             gameObject.SetActive(false);
     }
