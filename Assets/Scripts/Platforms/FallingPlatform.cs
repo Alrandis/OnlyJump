@@ -1,20 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FallingPlatform : MonoBehaviour
+public class FallingPlatform : PlatformBase
 {
     [SerializeField] private float _defaultDisappearDelay = 2f;
     private float _currentDelay;
 
     private bool _isActivated;
-    private Collider2D _collider;
-    private SpriteRenderer _renderer;
     private Animator _animator;
 
     private void Awake()
     {
-        _collider = GetComponent<Collider2D>();
-        _renderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _currentDelay = _defaultDisappearDelay;
     }
@@ -25,13 +21,11 @@ public class FallingPlatform : MonoBehaviour
         ResetPlatform();
     }
 
-    private void ResetPlatform()
+    public override void ResetPlatform()
     {
         _isActivated = false;
-        _collider.enabled = true;
-        _renderer.enabled = true;
-        _animator.SetTrigger("Idle");
 
+        _animator.SetTrigger("Idle");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -56,11 +50,6 @@ public class FallingPlatform : MonoBehaviour
         _animator.SetTrigger("Disappear");
         
         yield return new WaitForSeconds(_currentDelay);
-
-        _collider.enabled = false;
-        _renderer.enabled = false;
-
-        // Если используешь пул → верни платформу в пул
-        gameObject.SetActive(false);
+        ReturnToPool();
     }
 }

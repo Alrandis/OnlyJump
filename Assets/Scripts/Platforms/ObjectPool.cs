@@ -54,7 +54,7 @@ public class ObjectPool : MonoBehaviour
         var obj = pool.Dequeue();
         obj.transform.position = position;
         obj.transform.rotation = rotation;
-        obj.SetActive(true);
+        obj.transform.root.gameObject.SetActive(true);
 
         var platform = obj.GetComponent<PlatformBase>();
         if (platform != null)
@@ -70,7 +70,7 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     public void ReturnObject(GameObject obj)
     {
-        obj.SetActive(false);
+        obj.transform.root.gameObject.SetActive(false);
 
         var platform = obj.GetComponent<PlatformBase>();
         if (platform != null)
