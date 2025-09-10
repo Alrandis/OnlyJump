@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Player Data SO
   m_EditorClassIdentifier: 
   JumpTime: 0.35
-  MaxJumpX: 5
-  MaxJumpY: 3
+  MaxJumpX: 2.5
+  MaxJumpY: 2
   GroundRadius: 0.2
   GroundLayer:
     serializedVersion: 2
@@ -23,7 +23,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   WallSlideSpeed: 0.5
-  IsGrounded: 0
+  IsGrounded: 1
   IsTouchingWall: 0
   IsJumping: 0
   CurrentVelocity: {x: 0, y: 0}
+  IsKnockedBack: 0
