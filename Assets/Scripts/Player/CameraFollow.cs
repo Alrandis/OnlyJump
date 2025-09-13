@@ -4,7 +4,7 @@ public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform target;      // Игрок
     [SerializeField] private float smoothSpeed = 5f; // Скорость сглаживания
-    [SerializeField] private float yOffset = 2f;    // Порог по Y (смещение)
+    [SerializeField] private float yOffset = 1f;    // Порог по Y (смещение)
 
     private float fixedX; // фиксируем X при старте
 

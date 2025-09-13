@@ -37,6 +37,7 @@ public class PoolManager : MonoBehaviour
             pool.InitialSize = item.initialSize;
             pool.Expandable = item.expandable;
 
+            pool.InitializePool();
             pools[item.prefab] = pool;
         }
     }

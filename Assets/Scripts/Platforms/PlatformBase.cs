@@ -2,25 +2,57 @@ using UnityEngine;
 
 public abstract class PlatformBase : MonoBehaviour
 {
-    public ObjectPool Pool;
+    public ObjectPool Pool { get; private set; }
+
+    // Сохраняем корневой объект платформы
+    private GameObject platformRoot;
 
     public void Init(ObjectPool pool)
     {
         Pool = pool;
+        platformRoot = GetRootObject();
         OnInit();
     }
 
-    // Каждый тип платформы сбрасывает свое состояние по-своему
+    // Получаем корень платформы
+    private GameObject GetRootObject()
+    {
+        // Если скрипт на корне — вернём себя
+        if (transform.parent == null || transform.parent.GetComponent<ObjectPool>() == null)
+            return gameObject;
+
+        // Если есть родитель — ищем первый объект выше, который не PoolManager
+        Transform t = transform;
+        while (t.parent != null && t.parent.GetComponent<ObjectPool>() == null)
+            t = t.parent;
+
+        return t.gameObject;
+    }
+
+    // Сбрасывает состояние платформы
     public abstract void ResetPlatform();
 
+    // Возврат в пул
     protected void ReturnToPool()
     {
         if (Pool != null)
-            Pool.ReturnObject(gameObject);
+            Pool.ReturnObject(platformRoot);
         else
-            gameObject.SetActive(false);
+            platformRoot.SetActive(false);
     }
 
-    // Хук для доп. инициализации (если кому-то нужно)
+    // Хук для дополнительной инициализации
     protected virtual void OnInit() { }
+
+    // Включение платформы
+    public void Activate()
+    {
+        platformRoot.SetActive(true);
+    }
+
+    // Деактивация платформы
+    public void Deactivate()
+    {
+        platformRoot.SetActive(false);
+    }
 }
