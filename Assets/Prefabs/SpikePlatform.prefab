@@ -308,7 +308,6 @@ GameObject:
   - component: {fileID: 6441846131569351870}
   - component: {fileID: 4408575671698871090}
   - component: {fileID: 6071438466900475012}
-  - component: {fileID: 898146510742424005}
   m_Layer: 6
   m_Name: SpikePlatform
   m_TagString: Untagged
@@ -375,7 +374,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.4867924, g: 0.26584122, b: 0.1386899, a: 1}
   m_FlipX: 0
@@ -452,21 +451,6 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &898146510742424005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4357621558041775060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a6365d21f81fa4e8444b1aeb633ee1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Pool: {fileID: 0}
-  spikeAnimator: {fileID: 3363438516949124391}
-  spikeCollider: {fileID: 1784623657092366196}
 --- !u!1 &4976623320898677852
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +13,8 @@ public class Health : MonoBehaviour
     [SerializeField] private float KnockbackForce = 5f; // сила отброса
 
     private Rigidbody2D _rb;
+
+    public static Action PlayerDead;
 
     private void Awake()
     {
@@ -33,10 +36,8 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        // Здесь можно добавить анимацию смерти, перезагрузку сцены и т.д.
-        Debug.Log("Игрок умер");
-        // например:
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        PlayerDead?.Invoke();
+
         gameObject.SetActive(false);
     }
 

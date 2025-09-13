@@ -2,45 +2,67 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 
 public class MenuUI : MonoBehaviour
 {
     [SerializeField] private GameObject panelMenu;
+    [SerializeField] private GameObject panelDeath;
     [SerializeField] private GameObject buttonMenu;
     [SerializeField] private TextMeshProUGUI textScore;
-    
+    [SerializeField] private TextMeshProUGUI textDeathScore;
+
     private bool isMenuOpen = false;
 
     private void Start()
     {
         panelMenu.SetActive(false);
+        panelDeath.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        Health.PlayerDead += OpenDeathPanel;
+    }
+
+    private void OnDisable()
+    {
+        Health.PlayerDead -= OpenDeathPanel;
+    }
+
+    private void OpenDeathPanel()
+    {
+        buttonMenu.SetActive(false);
+        panelDeath.SetActive(true);
+        ToggleMenu();
     }
 
     public void ToggleMenu()
     {
         isMenuOpen = !isMenuOpen;
-        panelMenu.SetActive(isMenuOpen);
-
         // стопаем время только при открытии меню
         Time.timeScale = isMenuOpen ? 0f : 1f;
 
-        if (isMenuOpen)
-        {
-            UpdateScoreText();
-        }
+        UpdateScoreText();
+
     }
 
     private void UpdateScoreText()
     {
         // пока плейсхолдер, потом подключим систему очков
-        textScore.text = $"Высота: 0\n" +
+        textScore.text = $"Счёт: 0\n" +
                          $"Время: 0\n" +
-                         $"Счёт: 0";
+                         $"Высота: 0";
+
+        textDeathScore.text = $"Счёт: 0\n" +
+                 $"Время: 0\n" +
+                 $"Высота: 0";
     }
 
     public void OnContinue()
     {
+        panelMenu.SetActive(false);
         ToggleMenu();
         buttonMenu.SetActive(true);
     }
