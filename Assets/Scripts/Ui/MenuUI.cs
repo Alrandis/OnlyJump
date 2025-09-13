@@ -23,12 +23,12 @@ public class MenuUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Health.PlayerDead += OpenDeathPanel;
+        Health.OnPlayerDead += OpenDeathPanel;
     }
 
     private void OnDisable()
     {
-        Health.PlayerDead -= OpenDeathPanel;
+        Health.OnPlayerDead -= OpenDeathPanel;
     }
 
     private void OpenDeathPanel()

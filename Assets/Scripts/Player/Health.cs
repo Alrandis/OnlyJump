@@ -14,7 +14,8 @@ public class Health : MonoBehaviour
 
     private Rigidbody2D _rb;
 
-    public static Action PlayerDead;
+    public static Action OnPlayerDead;
+    public static Action<int> OnHealthChanged;
 
     private void Awake()
     {
@@ -26,7 +27,8 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
-
+        OnHealthChanged?.Invoke(CurrentHealth);
+ 
         // Проверка смерти
         if (CurrentHealth <= 0)
         {
@@ -36,7 +38,7 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        PlayerDead?.Invoke();
+        OnPlayerDead?.Invoke();
 
         gameObject.SetActive(false);
     }
