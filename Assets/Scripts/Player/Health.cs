@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,9 @@ public class Health : MonoBehaviour
 
     private Rigidbody2D _rb;
 
+    public static Action OnPlayerDead;
+    public static Action<int> OnHealthChanged;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -23,7 +27,8 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
-
+        OnHealthChanged?.Invoke(CurrentHealth);
+ 
         // Проверка смерти
         if (CurrentHealth <= 0)
         {
@@ -33,10 +38,8 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        // Здесь можно добавить анимацию смерти, перезагрузку сцены и т.д.
-        Debug.Log("Игрок умер");
-        // например:
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        OnPlayerDead?.Invoke();
+
         gameObject.SetActive(false);
     }
 
