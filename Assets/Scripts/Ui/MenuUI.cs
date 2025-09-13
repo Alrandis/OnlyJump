@@ -8,6 +8,7 @@ using System;
 public class MenuUI : MonoBehaviour
 {
     [SerializeField] private GameObject panelMenu;
+    [SerializeField] private GameObject HeatlhBar;
     [SerializeField] private GameObject panelDeath;
     [SerializeField] private GameObject buttonMenu;
     [SerializeField] private TextMeshProUGUI textScore;
@@ -19,6 +20,7 @@ public class MenuUI : MonoBehaviour
     {
         panelMenu.SetActive(false);
         panelDeath.SetActive(false);
+        HeatlhBar.SetActive(true);
     }
 
     private void OnEnable()
@@ -65,12 +67,15 @@ public class MenuUI : MonoBehaviour
         panelMenu.SetActive(false);
         ToggleMenu();
         buttonMenu.SetActive(true);
+        HeatlhBar.SetActive(true);
     }
 
     public void OpenMenu()
     {
         ToggleMenu();
         buttonMenu.SetActive(false);
+        panelMenu.SetActive(true);
+        HeatlhBar.SetActive(false);
     }
 
     public void OnRestart()
