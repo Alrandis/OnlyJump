@@ -1229,8 +1229,8 @@ Transform:
   m_GameObject: {fileID: 915196315}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.70710576, w: 0.70710784}
-  m_LocalPosition: {x: -2.75, y: 2.3962, z: 0}
-  m_LocalScale: {x: 14.275963, y: 0.3128, z: 1}
+  m_LocalPosition: {x: -2.75, y: 2.3961997, z: 0}
+  m_LocalScale: {x: 14.275962, y: 0.31279996, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2356,14 +2356,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 168834288}
-  platformSpacingY: 2
+  platformSpacingY: 1.5
   platformsBuffer: 5
   maxFallY: 10
   normalPlatform: {fileID: 4357621558041775060, guid: 29cd13865e2cb914c9cefa42af22d77c, type: 3}
   disappearingPlatform: {fileID: 2010576501425868346, guid: 413ff381798f4ea40b197a63bac92c3d, type: 3}
   spikesPlatform: {fileID: 4357621558041775060, guid: 5251bc3ee86eb3c4a97f273f81240b22, type: 3}
   flyingPlatform: {fileID: 4357621558041775060, guid: 9a452be99d911e94086edb21cc7e19ef, type: 3}
-  verticalPlatform: {fileID: 5394405522839577087, guid: 53ff5665c4e70c6498bb1c78bf51c044, type: 3}
 --- !u!4 &1378494098
 Transform:
   m_ObjectHideFlags: 0
@@ -2957,7 +2956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 168834288}
   smoothSpeed: 5
-  yOffset: 2
+  yOffset: 0
 --- !u!1 &1718834302
 GameObject:
   m_ObjectHideFlags: 0
@@ -3311,8 +3310,8 @@ Transform:
   m_GameObject: {fileID: 1890178013}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.70710576, w: 0.70710784}
-  m_LocalPosition: {x: 2.72, y: 2.3962, z: 0}
-  m_LocalScale: {x: 14.275963, y: 0.3128, z: 1}
+  m_LocalPosition: {x: 2.72, y: 2.3961997, z: 0}
+  m_LocalScale: {x: 14.275962, y: 0.31279996, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3390,6 +3389,66 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1927531415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1927531417}
+  - component: {fileID: 1927531416}
+  m_Layer: 0
+  m_Name: Pool Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1927531416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927531415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa4eddee3246aed4c838ace3f7fb0ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsToPool:
+  - prefab: {fileID: 4357621558041775060, guid: 29cd13865e2cb914c9cefa42af22d77c, type: 3}
+    initialSize: 10
+    expandable: 1
+  - prefab: {fileID: 2010576501425868346, guid: 413ff381798f4ea40b197a63bac92c3d, type: 3}
+    initialSize: 10
+    expandable: 1
+  - prefab: {fileID: 4357621558041775060, guid: 5251bc3ee86eb3c4a97f273f81240b22, type: 3}
+    initialSize: 10
+    expandable: 1
+  - prefab: {fileID: 4357621558041775060, guid: 9a452be99d911e94086edb21cc7e19ef, type: 3}
+    initialSize: 10
+    expandable: 1
+  - prefab: {fileID: 5394405522839577087, guid: 53ff5665c4e70c6498bb1c78bf51c044, type: 3}
+    initialSize: 5
+    expandable: 1
+--- !u!4 &1927531417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927531415}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.39430946, y: -0.7058512, z: -9.947519}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1937585680
 GameObject:
   m_ObjectHideFlags: 0
@@ -3863,3 +3922,4 @@ SceneRoots:
   - {fileID: 1094320651}
   - {fileID: 706545957}
   - {fileID: 1378494098}
+  - {fileID: 1927531417}

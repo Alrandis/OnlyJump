@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6444995610305013332}
   - component: {fileID: 6769739005137721576}
   - component: {fileID: 4556630752529119794}
-  - component: {fileID: 3737315335265212918}
+  - component: {fileID: -9061436910365172270}
   m_Layer: 8
   m_Name: VerticalPlatform
   m_TagString: Untagged
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3735848, g: 0.08669984, b: 0.10537706, a: 1}
+  m_Color: {r: 0.335849, g: 0.058203764, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -163,7 +163,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3737315335265212918
+--- !u!114 &-9061436910365172270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,7 +172,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5394405522839577087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3fd211a5c5146849ae74d00ad495720, type: 3}
+  m_Script: {fileID: 11500000, guid: d000cc5616d81214dbdf31778f92c52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pool: {fileID: 0}
+  side: -1
+  distanceFromWall: 2.4

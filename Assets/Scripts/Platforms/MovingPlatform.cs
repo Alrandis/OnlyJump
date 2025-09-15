@@ -8,14 +8,10 @@ public class MovingPlatform : PlatformBase
     private Vector3 startPos;
     private int direction = 1;
 
-    protected override void OnInit()
-    {
-        startPos = transform.position;
-    }
-
     public override void ResetPlatform()
     {
-        transform.position = startPos;
+        startPos = transform.position;
+        
         direction = 1;
     }
 

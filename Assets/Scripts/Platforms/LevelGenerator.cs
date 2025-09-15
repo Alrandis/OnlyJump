@@ -16,6 +16,7 @@ public class LevelGenerator : MonoBehaviour
     public GameObject disappearingPlatform;
     public GameObject spikesPlatform;
     public GameObject flyingPlatform;
+    public GameObject verticalPlatform;
 
     private List<GameObject> activePlatforms = new List<GameObject>();
     private float lastPlatformY = 0f;
@@ -42,13 +43,13 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateNextPlatform()
     {
-        float xPos = ChooseXSlot(lastPlatformY);
         GameObject prefab = ChoosePlatformPrefab(lastPlatformY);
+        float xPos = ChooseXSlot(prefab);
 
         if (prefab == null) return;
 
         Vector3 spawnPos = new Vector3(xPos, lastPlatformY + platformSpacingY, 0f);
-        GameObject platformObj = PoolManager.Instance.GetObject(prefab, spawnPos, Quaternion.identity);
+        GameObject platformObj = PoolManager.Instance.GetObject(prefab, spawnPos, prefab.transform.rotation);
         activePlatforms.Add(platformObj);
 
         // Настраиваем исчезновение для FallingPlatform
@@ -58,15 +59,21 @@ public class LevelGenerator : MonoBehaviour
             fallingPlatform.UpdateDisappearDelay(player.position.y);
         }
 
+        // Если это вертикальная платформа
+        var vertical = platformObj.GetComponent<VerticalPlatform>();
+        if (vertical != null)
+        {
+            VerticalPlatform.WallSide side = (Random.value < 0.5f) ? VerticalPlatform.WallSide.Left : VerticalPlatform.WallSide.Right;
+            vertical.SetWallSide(side, lastPlatformY + platformSpacingY);
+        }
+
         lastPlatformY += platformSpacingY;
     }
 
-    private float ChooseXSlot(float height)
+    private float ChooseXSlot(GameObject prefab)
     {
-        // Летающая платформа всегда по центру
-        if (height > 60f) return 0f;
-
-        return Random.value < 0.5f ? -2f : 2f;
+        if (prefab == flyingPlatform) return 0f; // летающая по центру
+        return Random.value < 0.5f ? -2f : 2f;    // обычные слева/справа
     }
 
     private GameObject ChoosePlatformPrefab(float height)
@@ -82,11 +89,12 @@ public class LevelGenerator : MonoBehaviour
         }
         else
         {
-            float r = Random.value;
-            if (r < 0.25f) return normalPlatform;
-            if (r < 0.5f) return disappearingPlatform;
-            if (r < 0.75f) return spikesPlatform;
-            return flyingPlatform;
+            float r2 = Random.value;
+            if (r2 < 0.2f) return normalPlatform;
+            if (r2 < 0.4f) return disappearingPlatform;
+            if (r2 < 0.6f) return spikesPlatform;
+            if (r2 < 0.8f) return flyingPlatform;
+            return verticalPlatform; // новая вертикальная платформа
         }
     }
 
