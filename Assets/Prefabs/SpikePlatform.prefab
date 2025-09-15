@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: -9179223126455770858}
   m_Layer: 6
   m_Name: SpikePlatform
-  m_TagString: Untagged
+  m_TagString: SpikePlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -464,7 +464,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3fd211a5c5146849ae74d00ad495720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pool: {fileID: 0}
 --- !u!1 &4976623320898677852
 GameObject:
   m_ObjectHideFlags: 0

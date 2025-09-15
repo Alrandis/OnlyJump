@@ -21,6 +21,9 @@ public class LevelGenerator : MonoBehaviour
     private List<GameObject> activePlatforms = new List<GameObject>();
     private float lastPlatformY = 0f;
 
+    [Header("Monster Spawner")]
+    public MonsterSpawner monsterSpawner;
+
     private void Start()
     {
         lastPlatformY = player.position.y - platformSpacingY;
@@ -66,6 +69,10 @@ public class LevelGenerator : MonoBehaviour
             VerticalPlatform.WallSide side = (Random.value < 0.5f) ? VerticalPlatform.WallSide.Left : VerticalPlatform.WallSide.Right;
             vertical.SetWallSide(side, lastPlatformY + platformSpacingY);
         }
+
+        // Спавним монстров для этой платформы
+        if (monsterSpawner != null)
+            monsterSpawner.SpawnForPlatform(platformObj);
 
         lastPlatformY += platformSpacingY;
     }

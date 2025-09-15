@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -9061436910365172270}
   m_Layer: 8
   m_Name: VerticalPlatform
-  m_TagString: Untagged
+  m_TagString: VerticalPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
