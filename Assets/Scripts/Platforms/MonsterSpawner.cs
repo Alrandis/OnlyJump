@@ -1,82 +1,96 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [Header("Prefabs")]
+    [Header("Monster prefabs")]
     public GameObject standingMonsterPrefab;
     public GameObject walkingMonsterPrefab;
-    public GameObject flyingMonsterPrefab;
     public GameObject shootingMonsterPrefab;
+    public GameObject flyingMonsterPrefab;
 
     [Header("Settings")]
-    public float horizontalOffset = 3f;   // для стрелков
-    public float flyingOffsetY = 2f;      // высота летающего над платформой
-    public float shootingOffsetY = 3f;    // высота стрелка над платформой
-    public float maxPlayerHeight = 100f;  // для коэффициента сложности
-    public int maxMonstersPerPlatform = 2;
+    public float horizontalOffset = 3f;
+    public float flyingOffsetY = 2f;
+    public float shootingOffsetY = 3f;
+    public int maxMonstersPerPlatform = 1; // можно 1-2
 
-    [SerializeField] private Transform player;
+    [Header("Spawn Settings")]
+    [Range(0f, 1f)]
+    public float spawnChancePerPlatform = 0.3f; // шанс, что на платформе будет враг
 
-    public void SpawnForPlatform(GameObject platform)
+    // Словарь платформ -> список монстров на ней
+    private Dictionary<GameObject, List<GameObject>> platformMonsters = new Dictionary<GameObject, List<GameObject>>();
+
+    public void SpawnForPlatform(GameObject platformObj)
     {
-        if (player == null) return;
+        if (platformObj == null) return;
+        if (platformMonsters.ContainsKey(platformObj)) return; // уже спавнили монстра
 
-        float t = Mathf.Clamp01(player.position.y / maxPlayerHeight);
-        int spawned = 0;
+        // Шанс спавна
+        if (Random.value > spawnChancePerPlatform) return; // пропускаем платформу
 
-        // --- 1. Стоячий / бродячий ---
-        if (platform.CompareTag("VerticalPlatform") || platform.CompareTag("SpikePlatform"))
+        float platformY = platformObj.transform.position.y;
+        List<GameObject> spawnedMonsters = new List<GameObject>();
+
+        // --- Спавн по высоте ---
+        if (platformY >= 20f && platformY < 40f)
         {
-            // на этих платформах не спавним наземных
+            SpawnMonsterOnPlatform(standingMonsterPrefab, platformObj, Vector3.up * 0.5f, spawnedMonsters);
         }
-        else
+        else if (platformY >= 40f && platformY < 60f)
         {
-            if (spawned < maxMonstersPerPlatform && Random.value < Mathf.Lerp(0.2f, 0.7f, t))
-            {
-                SpawnMonster(standingMonsterPrefab, platform.transform.position + Vector3.up * 0.5f);
-                spawned++;
-            }
-
-            if (spawned < maxMonstersPerPlatform && Random.value < Mathf.Lerp(0.2f, 0.6f, t))
-            {
-                SpawnMonster(walkingMonsterPrefab, platform.transform.position + Vector3.up * 0.5f);
-                spawned++;
-            }
+            SpawnMonsterOnPlatform(walkingMonsterPrefab, platformObj, Vector3.up * 0.5f, spawnedMonsters);
         }
-
-        // --- 2. Летающий ---
-        if (spawned < maxMonstersPerPlatform && Random.value < Mathf.Lerp(0.1f, 0.5f, t))
+        else if (platformY >= 60f && platformY < 80f)
         {
-            Vector3 pos = new Vector3(0, platform.transform.position.y + flyingOffsetY, 0);
-            SpawnMonster(flyingMonsterPrefab, pos);
-            spawned++;
+            Vector3 pos = new Vector3(Random.value < 0.5f ? -horizontalOffset : horizontalOffset, platformY + shootingOffsetY, 0f);
+            SpawnMonsterOnPlatform(shootingMonsterPrefab, platformObj, pos - platformObj.transform.position, spawnedMonsters);
+        }
+        else if (platformY >= 80f)
+        {
+            Vector3 pos = new Vector3(0f, platformY + flyingOffsetY, 0f);
+            SpawnMonsterOnPlatform(flyingMonsterPrefab, platformObj, pos - platformObj.transform.position, spawnedMonsters);
         }
 
-        // --- 3. Стрелок ---
-        if (spawned < maxMonstersPerPlatform && Random.value < Mathf.Lerp(0.1f, 0.4f, t))
-        {
-            float wallX = Random.value < 0.5f ? -horizontalOffset : horizontalOffset;
-            Vector3 pos = new Vector3(wallX, platform.transform.position.y + shootingOffsetY, 0);
-            SpawnMonster(shootingMonsterPrefab, pos);
-            spawned++;
-        }
+        if (spawnedMonsters.Count > 0)
+            platformMonsters[platformObj] = spawnedMonsters;
     }
 
-    private void SpawnMonster(GameObject prefab, Vector3 position)
+
+    private void SpawnMonsterOnPlatform(GameObject prefab, GameObject platform, Vector3 offset, List<GameObject> spawnedList)
     {
-        if (prefab == null) return;
+        if (prefab == null || spawnedList.Count >= maxMonstersPerPlatform) return;
+
+        Vector3 spawnPos = platform.transform.position + offset;
 
         GameObject monster = null;
 
-        // Если есть пул — берём из него
         if (PoolManager.Instance != null)
-            monster = PoolManager.Instance.GetObject(prefab, position, Quaternion.identity);
+            monster = PoolManager.Instance.GetObject(prefab, spawnPos, prefab.transform.rotation);
 
-        // Если не нашли в пуле — создаём напрямую
         if (monster == null)
-            monster = Instantiate(prefab, position, Quaternion.identity);
+            monster = Instantiate(prefab, spawnPos, prefab.transform.rotation);
 
-        monster.transform.position = position;
         monster.SetActive(true);
+        var monsterBase = monster.GetComponent<MonsterBase>();
+        if (monsterBase != null)
+            monsterBase.Activate();
+
+        spawnedList.Add(monster);
+    }
+
+    // --- Вызывается при очистке платформ ---
+    public void RemovePlatform(GameObject platform)
+    {
+        if (platformMonsters.TryGetValue(platform, out var monsters))
+        {
+            foreach (var m in monsters)
+            {
+                if (m != null)
+                    PoolManager.Instance.ReturnObject(m);
+            }
+            platformMonsters.Remove(platform);
+        }
     }
 }

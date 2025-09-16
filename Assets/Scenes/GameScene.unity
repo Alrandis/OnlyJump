@@ -2387,6 +2387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1378494098}
   - component: {fileID: 1378494097}
+  - component: {fileID: 1378494099}
   m_Layer: 0
   m_Name: Platform Generator
   m_TagString: Untagged
@@ -2415,6 +2416,7 @@ MonoBehaviour:
   spikesPlatform: {fileID: 4357621558041775060, guid: 5251bc3ee86eb3c4a97f273f81240b22, type: 3}
   flyingPlatform: {fileID: 4357621558041775060, guid: 9a452be99d911e94086edb21cc7e19ef, type: 3}
   verticalPlatform: {fileID: 5394405522839577087, guid: 53ff5665c4e70c6498bb1c78bf51c044, type: 3}
+  monsterSpawner: {fileID: 0}
 --- !u!4 &1378494098
 Transform:
   m_ObjectHideFlags: 0
@@ -2430,6 +2432,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1378494099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378494096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca466361869b1d4aa1592f6223b943c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standingMonsterPrefab: {fileID: 3518317332710520880, guid: b91019035877c874a8e2bcd208a75592, type: 3}
+  walkingMonsterPrefab: {fileID: 3518317332710520880, guid: 4c77153ffdd2446439ff1352a8aa2284, type: 3}
+  flyingMonsterPrefab: {fileID: 3518317332710520880, guid: 4db900c698cdbcd4e8f419cf03a69490, type: 3}
+  shootingMonsterPrefab: {fileID: 3518317332710520880, guid: 9e117410e4a352347bf045b864d2e98a, type: 3}
+  horizontalOffset: 3
+  flyingOffsetY: 3
+  shootingOffsetY: 4
+  maxPlayerHeight: 100
+  maxMonstersPerPlatform: 2
+  player: {fileID: 168834288}
 --- !u!1 &1403444975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3008,7 +3032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 168834288}
   smoothSpeed: 5
-  yOffset: -1
+  yOffset: 0
 --- !u!1 &1718834302
 GameObject:
   m_ObjectHideFlags: 0

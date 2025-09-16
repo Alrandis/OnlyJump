@@ -70,9 +70,11 @@ public class LevelGenerator : MonoBehaviour
             vertical.SetWallSide(side, lastPlatformY + platformSpacingY);
         }
 
-        // Спавним монстров для этой платформы
+        // --- ВЫЗОВ SPAWN FOR PLATFORM (тандем с генерацией платформы) ---
         if (monsterSpawner != null)
+        {
             monsterSpawner.SpawnForPlatform(platformObj);
+        }
 
         lastPlatformY += platformSpacingY;
     }
@@ -112,6 +114,10 @@ public class LevelGenerator : MonoBehaviour
             if (activePlatforms[i].transform.position.y < player.position.y - maxFallY)
             {
                 PoolManager.Instance.ReturnObject(activePlatforms[i]);
+                if (monsterSpawner != null)
+                {
+                    monsterSpawner.RemovePlatform(activePlatforms[i]);
+                }
                 activePlatforms.RemoveAt(i);
             }
         }
