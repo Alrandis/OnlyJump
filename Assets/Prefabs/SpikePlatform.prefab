@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 4408575671698871090}
   - component: {fileID: 6071438466900475012}
   - component: {fileID: -9179223126455770858}
+  - component: {fileID: 301509288539193620}
   m_Layer: 6
   m_Name: SpikePlatform
   m_TagString: SpikePlatform
@@ -462,6 +463,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3fd211a5c5146849ae74d00ad495720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &301509288539193620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4357621558041775060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d0b7537b5bfa145be77c069763fe94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4976623320898677852
