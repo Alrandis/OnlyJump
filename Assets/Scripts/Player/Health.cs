@@ -51,14 +51,14 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
+        StartCoroutine(Death());
+    }
+
+    private IEnumerator Death()
+    {
+        yield return new WaitForSeconds(0.3f);
         OnPlayerDead?.Invoke();
 
         gameObject.SetActive(false);
-    }
-
-    // Восстановление здоровья (опционально)
-    public void Heal(int amount)
-    {
-        CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
     }
 }
