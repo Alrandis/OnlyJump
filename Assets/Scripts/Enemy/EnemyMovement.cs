@@ -1,11 +1,16 @@
 using UnityEngine;
 
-public abstract class EnemyMovement : MonoBehaviour
+public class EnemyMovement : MonsterBase
 {
     private void Update()
     {
         Tick(); // теперь каждый враг двигается автоматически
     }
 
-    public abstract void Tick();
+    public override void ResetMonster()
+    {
+
+    }
+
+    public virtual void Tick() { }
 }

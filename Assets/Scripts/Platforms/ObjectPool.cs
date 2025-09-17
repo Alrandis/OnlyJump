@@ -9,9 +9,15 @@ public class ObjectPool : MonoBehaviour
 
     private Queue<GameObject> pool = new Queue<GameObject>();
 
-    private void Awake()
+    // Инициализация пула вызывается после присвоения Prefab
+    public void InitializePool()
     {
-        // Заполняем пул начальными объектами
+        if (Prefab == null)
+        {
+            Debug.LogError($"{name} Pool has no prefab assigned!");
+            return;
+        }
+
         for (int i = 0; i < InitialSize; i++)
         {
             CreateObject();
@@ -20,6 +26,9 @@ public class ObjectPool : MonoBehaviour
 
     private GameObject CreateObject()
     {
+        if (Prefab == null)
+            return null;
+
         var obj = Instantiate(Prefab, transform);
         obj.SetActive(false);
 
@@ -34,7 +43,7 @@ public class ObjectPool : MonoBehaviour
     }
 
     /// <summary>
-    /// Выдаёт объект из пула
+    /// Получение объекта из пула
     /// </summary>
     public GameObject GetObject(Vector3 position, Quaternion rotation)
     {
@@ -54,28 +63,36 @@ public class ObjectPool : MonoBehaviour
         var obj = pool.Dequeue();
         obj.transform.position = position;
         obj.transform.rotation = rotation;
-        obj.transform.root.gameObject.SetActive(true);
 
+        // Активируем корень объекта платформы
         var platform = obj.GetComponent<PlatformBase>();
         if (platform != null)
         {
             platform.ResetPlatform();
+            platform.Activate();
+        }
+        else
+        {
+            obj.SetActive(true);
         }
 
         return obj;
     }
 
     /// <summary>
-    /// Возвращает объект в пул
+    /// Возврат объекта в пул
     /// </summary>
     public void ReturnObject(GameObject obj)
     {
-        obj.transform.root.gameObject.SetActive(false);
-
         var platform = obj.GetComponent<PlatformBase>();
         if (platform != null)
         {
             platform.ResetPlatform();
+            platform.Deactivate();
+        }
+        else
+        {
+            obj.SetActive(false);
         }
 
         pool.Enqueue(obj);

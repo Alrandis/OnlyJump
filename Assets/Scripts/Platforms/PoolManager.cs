@@ -26,7 +26,6 @@ public class PoolManager : MonoBehaviour
         }
         Instance = this;
 
-        // Создаём ObjectPool для каждого префаба
         foreach (var item in prefabsToPool)
         {
             GameObject poolObj = new GameObject(item.prefab.name + "_Pool");
@@ -37,13 +36,12 @@ public class PoolManager : MonoBehaviour
             pool.InitialSize = item.initialSize;
             pool.Expandable = item.expandable;
 
+            pool.InitializePool();
             pools[item.prefab] = pool;
         }
     }
 
-    /// <summary>
-    /// Выдать объект нужного типа из пула
-    /// </summary>
+    /// Выдать объект из пула
     public GameObject GetObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         if (!pools.TryGetValue(prefab, out var pool))
@@ -51,25 +49,44 @@ public class PoolManager : MonoBehaviour
             Debug.LogWarning($"Нет пула для префаба {prefab.name}");
             return null;
         }
-        return pool.GetObject(position, rotation);
+
+        var obj = pool.GetObject(position, rotation);
+        if (obj == null) return null;
+
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
+        obj.SetActive(true);
+
+        // Автоинициализация для платформ
+        if (obj.TryGetComponent<PlatformBase>(out var platform) && platform.Pool == null)
+            platform.Init(pool);
+
+        // Автоинициализация для монстров
+        if (obj.TryGetComponent<MonsterBase>(out var monster) && monster.Pool == null)
+            monster.Init(pool);
+
+        return obj;
     }
 
-    /// <summary>
     /// Вернуть объект в пул
-    /// </summary>
     public void ReturnObject(GameObject obj)
     {
-        var platform = obj.GetComponent<PlatformBase>();
-        if (platform != null)
+        if (obj.TryGetComponent<PlatformBase>(out var platform))
         {
             platform.ResetPlatform();
-            platform.gameObject.SetActive(false);
-            // используем пул, к которому привязан объект
+            platform.Deactivate(); 
             platform.Pool?.ReturnObject(obj);
+            return;
         }
-        else
+
+        if (obj.TryGetComponent<MonsterBase>(out var monster))
         {
-            obj.SetActive(false);
+            monster.ResetMonster();
+            monster.Deactivate(); 
+            monster.Pool?.ReturnObject(obj);
+            return;
         }
+
+        obj.SetActive(false);
     }
 }
