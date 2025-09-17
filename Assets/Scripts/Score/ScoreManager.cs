@@ -37,10 +37,26 @@ public class ScoreManager : MonoBehaviour
     public (int score, int height, int time) GetCurrentAttempt()
     {
         int timeSpent = Mathf.FloorToInt(Time.time - _startTime);
-        int score = Mathf.RoundToInt((_maxHeight * scoreMultiplier) / Mathf.Max(1, timeSpent));
 
-        return (score, _maxHeight, timeSpent);
+        // --- Базовый счёт (за высоту) ---
+        int baseScore = _maxHeight;
+
+        // --- Бонус за скорость ---
+        float timePerHeight = 0.5f; // "эталонное" время на 1 единицу высоты
+        float targetTime = _maxHeight * timePerHeight;
+
+        int bonus = 0;
+        if (timeSpent < targetTime)
+        {
+            bonus = Mathf.RoundToInt((targetTime - timeSpent) * 2f);
+            // 2f — коэффициент, подбираешь под баланс
+        }
+
+        int finalScore = baseScore + bonus;
+
+        return (finalScore, _maxHeight, timeSpent);
     }
+
 
     public void SaveAttempt()
     {
