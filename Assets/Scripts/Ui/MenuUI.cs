@@ -52,14 +52,13 @@ public class MenuUI : MonoBehaviour
 
     private void UpdateScoreText()
     {
-        // пока плейсхолдер, потом подключим систему очков
-        textScore.text = $"Счёт: 0\n" +
-                         $"Время: 0\n" +
-                         $"Высота: 0";
+        var attempt = ScoreManager.Instance.GetCurrentAttempt();
 
-        textDeathScore.text = $"Счёт: 0\n" +
-                 $"Время: 0\n" +
-                 $"Высота: 0";
+        textScore.text = $"Счёт: {attempt.score}\n" +
+                         $"Время: {attempt.time}\n" +
+                         $"Высота: {attempt.height}";
+
+        textDeathScore.text = textScore.text;
     }
 
     public void OnContinue()
