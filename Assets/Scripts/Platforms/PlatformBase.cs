@@ -3,25 +3,32 @@ using UnityEngine;
 public abstract class PlatformBase : MonoBehaviour
 {
     public ObjectPool Pool { get; private set; }
+    protected GameObject platformRoot;
 
-    // Сохраняем корневой объект платформы
-    private GameObject platformRoot;
+    protected Vector3 initialPosition;
+    protected Quaternion initialRotation;
+    protected Vector3 initialScale;
+
+    protected virtual void Awake()
+    {
+        platformRoot = GetRootObject();
+
+        initialPosition = transform.localPosition;
+        initialRotation = transform.localRotation;
+        initialScale = transform.localScale;
+    }
 
     public void Init(ObjectPool pool)
     {
         Pool = pool;
-        platformRoot = GetRootObject();
         OnInit();
     }
 
-    // Получаем корень платформы
     private GameObject GetRootObject()
     {
-        // Если скрипт на корне — вернём себя
         if (transform.parent == null || transform.parent.GetComponent<ObjectPool>() == null)
             return gameObject;
 
-        // Если есть родитель — ищем первый объект выше, который не PoolManager
         Transform t = transform;
         while (t.parent != null && t.parent.GetComponent<ObjectPool>() == null)
             t = t.parent;
@@ -29,30 +36,32 @@ public abstract class PlatformBase : MonoBehaviour
         return t.gameObject;
     }
 
-    // Сбрасывает состояние платформы
-    public abstract void ResetPlatform();
+    public virtual void ResetPlatform()
+    {
+        StopAllCoroutines();
 
-    // Возврат в пул
+        transform.localRotation = initialRotation;
+        transform.localScale = initialScale;
+    }
+
     protected void ReturnToPool()
     {
+        StopAllCoroutines();
         if (Pool != null)
             Pool.ReturnObject(platformRoot);
         else
             platformRoot.SetActive(false);
     }
 
-    // Хук для дополнительной инициализации
-    protected virtual void OnInit() { }
-
-    // Включение платформы
     public void Activate()
     {
         platformRoot.SetActive(true);
     }
 
-    // Деактивация платформы
     public void Deactivate()
     {
         platformRoot.SetActive(false);
     }
+
+    protected virtual void OnInit() { }
 }

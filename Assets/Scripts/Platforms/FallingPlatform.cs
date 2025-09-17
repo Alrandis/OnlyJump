@@ -1,70 +1,63 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class FallingPlatform : PlatformBase
+public class FallingPlatform : MonoBehaviour
 {
-    [SerializeField] private float _defaultDisappearDelay = 2f;
-    private float _currentDelay;
-
-    private bool _isActivated;
-    private Animator _animator;
+    [SerializeField] private float delayBeforeDisappear = 1f;
+    [SerializeField] private float fallSpeed = 5f;
+    private Animator animator;
 
     private void Awake()
     {
-        _animator = GetComponentInChildren<Animator>();
-        _currentDelay = _defaultDisappearDelay;
+        animator = GetComponentInChildren<Animator>();
     }
 
-    public override void ResetPlatform()
+    private bool triggered = false;
+    private float disappearTimer = 0f;
+
+    public bool MarkedForRemoval { get; private set; } = false;
+
+    public void UpdateDisappearDelay(float playerY)
     {
-        _isActivated = false;
-
-        if (_animator != null)
-            _animator.SetTrigger("Idle");
-
-        _currentDelay = _defaultDisappearDelay;
-    }
-
-    // Автоматическая установка задержки по высоте игрока
-    public void UpdateDisappearDelay(float playerHeight)
-    {
-        float maxDelay = 2f;
-        float minDelay = 0.5f;
-        float maxHeight = 100f; // высота, на которой сложность максимальна
-
-        float t = Mathf.Clamp01(playerHeight / maxHeight);
-        _currentDelay = Mathf.Lerp(maxDelay, minDelay, t);
+        // при создании можно обновить таймер (если надо)
+        disappearTimer = delayBeforeDisappear;
+        triggered = false;
+        MarkedForRemoval = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (_isActivated) return;
-        if (!collision.collider.CompareTag("Player")) return;
-
-        foreach (var contact in collision.contacts)
+        if (!triggered && collision.collider.CompareTag("Player"))
         {
-            if (contact.normal.y < -0.8f) // игрок сверху
+            triggered = true;
+            disappearTimer = delayBeforeDisappear;
+        }
+    }
+
+    private void Update()
+    {
+        if (triggered && !MarkedForRemoval)
+        {
+            animator.SetTrigger("Disappear");
+            disappearTimer -= Time.deltaTime;
+            if (disappearTimer <= 0f)
             {
-                _isActivated = true;
-                StartCoroutine(DisappearRoutine());
-                break;
+                MarkedForRemoval = true;
+                triggered = false;
+               
+                GetComponent<Collider2D>().enabled = false;
+                GetComponentInChildren<SpriteRenderer>().enabled = false; 
             }
         }
     }
 
-    private IEnumerator DisappearRoutine()
+    public void ResetPlatform()
     {
-        if (_animator != null)
-            _animator.SetTrigger("Disappear");
-
-        yield return new WaitForSeconds(_currentDelay);
-
-        ReturnToPool();
-    }
-
-    public new void Activate()
-    {
-        base.Activate();
-        ResetPlatform();
+        triggered = false;
+        MarkedForRemoval = false;
+        disappearTimer = 0f;
+        // включаем обратно компоненты
+        GetComponent<Collider2D>().enabled = true;
+        GetComponentInChildren<SpriteRenderer>().enabled = true;
+        animator.SetTrigger("Idle");
     }
 }

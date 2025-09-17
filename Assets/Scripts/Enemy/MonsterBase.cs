@@ -53,6 +53,9 @@ public abstract class MonsterBase : MonoBehaviour
     /// </summary>
     public void Activate()
     {
+        if (monsterRoot == null)
+            monsterRoot = GetRootObject(); // гарантируем, что есть объект
+
         monsterRoot.SetActive(true);
         ResetMonster();
     }

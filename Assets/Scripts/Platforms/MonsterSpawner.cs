@@ -26,6 +26,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         if (platformObj == null) return;
         if (platformMonsters.ContainsKey(platformObj)) return; // уже спавнили монстра
+        if (!CanSpawnOnPlatform(platformObj)) return;
 
         // Шанс спавна
         if (Random.value > spawnChancePerPlatform) return; // пропускаем платформу
@@ -44,7 +45,8 @@ public class MonsterSpawner : MonoBehaviour
         }
         else if (platformY >= 60f && platformY < 80f)
         {
-            Vector3 pos = new Vector3(Random.value < 0.5f ? -horizontalOffset : horizontalOffset, platformY + shootingOffsetY, 0f);
+            float wallX = horizontalOffset; // правая стена
+            Vector3 pos = new Vector3(wallX, platformY + shootingOffsetY, 0f);
             SpawnMonsterOnPlatform(shootingMonsterPrefab, platformObj, pos - platformObj.transform.position, spawnedMonsters);
         }
         else if (platformY >= 80f)
@@ -73,11 +75,25 @@ public class MonsterSpawner : MonoBehaviour
             monster = Instantiate(prefab, spawnPos, prefab.transform.rotation);
 
         monster.SetActive(true);
+
         var monsterBase = monster.GetComponent<MonsterBase>();
         if (monsterBase != null)
+        {
+            if (monsterBase.Pool == null)
+                monsterBase.Init(null); // если пул не передан, хотя бы инициализируем
+
             monsterBase.Activate();
+        }
 
         spawnedList.Add(monster);
+    }
+
+    private bool CanSpawnOnPlatform(GameObject platformObj)
+    {
+        if (platformObj == null) return false;
+
+        // Если есть компонент SpikePlatform — нельзя спавнить
+        return platformObj.GetComponentInChildren<SpikeDamage>() == null;
     }
 
     // --- Вызывается при очистке платформ ---

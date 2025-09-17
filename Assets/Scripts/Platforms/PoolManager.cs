@@ -51,6 +51,11 @@ public class PoolManager : MonoBehaviour
         }
 
         var obj = pool.GetObject(position, rotation);
+        if (obj == null) return null;
+
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
+        obj.SetActive(true);
 
         // Автоинициализация для платформ
         if (obj.TryGetComponent<PlatformBase>(out var platform) && platform.Pool == null)
@@ -69,7 +74,7 @@ public class PoolManager : MonoBehaviour
         if (obj.TryGetComponent<PlatformBase>(out var platform))
         {
             platform.ResetPlatform();
-            platform.gameObject.SetActive(false);
+            platform.Deactivate(); 
             platform.Pool?.ReturnObject(obj);
             return;
         }
@@ -77,7 +82,7 @@ public class PoolManager : MonoBehaviour
         if (obj.TryGetComponent<MonsterBase>(out var monster))
         {
             monster.ResetMonster();
-            monster.gameObject.SetActive(false);
+            monster.Deactivate(); 
             monster.Pool?.ReturnObject(obj);
             return;
         }
