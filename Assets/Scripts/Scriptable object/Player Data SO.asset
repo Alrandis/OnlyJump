@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7095f18b710ec4bbc3d8aa3a487de7, type: 3}
   m_Name: Player Data SO
   m_EditorClassIdentifier: 
-  JumpTime: 0.35
+  JumpTime: 0.28
   MaxJumpX: 5
-  MaxJumpY: 2
+  MaxJumpY: 2.5
   GroundRadius: 0.2
   GroundLayer:
     serializedVersion: 2
@@ -25,6 +25,6 @@ MonoBehaviour:
   WallSlideSpeed: 0.5
   IsGrounded: 1
   IsTouchingWall: 0
-  IsJumping: 1
-  CurrentVelocity: {x: 0.040066585, y: -2.290235}
+  IsJumping: 0
+  CurrentVelocity: {x: 0, y: 0}
   IsKnockedBack: 0

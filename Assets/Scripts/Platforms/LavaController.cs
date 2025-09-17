@@ -5,11 +5,11 @@ public class LavaController : MonoBehaviour
 {
     [Header("Движение лавы")]
     [SerializeField] private float _baseSpeed = 0.5f;   // базовая скорость
-    [SerializeField] private float _speedIncrease = 0.05f; // на сколько ускоряется с ростом игрока
+    [SerializeField] private float _speedIncrease = 0.03f; // на сколько ускоряется с ростом игрока
     [SerializeField] private Transform _player;         // игрок для отслеживания высоты
     [SerializeField] private float _currentSpeed;
 
-    private float _maxSpeed = 3f;
+    private float _maxSpeed = 2.8f;
 
     private void Update()
     {

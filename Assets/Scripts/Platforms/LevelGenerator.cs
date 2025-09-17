@@ -8,7 +8,7 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("Generation Settings")]
     public float platformSpacingY = 2f;
-    public float platformSpacingX = 1.5f;
+    public float platformSpacingX = 1.4f;
     public int platformsBuffer = 5;
     public float maxFallY = 10f;
 

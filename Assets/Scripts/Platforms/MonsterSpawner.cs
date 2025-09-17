@@ -52,7 +52,7 @@ public class MonsterSpawner : MonoBehaviour
         else if (platformY >= 80f)
         {
             Vector3 pos = new Vector3(0f, platformY + flyingOffsetY, 0f);
-            SpawnMonsterOnPlatform(flyingMonsterPrefab, platformObj, pos - platformObj.transform.position, spawnedMonsters);
+            SpawnMonsterOnPlatform(flyingMonsterPrefab, platformObj, pos + new Vector3(0, 1.2f, 0) - platformObj.transform.position , spawnedMonsters);
         }
 
         if (spawnedMonsters.Count > 0)
