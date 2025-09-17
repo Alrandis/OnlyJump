@@ -7492,8 +7492,8 @@ Camera:
   m_GameObject: {fileID: 1647078984}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.5320754, g: 0.36309364, b: 0.16363825, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -9315,7 +9315,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.00000023841858, y: -0.012125492}
+  m_Offset: {x: 0.15263963, y: -0.69498634}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -9325,7 +9325,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 7.2013764, y: 2.3715572}
+  m_Size: {x: 6.8960977, y: 1.0058355}
   m_EdgeRadius: 0
 --- !u!4 &2077658966
 Transform:

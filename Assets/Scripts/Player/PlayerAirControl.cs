@@ -11,9 +11,13 @@ public class PlayerAirControl : MonoBehaviour
     private bool _isKnockedBack;          
     private Vector2 _knockbackVelocity;
 
+    private Animator _animator;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponentInChildren<Animator>();
+
     }
 
     private void FixedUpdate()
@@ -42,7 +46,9 @@ public class PlayerAirControl : MonoBehaviour
         _isBouncingVertically = true;
         _isKnockedBack = false;
         _knockbackVelocity = Vector2.zero;
-        
+
+        if (_animator != null)
+            _animator.SetTrigger("Hurt");
     }
 
 
@@ -52,6 +58,8 @@ public class PlayerAirControl : MonoBehaviour
         _isKnockedBack = true;
         _isBouncingVertically = false;
         _knockbackVelocity = new Vector2(_rb.linearVelocity.x, 0);
+        if (_animator != null)
+            _animator.SetTrigger("Hurt");
     }
 
 
