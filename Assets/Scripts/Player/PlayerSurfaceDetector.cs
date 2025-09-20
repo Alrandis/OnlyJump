@@ -15,11 +15,14 @@ public class PlayerSurfaceDetector : MonoBehaviour
 
     private Rigidbody2D _rb;
     private PlayerAirControl _playerAirControl;
+    private Animator _animator;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _playerAirControl = GetComponent<PlayerAirControl>();
+        _animator = GetComponentInChildren<Animator>();
+
     }
 
     private void Update()
@@ -27,7 +30,11 @@ public class PlayerSurfaceDetector : MonoBehaviour
         // Проверка земли
         PlayerData.IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, GroundRadius, GroundLayer);
         if (PlayerData.IsGrounded)
+        {
             _playerAirControl.ResetAirControl();
+            if (_animator != null)
+                _animator.SetTrigger("Idle");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

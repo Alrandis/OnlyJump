@@ -6,7 +6,6 @@ public class EnemyController : MonoBehaviour
     public int Damage = 1;
     public float BounceForce = 10f;
 
-    private Transform _player;
     private Health _playerHealth;
     private PlayerAirControl _playerAirControl;
     [SerializeField] private Transform enemyTop;
@@ -17,7 +16,6 @@ public class EnemyController : MonoBehaviour
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
-            _player = playerObj.transform;
             _playerHealth = playerObj.GetComponent<Health>();
             _playerAirControl = playerObj.GetComponent<PlayerAirControl>();
         }
@@ -28,7 +26,7 @@ public class EnemyController : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player")) return;
 
         // Проверка: сверху ли игрок
-        if (collision.transform.position.y > enemyTop.position.y + 0.2f)
+        if (collision.transform.position.y > enemyTop.position.y)
         {
             // Враг умирает
             Die();

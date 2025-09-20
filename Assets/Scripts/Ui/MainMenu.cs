@@ -46,6 +46,12 @@ public class MainMenu : MonoBehaviour
     {
         _scoreDataSO.Clear();
         _scoreDataSO.IsExistSave = true;
+
+        // Удаляем файл сохранения JSON, если он есть
+        string path = System.IO.Path.Combine(Application.persistentDataPath, "gamedata.json");
+        if (System.IO.File.Exists(path))
+            System.IO.File.Delete(path);
+
         SceneManager.LoadScene(_sceneName);
     }
 

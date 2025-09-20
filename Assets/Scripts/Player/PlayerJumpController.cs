@@ -13,7 +13,7 @@ public class PlayerJumpController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         _gravity = Mathf.Abs(Physics2D.gravity.y * _rb.gravityScale);
     }
 
@@ -41,9 +41,6 @@ public class PlayerJumpController : MonoBehaviour
                 // Не меняем как ты просил
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x * 0.2f, _rb.linearVelocity.y * 0.01f);
                 PlayerData.IsJumping = false;
-
-                if (_animator != null)
-                    _animator.SetTrigger("Idle");
             }
         }
 

@@ -9,6 +9,16 @@ public class WallsFollower : MonoBehaviour
     [SerializeField] private float verticalOffset = 5f; // запас сверху
     [SerializeField] private float moveSpeed = 3f;      // скорость плавного движения
 
+    //[SerializeField] private SpriteRenderer leftWallRenderer;
+    //[SerializeField] private SpriteRenderer rightWallRenderer;
+
+    //private void Start()
+    //{
+    //    // Переворачиваем визуально спрайт вверх ногами
+    //    leftWallRenderer.flipY = true;
+    //    rightWallRenderer.flipY = true;
+    //}
+
     private void Update()
     {
         // целевая позиция Y всегда = позиция игрока + offset

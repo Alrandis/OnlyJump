@@ -11,6 +11,6 @@ public class ScoreEntryUI : MonoBehaviour
     {
         _scoreText.text = $"Счет: {attempt.Score.ToString()}";
         _heightText.text = $"Высота: {attempt.Height.ToString()}";
-        _timeText.text = $"Время: {attempt.Timestamp}";
+        _timeText.text = $"Время: {attempt.Time}";
     }
 }
