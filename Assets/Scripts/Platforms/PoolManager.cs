@@ -8,14 +8,14 @@ public class PoolManager : MonoBehaviour
     [System.Serializable]
     public class PoolPrefab
     {
-        public GameObject prefab;
-        public int initialSize = 5;
-        public bool expandable = true;
+        public GameObject Prefab;
+        public int InitialSize = 5;
+        public bool Expandable = true;
     }
 
-    [SerializeField] private List<PoolPrefab> prefabsToPool;
+    [SerializeField] private List<PoolPrefab> _prefabsToPool;
 
-    private Dictionary<GameObject, ObjectPool> pools = new Dictionary<GameObject, ObjectPool>();
+    private Dictionary<GameObject, ObjectPool> _pools = new Dictionary<GameObject, ObjectPool>();
 
     private void Awake()
     {
@@ -26,25 +26,27 @@ public class PoolManager : MonoBehaviour
         }
         Instance = this;
 
-        foreach (var item in prefabsToPool)
+        foreach (var item in _prefabsToPool)
         {
-            GameObject poolObj = new GameObject(item.prefab.name + "_Pool");
+            GameObject poolObj = new GameObject(item.Prefab.name + "_Pool");
             poolObj.transform.SetParent(transform);
             var pool = poolObj.AddComponent<ObjectPool>();
 
-            pool.Prefab = item.prefab;
-            pool.InitialSize = item.initialSize;
-            pool.Expandable = item.expandable;
+            pool.Prefab = item.Prefab;
+            pool.InitialSize = item.InitialSize;
+            pool.Expandable = item.Expandable;
 
             pool.InitializePool();
-            pools[item.prefab] = pool;
+            _pools[item.Prefab] = pool;
         }
     }
 
+    /// <summary>
     /// Выдать объект из пула
+    /// <summary> 
     public GameObject GetObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        if (!pools.TryGetValue(prefab, out var pool))
+        if (!_pools.TryGetValue(prefab, out var pool))
         {
             Debug.LogWarning($"Нет пула для префаба {prefab.name}");
             return null;
@@ -68,7 +70,9 @@ public class PoolManager : MonoBehaviour
         return obj;
     }
 
+    /// <summary>
     /// Вернуть объект в пул
+    /// <summary>
     public void ReturnObject(GameObject obj)
     {
         if (obj.TryGetComponent<PlatformBase>(out var platform))

@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerWallSlide : MonoBehaviour
 {
-    [SerializeField] private PlayerDataSO PlayerData;
+    [SerializeField] private PlayerDataSO _playerData;
 
     private Rigidbody2D _rb;
 
@@ -19,9 +19,9 @@ public class PlayerWallSlide : MonoBehaviour
         // 2. Не на земле
         // 3. Не прыгает
         // 4. Падает вниз
-        if (PlayerData.IsTouchingWall && !PlayerData.IsGrounded && !PlayerData.IsJumping && _rb.linearVelocity.y < 0)
+        if (_playerData.IsTouchingWall && !_playerData.IsGrounded && !_playerData.IsJumping && _rb.linearVelocity.y < 0)
         {
-            _rb.linearVelocity = new Vector2(0, -PlayerData.WallSlideSpeed);
+            _rb.linearVelocity = new Vector2(0, -_playerData.WallSlideSpeed);
         }
     }
 }

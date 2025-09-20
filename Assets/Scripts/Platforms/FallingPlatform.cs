@@ -2,47 +2,47 @@
 
 public class FallingPlatform : MonoBehaviour
 {
-    [SerializeField] private float delayBeforeDisappear = 1f;
-    [SerializeField] private float fallSpeed = 5f;
-    private Animator animator;
+    [SerializeField] private float _delayBeforeDisappear = 1f;
+    [SerializeField] private float _fallSpeed = 5f;
+    private Animator _animator;
+
+    private bool _isTriggered = false;
+    private float _disappearTimer = 0f;
+
+    public bool MarkedForRemoval { get; private set; } = false;
 
     private void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>();
     }
-
-    private bool triggered = false;
-    private float disappearTimer = 0f;
-
-    public bool MarkedForRemoval { get; private set; } = false;
 
     public void UpdateDisappearDelay(float playerY)
     {
         // при создании можно обновить таймер (если надо)
-        disappearTimer = delayBeforeDisappear;
-        triggered = false;
+        _disappearTimer = _delayBeforeDisappear;
+        _isTriggered = false;
         MarkedForRemoval = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!triggered && collision.collider.CompareTag("Player"))
+        if (!_isTriggered && collision.collider.CompareTag("Player"))
         {
-            triggered = true;
-            disappearTimer = delayBeforeDisappear;
+            _isTriggered = true;
+            _disappearTimer = _delayBeforeDisappear;
         }
     }
 
     private void Update()
     {
-        if (triggered && !MarkedForRemoval)
+        if (_isTriggered && !MarkedForRemoval)
         {
-            animator.SetTrigger("Disappear");
-            disappearTimer -= Time.deltaTime;
-            if (disappearTimer <= 0f)
+            _animator.SetTrigger("Disappear");
+            _disappearTimer -= Time.deltaTime;
+            if (_disappearTimer <= 0f)
             {
                 MarkedForRemoval = true;
-                triggered = false;
+                _isTriggered = false;
                
                 GetComponent<Collider2D>().enabled = false;
                 GetComponentInChildren<SpriteRenderer>().enabled = false; 
@@ -52,12 +52,12 @@ public class FallingPlatform : MonoBehaviour
 
     public void ResetPlatform()
     {
-        triggered = false;
+        _isTriggered = false;
         MarkedForRemoval = false;
-        disappearTimer = 0f;
+        _disappearTimer = 0f;
         // включаем обратно компоненты
         GetComponent<Collider2D>().enabled = true;
         GetComponentInChildren<SpriteRenderer>().enabled = true;
-        animator.SetTrigger("Idle");
+        _animator.SetTrigger("Idle");
     }
 }

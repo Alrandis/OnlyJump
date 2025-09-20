@@ -7,23 +7,20 @@ using UnityEngine.SceneManagement;
 public class Health : MonoBehaviour
 {
     [Header("Параметры здоровья")]
-    [SerializeField] private int MaxHealth = 3;
+    [SerializeField] private int _maxHealth = 3;
     public int CurrentHealth { get; private set; }
 
     [Header("Параметры подбрасывания")]
-    [SerializeField] private float KnockbackForce = 5f; // сила отброса
+    [SerializeField] private float _knockbackForce = 5f; // сила отброса
 
     private bool _isInvulnerable = false;
-
-    private Rigidbody2D _rb;
 
     public static Action OnPlayerDead;
     public static Action<int> OnHealthChanged;
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        CurrentHealth = MaxHealth;
+        CurrentHealth = _maxHealth;
     }
 
     // Применяем урон и knockback

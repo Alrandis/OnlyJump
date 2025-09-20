@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
 
     private Health _playerHealth;
     private PlayerAirControl _playerAirControl;
-    [SerializeField] private Transform enemyTop;
+    [SerializeField] private Transform _enemyTop;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player")) return;
 
         // Проверка: сверху ли игрок
-        if (collision.transform.position.y > enemyTop.position.y)
+        if (collision.transform.position.y > _enemyTop.position.y)
         {
             // Враг умирает
             Die();
@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour
             //Vector2 knockbackDir = ((Vector2)collision.transform.position - (Vector2)enemyTop.position).normalized;
 
             Vector2 knockback = new Vector2(
-               collision.transform.position.x < enemyTop.position.x ? -5f : 5f, 3f); 
+               collision.transform.position.x < _enemyTop.position.x ? -5f : 5f, 3f); 
 
 
             _playerAirControl.Knockback(knockback);

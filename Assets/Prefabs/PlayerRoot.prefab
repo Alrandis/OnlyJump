@@ -225,13 +225,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983265196a6f458449b6dab86feadaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerData: {fileID: 11400000, guid: d80233db415694a44a2ffa4c2e89f74d, type: 2}
-  GroundCheck: {fileID: 1739995828186433460}
-  GroundRadius: 0.2
-  GroundLayer:
+  _playerData: {fileID: 11400000, guid: d80233db415694a44a2ffa4c2e89f74d, type: 2}
+  _groundCheck: {fileID: 1739995828186433460}
+  _groundRadius: 0.2
+  _groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  WallLayer:
+  _wallLayer:
     serializedVersion: 2
     m_Bits: 256
 --- !u!114 &9093204393856405887
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05f710b1432188478bbb1b1de71fdf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerData: {fileID: 11400000, guid: d80233db415694a44a2ffa4c2e89f74d, type: 2}
+  _playerData: {fileID: 11400000, guid: d80233db415694a44a2ffa4c2e89f74d, type: 2}
   _jumpTarget: {x: 0, y: 0}
 --- !u!114 &6604608308424405455
 MonoBehaviour:
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574bd5a9bf859144bbc5dc24655d5c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerData: {fileID: 11400000, guid: d80233db415694a44a2ffa4c2e89f74d, type: 2}
+  _playerData: {fileID: 11400000, guid: d80233db415694a44a2ffa4c2e89f74d, type: 2}
 --- !u!114 &6341319319739221740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,8 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9df1106b61b694dba46ce1ffe7823a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 3
-  KnockbackForce: 5
+  _maxHealth: 3
+  _knockbackForce: 5
 --- !u!1 &5809121430094513315
 GameObject:
   m_ObjectHideFlags: 0
