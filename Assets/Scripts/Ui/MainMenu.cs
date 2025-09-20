@@ -5,16 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [Header("Panels")]
     [SerializeField] private GameObject _scorePanel;
-
-    [Header("Scene")]
     [SerializeField] private string _sceneName = "GameScene";
-
-    [Header("Scriptable Objects")]
     [SerializeField] private GameDataSO _scoreDataSO;
-
-    [Header("UI")]
     [SerializeField] private Button _continueButton; 
 
     private void Start()
