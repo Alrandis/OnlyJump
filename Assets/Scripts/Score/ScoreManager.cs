@@ -5,7 +5,6 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; }
 
     [SerializeField] private GameDataSO gameData;
-    [SerializeField] private float scoreMultiplier = 10f;
 
     private float _startTime;
     private int _maxHeight;
@@ -20,6 +19,10 @@ public class ScoreManager : MonoBehaviour
     {
         _startTime = Time.time;
         _maxHeight = 0;
+
+        // Загружаем данные из JSON при старте игры
+        SaveSystem.Load(gameData);
+
         Health.OnPlayerDead += SaveAttempt;
     }
 
@@ -37,30 +40,25 @@ public class ScoreManager : MonoBehaviour
     public (int score, int height, int time) GetCurrentAttempt()
     {
         int timeSpent = Mathf.FloorToInt(Time.time - _startTime);
-
-        // --- Базовый счёт (за высоту) ---
         int baseScore = _maxHeight;
 
-        // --- Бонус за скорость ---
-        float timePerHeight = 0.5f; // "эталонное" время на 1 единицу высоты
+        float timePerHeight = 0.5f;
         float targetTime = _maxHeight * timePerHeight;
 
         int bonus = 0;
         if (timeSpent < targetTime)
-        {
             bonus = Mathf.RoundToInt((targetTime - timeSpent) * 2f);
-            // 2f — коэффициент, подбираешь под баланс
-        }
 
         int finalScore = baseScore + bonus;
-
         return (finalScore, _maxHeight, timeSpent);
     }
-
 
     public void SaveAttempt()
     {
         var attempt = GetCurrentAttempt();
         gameData.AddAttempt(attempt.score, attempt.height, attempt.time);
+
+        // Сохраняем JSON на диск
+        SaveSystem.Save(gameData);
     }
 }

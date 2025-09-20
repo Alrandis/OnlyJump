@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 110952563397826159}
   m_Layer: 8
   m_Name: VerticalPlatform
-  m_TagString: VerticalPlatform
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,6 +225,6 @@ PolygonCollider2D:
     - - {x: 1.3685387, y: 0.37010214}
       - {x: -1.4362129, y: 0.4370967}
       - {x: -1.4446706, y: -0.44072357}
-      - {x: 1.3598875, y: -0.49717003}
+      - {x: 1.3652145, y: -0.42357054}
       - {x: 1.9750936, y: -0.064170085}
   m_UseDelaunayMesh: 0

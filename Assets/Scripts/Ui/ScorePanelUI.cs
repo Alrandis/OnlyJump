@@ -23,8 +23,11 @@ public class ScorePanelUI : MonoBehaviour
 
     private void OnEnable()
     {
+        // Загружаем актуальные данные из JSON
+        SaveSystem.Load(_scoreDataSO);
+
         // Обновляем лучший счет
-        _bestScoreText.text = $"Лучший счет: {_scoreDataSO.GetHighScore()}";
+        _bestScoreText.text = $"Лучший счет: {_scoreDataSO.HighScore}";
 
         // Заполняем ScrollView
         UpdateScoreList();
