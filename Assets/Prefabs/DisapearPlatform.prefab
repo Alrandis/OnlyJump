@@ -222,8 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc099c806fa3384c8f82e04a7ff9894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayBeforeDisappear: 2
-  fallSpeed: 5
+  _delayBeforeDisappear: 2
+  _fallSpeed: 5
 --- !u!61 &7156337046968242901
 BoxCollider2D:
   m_ObjectHideFlags: 0

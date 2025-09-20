@@ -5,10 +5,10 @@ using System.Collections.Generic;
 public class HealthUI : MonoBehaviour
 {
 
-    [SerializeField] private Image heartPrefab;
-    [SerializeField] private Transform heartsParent;
+    [SerializeField] private Image _heartPrefab;
+    [SerializeField] private Transform _heartsParent;
 
-    private List<Image> hearts = new List<Image>();
+    private List<Image> _hearts = new List<Image>();
 
     private void Start()
     {
@@ -25,16 +25,16 @@ public class HealthUI : MonoBehaviour
     {
         for (int i = 0; i < maxHealth; i++)
         {
-            var heart = Instantiate(heartPrefab, heartsParent);
-            hearts.Add(heart);
+            var heart = Instantiate(_heartPrefab, _heartsParent);
+            _hearts.Add(heart);
         }
     }
 
     private void UpdateHearts(int currentHealth)
     {
-        for (int i = 0; i < hearts.Count; i++)
+        for (int i = 0; i < _hearts.Count; i++)
         {
-            hearts[i].enabled = i < currentHealth;
+            _hearts[i].enabled = i < currentHealth;
         }
     }
 }

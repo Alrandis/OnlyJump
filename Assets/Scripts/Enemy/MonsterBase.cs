@@ -4,12 +4,12 @@ public abstract class MonsterBase : MonoBehaviour
 {
     public ObjectPool Pool { get; private set; }
 
-    private GameObject monsterRoot;
+    private GameObject _monsterRoot;
 
     public void Init(ObjectPool pool)
     {
         Pool = pool;
-        monsterRoot = GetRootObject();
+        _monsterRoot = GetRootObject();
         OnInit();
     }
 
@@ -38,9 +38,9 @@ public abstract class MonsterBase : MonoBehaviour
     protected void ReturnToPool()
     {
         if (Pool != null)
-            Pool.ReturnObject(monsterRoot);
+            Pool.ReturnObject(_monsterRoot);
         else
-            monsterRoot.SetActive(false);
+            _monsterRoot.SetActive(false);
     }
 
     /// <summary>
@@ -53,10 +53,10 @@ public abstract class MonsterBase : MonoBehaviour
     /// </summary>
     public void Activate()
     {
-        if (monsterRoot == null)
-            monsterRoot = GetRootObject(); // гарантируем, что есть объект
+        if (_monsterRoot == null)
+            _monsterRoot = GetRootObject(); // гарантируем, что есть объект
 
-        monsterRoot.SetActive(true);
+        _monsterRoot.SetActive(true);
         ResetMonster();
     }
 
@@ -65,6 +65,6 @@ public abstract class MonsterBase : MonoBehaviour
     /// </summary>
     public void Deactivate()
     {
-        monsterRoot.SetActive(false);
+        _monsterRoot.SetActive(false);
     }
 }

@@ -2,25 +2,25 @@ using UnityEngine;
 
 public class MovingPlatform : PlatformBase
 {
-    [SerializeField] private float speed = 2f;
-    [SerializeField] private float distance = 3f;
+    [SerializeField] private float _speed = 2f;
+    [SerializeField] private float _distance = 3f;
 
-    private Vector3 startPos;
-    private int direction = 1;
+    private Vector3 _startPos;
+    private int _direction = 1;
 
     public override void ResetPlatform()
     {
-        startPos = transform.position;
+        _startPos = transform.position;
         
-        direction = 1;
+        _direction = 1;
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
+        transform.Translate(Vector3.right * _direction * _speed * Time.deltaTime);
 
-        if (Mathf.Abs(transform.position.x - startPos.x) >= distance)
-            direction *= -1;
+        if (Mathf.Abs(transform.position.x - _startPos.x) >= _distance)
+            _direction *= -1;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

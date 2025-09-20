@@ -7,7 +7,7 @@ public class ObjectPool : MonoBehaviour
     public int InitialSize = 10;
     public bool Expandable = true;
 
-    private Queue<GameObject> pool = new Queue<GameObject>();
+    private Queue<GameObject> _pool = new Queue<GameObject>();
 
     // Инициализация пула вызывается после присвоения Prefab
     public void InitializePool()
@@ -38,7 +38,7 @@ public class ObjectPool : MonoBehaviour
             platform.Init(this);
         }
 
-        pool.Enqueue(obj);
+        _pool.Enqueue(obj);
         return obj;
     }
 
@@ -47,7 +47,7 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     public GameObject GetObject(Vector3 position, Quaternion rotation)
     {
-        if (pool.Count == 0)
+        if (_pool.Count == 0)
         {
             if (Expandable)
             {
@@ -60,7 +60,7 @@ public class ObjectPool : MonoBehaviour
             }
         }
 
-        var obj = pool.Dequeue();
+        var obj = _pool.Dequeue();
         obj.transform.position = position;
         obj.transform.rotation = rotation;
 
@@ -95,6 +95,6 @@ public class ObjectPool : MonoBehaviour
             obj.SetActive(false);
         }
 
-        pool.Enqueue(obj);
+        _pool.Enqueue(obj);
     }
 }

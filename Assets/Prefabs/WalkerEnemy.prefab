@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 1
   BounceForce: 25
-  enemyTop: {fileID: 8247239331064777581}
+  _enemyTop: {fileID: 8247239331064777581}
 --- !u!61 &9160276610671410352
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -2,34 +2,24 @@ using UnityEngine;
 
 public class WallsFollower : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private Transform leftWall;
-    [SerializeField] private Transform rightWall;
+    [SerializeField] private Transform _player;
+    [SerializeField] private Transform _leftWall;
+    [SerializeField] private Transform _rightWall;
 
-    [SerializeField] private float verticalOffset = 5f; // запас сверху
-    [SerializeField] private float moveSpeed = 3f;      // скорость плавного движения
-
-    //[SerializeField] private SpriteRenderer leftWallRenderer;
-    //[SerializeField] private SpriteRenderer rightWallRenderer;
-
-    //private void Start()
-    //{
-    //    // Переворачиваем визуально спрайт вверх ногами
-    //    leftWallRenderer.flipY = true;
-    //    rightWallRenderer.flipY = true;
-    //}
+    [SerializeField] private float _verticalOffset = 5f; // запас сверху
+    [SerializeField] private float _moveSpeed = 3f;      // скорость плавного движения
 
     private void Update()
     {
         // целевая позиция Y всегда = позиция игрока + offset
-        float targetY = player.position.y + verticalOffset;
+        float targetY = _player.position.y + _verticalOffset;
 
         // обновляем позиции стен
-        Vector3 leftTarget = new Vector3(leftWall.position.x, targetY, leftWall.position.z);
-        Vector3 rightTarget = new Vector3(rightWall.position.x, targetY, rightWall.position.z);
+        Vector3 leftTarget = new Vector3(_leftWall.position.x, targetY, _leftWall.position.z);
+        Vector3 rightTarget = new Vector3(_rightWall.position.x, targetY, _rightWall.position.z);
 
         // плавно тянем стены
-        leftWall.position = Vector3.Lerp(leftWall.position, leftTarget, moveSpeed * Time.deltaTime);
-        rightWall.position = Vector3.Lerp(rightWall.position, rightTarget, moveSpeed * Time.deltaTime);
+        _leftWall.position = Vector3.Lerp(_leftWall.position, leftTarget, _moveSpeed * Time.deltaTime);
+        _rightWall.position = Vector3.Lerp(_rightWall.position, rightTarget, _moveSpeed * Time.deltaTime);
     }
 }

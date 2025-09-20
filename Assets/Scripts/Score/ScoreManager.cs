@@ -4,7 +4,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
-    [SerializeField] private GameDataSO gameData;
+    [SerializeField] private GameDataSO _gameData;
 
     private float _startTime;
     private int _maxHeight;
@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour
         _maxHeight = 0;
 
         // Загружаем данные из JSON при старте игры
-        SaveSystem.Load(gameData);
+        SaveSystem.Load(_gameData);
 
         Health.OnPlayerDead += SaveAttempt;
     }
@@ -56,9 +56,9 @@ public class ScoreManager : MonoBehaviour
     public void SaveAttempt()
     {
         var attempt = GetCurrentAttempt();
-        gameData.AddAttempt(attempt.score, attempt.height, attempt.time);
+        _gameData.AddAttempt(attempt.score, attempt.height, attempt.time);
 
         // Сохраняем JSON на диск
-        SaveSystem.Save(gameData);
+        SaveSystem.Save(_gameData);
     }
 }

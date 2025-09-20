@@ -2,48 +2,48 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Transform target;      // Игрок
-    [SerializeField] private float smoothSpeed = 5f; // Скорость сглаживания
-    [SerializeField] private float yOffset = 1f;    // Порог по Y (смещение)
-    private Camera cam;
+    [SerializeField] private Transform _target;      // Игрок
+    [SerializeField] private float _smoothSpeed = 5f; // Скорость сглаживания
+    [SerializeField] private float _yOffset = 1f;    // Порог по Y (смещение)
+    private Camera _cam;
        
 
-    private float fixedX; // фиксируем X при старте
+    private float _fixedX; // фиксируем X при старте
 
     private void Start()
     {
-        fixedX = transform.position.x; // запоминаем X камеры
+        _fixedX = transform.position.x; // запоминаем X камеры
 
-        cam = Camera.main;
+        _cam = Camera.main;
         // Цель: ширина камеры = фиксированное значение, высота подстраивается под экран
         float targetWidth = 6f; // желаемая ширина мира
         float targetHeight = targetWidth * Screen.height / Screen.width;
 
-        cam.orthographicSize = targetHeight / 2f;
+        _cam.orthographicSize = targetHeight / 2f;
     }
 
     private void LateUpdate()
     {
-        if (target == null) return;
+        if (_target == null) return;
 
         Vector3 currentPos = transform.position;
         Vector3 targetPos = currentPos;
 
         // Камера двигается только вверх, если игрок превысил порог
-        if (target.position.y > currentPos.y + yOffset)
+        if (_target.position.y > currentPos.y + _yOffset)
         {
-            targetPos.y = target.position.y - yOffset;
+            targetPos.y = _target.position.y - _yOffset;
         }
         // если игрок ниже нижней границы окна
-        else if (target.position.y < currentPos.y - yOffset)
+        else if (_target.position.y < currentPos.y - _yOffset)
         {
-            targetPos.y = target.position.y + yOffset;
+            targetPos.y = _target.position.y + _yOffset;
         }
 
         // Плавное движение камеры по Y
-        transform.position = Vector3.Lerp(currentPos, targetPos, smoothSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(currentPos, targetPos, _smoothSpeed * Time.deltaTime);
 
         // Фиксируем X (камера не двигается по горизонтали)
-        transform.position = new Vector3(fixedX, transform.position.y, currentPos.z);
+        transform.position = new Vector3(_fixedX, transform.position.y, currentPos.z);
     }
 }

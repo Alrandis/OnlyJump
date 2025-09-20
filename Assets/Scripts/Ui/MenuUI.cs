@@ -7,20 +7,20 @@ using System;
 
 public class MenuUI : MonoBehaviour
 {
-    [SerializeField] private GameObject panelMenu;
-    [SerializeField] private GameObject HeatlhBar;
-    [SerializeField] private GameObject panelDeath;
-    [SerializeField] private GameObject buttonMenu;
-    [SerializeField] private TextMeshProUGUI textScore;
-    [SerializeField] private TextMeshProUGUI textDeathScore;
+    [SerializeField] private GameObject _panelMenu;
+    [SerializeField] private GameObject _heatlhBar;
+    [SerializeField] private GameObject _panelDeath;
+    [SerializeField] private GameObject _buttonMenu;
+    [SerializeField] private TextMeshProUGUI _textScore;
+    [SerializeField] private TextMeshProUGUI _textDeathScore;
 
-    private bool isMenuOpen = false;
+    private bool _isMenuOpen = false;
 
     private void Start()
     {
-        panelMenu.SetActive(false);
-        panelDeath.SetActive(false);
-        HeatlhBar.SetActive(true);
+        _panelMenu.SetActive(false);
+        _panelDeath.SetActive(false);
+        _heatlhBar.SetActive(true);
     }
 
     private void OnEnable()
@@ -35,16 +35,16 @@ public class MenuUI : MonoBehaviour
 
     private void OpenDeathPanel()
     {
-        buttonMenu.SetActive(false);
-        panelDeath.SetActive(true);
+        _buttonMenu.SetActive(false);
+        _panelDeath.SetActive(true);
         ToggleMenu();
     }
 
     public void ToggleMenu()
     {
-        isMenuOpen = !isMenuOpen;
+        _isMenuOpen = !_isMenuOpen;
         // стопаем время только при открытии меню
-        Time.timeScale = isMenuOpen ? 0f : 1f;
+        Time.timeScale = _isMenuOpen ? 0f : 1f;
 
         UpdateScoreText();
 
@@ -54,27 +54,27 @@ public class MenuUI : MonoBehaviour
     {
         var attempt = ScoreManager.Instance.GetCurrentAttempt();
 
-        textScore.text = $"Счёт: {attempt.score}\n" +
+        _textScore.text = $"Счёт: {attempt.score}\n" +
                          $"Время: {attempt.time}\n" +
                          $"Высота: {attempt.height}";
 
-        textDeathScore.text = textScore.text;
+        _textDeathScore.text = _textScore.text;
     }
 
     public void OnContinue()
     {
-        panelMenu.SetActive(false);
+        _panelMenu.SetActive(false);
         ToggleMenu();
-        buttonMenu.SetActive(true);
-        HeatlhBar.SetActive(true);
+        _buttonMenu.SetActive(true);
+        _heatlhBar.SetActive(true);
     }
 
     public void OpenMenu()
     {
         ToggleMenu();
-        buttonMenu.SetActive(false);
-        panelMenu.SetActive(true);
-        HeatlhBar.SetActive(false);
+        _buttonMenu.SetActive(false);
+        _panelMenu.SetActive(true);
+        _heatlhBar.SetActive(false);
     }
 
     public void OnRestart()
