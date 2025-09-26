@@ -11,6 +11,8 @@
 - Лава сразу отнимает всё здоровье, по этому попадание в нее смертельно.
 - Данные в игре хранятся в scriptable object. Между сессиями сохраняются в json.
 
+# Запуск проекта
+- В папке Build есть скомпилированная версия мобильного приложения пригодная для тестирования
   
 # Скриншоты и геймплей
 ![MainMenu](Screenshots/MainMenu.png) 
@@ -20,6 +22,3 @@
 ![Score Gif](Screenshots/Score.gif) 
 ![DeathFromEnemy Gif](Screenshots/DeathFromEnemy.gif) 
 ![DeathFromLava Gif](Screenshots/DeathFromLava.gif)
-
-# Запуск проекта
-- В папке Build есть скомпилированная версия мобильного приложения пригодная для тестирования
