@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 155929206}
   - component: {fileID: 155929205}
   - component: {fileID: 155929204}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Wall 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3900,7 +3900,7 @@ GameObject:
   - component: {fileID: 1130328501}
   - component: {fileID: 1130328500}
   - component: {fileID: 1130328499}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Wall 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6392,7 +6392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 168834288}
   _smoothSpeed: 5
-  _yOffset: 1
+  _yOffset: -2
 --- !u!1 &1655811633
 GameObject:
   m_ObjectHideFlags: 0
