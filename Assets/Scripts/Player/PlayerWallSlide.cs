@@ -19,7 +19,7 @@ public class PlayerWallSlide : MonoBehaviour
         // 2. Не на земле
         // 3. Не прыгает
         // 4. Падает вниз
-        if (_playerData.IsTouchingWall && !_playerData.IsGrounded && !_playerData.IsJumping && _rb.linearVelocity.y < 0)
+        if (_playerData.IsTouchingWall && !_playerData.IsGrounded && _rb.linearVelocity.y < 0)
         {
             _rb.linearVelocity = new Vector2(0, -_playerData.WallSlideSpeed);
         }

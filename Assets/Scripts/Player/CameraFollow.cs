@@ -27,23 +27,19 @@ public class CameraFollow : MonoBehaviour
         if (_target == null) return;
 
         Vector3 currentPos = transform.position;
-        Vector3 targetPos = currentPos;
 
-        // Камера двигается только вверх, если игрок превысил порог
-        if (_target.position.y > currentPos.y + _yOffset)
-        {
-            targetPos.y = _target.position.y - _yOffset;
-        }
-        // если игрок ниже нижней границы окна
-        else if (_target.position.y < currentPos.y - _yOffset)
-        {
-            targetPos.y = _target.position.y + _yOffset;
-        }
+        // ВСЕГДА следуем за игроком с оффсетом
+        Vector3 targetPos = new Vector3(
+            _fixedX,
+            _target.position.y - _yOffset,
+            currentPos.z
+        );
 
-        // Плавное движение камеры по Y
-        transform.position = Vector3.Lerp(currentPos, targetPos, _smoothSpeed * Time.deltaTime);
-
-        // Фиксируем X (камера не двигается по горизонтали)
-        transform.position = new Vector3(_fixedX, transform.position.y, currentPos.z);
+        transform.position = Vector3.Lerp(
+            currentPos,
+            targetPos,
+            _smoothSpeed * Time.deltaTime
+        );
     }
+
 }

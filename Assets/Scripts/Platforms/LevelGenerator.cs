@@ -7,7 +7,7 @@ public class LevelGenerator : MonoBehaviour
     public Transform Player;
 
     [Header("Generation Settings")]
-    public float PlatformSpacingY = 2f;
+    public float PlatformSpacingY = 1.8f;
     public float PlatformSpacingX = 1.4f;
     public int PlatformsBuffer = 5;
     public float MaxFallY = 10f;
@@ -100,22 +100,30 @@ public class LevelGenerator : MonoBehaviour
 
     private GameObject ChoosePlatformPrefab(float height)
     {
-        if (height < 20f) return NormalPlatform;
-        else if (height < 50f) return Random.value < 0.4f ? NormalPlatform : DisappearingPlatform;
-        else if (height < 80f)
+        if (height < 40f) return NormalPlatform;
+        else if (height < 100f) return Random.value < 0.7f ? NormalPlatform : SpikesPlatform;
+        else if (height < 150f)
         {
             float r = Random.value;
-            if (r < 0.30f) return NormalPlatform;
-            if (r < 0.80f) return DisappearingPlatform;
+            if (r < 0.7f) return DisappearingPlatform;
             return SpikesPlatform;
+        }
+        else if (height < 200f)
+        {
+            float r2 = Random.value;
+            if (r2 < 0.4f) return DisappearingPlatform;
+            return SpikesPlatform;
+        }
+        else if (height < 250f)
+        {
+            float r2 = Random.value;
+            if (r2 < 0.4f) return DisappearingPlatform;
+            return FlyingPlatform;
         }
         else
         {
             float r2 = Random.value;
-            if (r2 < 0.2f) return NormalPlatform;
-            if (r2 < 0.4f) return DisappearingPlatform;
-            if (r2 < 0.6f) return SpikesPlatform;
-            if (r2 < 0.8f) return FlyingPlatform;
+            if (r2 < 0.4f) return SpikesPlatform;
             return VerticalPlatform; // новая вертикальная платформа
         }
     }

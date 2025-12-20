@@ -31,6 +31,10 @@ public class PlayerJumpController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // НЕ останавливаем прыжок по дистанции, если у стены
+        if (_playerData.IsTouchingWall)
+            return;
+
         if (_playerData.IsJumping)
         {
             Vector2 currentPos = _rb.position;

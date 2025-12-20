@@ -35,21 +35,21 @@ public class MonsterSpawner : MonoBehaviour
         List<GameObject> spawnedMonsters = new List<GameObject>();
 
         // --- Спавн по высоте ---
-        if (platformY >= 20f && platformY < 40f)
+        if (platformY >= 20f && platformY < 80f)
         {
             SpawnMonsterOnPlatform(StandingMonsterPrefab, platformObj, Vector3.up * 0.5f, spawnedMonsters);
         }
-        else if (platformY >= 40f && platformY < 60f)
+        else if (platformY >= 80f && platformY < 120f)
         {
             SpawnMonsterOnPlatform(WalkingMonsterPrefab, platformObj, Vector3.up * 0.5f, spawnedMonsters);
         }
-        else if (platformY >= 60f && platformY < 80f)
+        else if (platformY >= 120f && platformY < 180f)
         {
             float wallX = HorizontalOffset; // правая стена
             Vector3 pos = new Vector3(wallX, platformY + ShootingOffsetY, 0f);
             SpawnMonsterOnPlatform(ShootingMonsterPrefab, platformObj, pos - platformObj.transform.position, spawnedMonsters);
         }
-        else if (platformY >= 80f)
+        else if (platformY >= 180f)
         {
             Vector3 pos = new Vector3(0f, platformY + FlyingOffsetY, 0f);
             SpawnMonsterOnPlatform(FlyingMonsterPrefab, platformObj, pos + new Vector3(0, 1.2f, 0) - platformObj.transform.position , spawnedMonsters);
