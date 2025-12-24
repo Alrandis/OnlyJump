@@ -6,50 +6,30 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _scorePanel;
-    [SerializeField] private string _sceneName = "GameScene";
-    [SerializeField] private GameDataSO _scoreDataSO;
-    [SerializeField] private Button _continueButton; 
+    [SerializeField] private GameObject _settingPanel;
+    [SerializeField] private string _sceneName = "";
 
-    private void Start()
-    {
-        // Отключаем кнопку Continue, если сохранения нет
-        _continueButton.interactable = _scoreDataSO.IsExistSave;
-    }
 
-    /// <summary>
-    /// Открыть окно счета
-    /// </summary>
+
     public void OpenScore()
     {
         gameObject.SetActive(false);
         _scorePanel.SetActive(true);
     }
 
-    public void ContinueGame()
+    public void OpenSetting()
     {
-        //if (_scoreDataSO.IsExistSave)
-        //{
-        //    SceneManager.LoadScene(_sceneName);
-        //}
-
-        SceneManager.LoadScene(_sceneName);
+        gameObject.SetActive(false);
+        _settingPanel.SetActive(true);
     }
 
-    public void StartNewGame()
+    public void OpenEndlesMode() 
     {
-        _scoreDataSO.Clear();
-        _scoreDataSO.IsExistSave = true;
-
-        // Удаляем файл сохранения JSON, если он есть
-        string path = System.IO.Path.Combine(Application.persistentDataPath, "gamedata.json");
-        if (System.IO.File.Exists(path))
-            System.IO.File.Delete(path);
-
-        SceneManager.LoadScene(_sceneName);
+        SceneManager.LoadScene("EternalLevel");
     }
 
-    public void QuitGame()
+    public void OpenStorysMode()
     {
-        Application.Quit();
+        SceneManager.LoadScene("LevelSelection");
     }
 }

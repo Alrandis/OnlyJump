@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class ScorePanelUI : MonoBehaviour
 {
@@ -15,19 +16,14 @@ public class ScorePanelUI : MonoBehaviour
     [Header("Prefab")]
     [SerializeField] private GameObject _scoreEntryPrefab;
 
-    [Header("Scriptable Objects")]
-    [SerializeField] private GameDataSO _scoreDataSO;
-
     // Object Pool
     private Queue<GameObject> _entryPool = new Queue<GameObject>();
 
     private void OnEnable()
     {
-        // Загружаем актуальные данные из JSON
-        SaveSystem.Load(_scoreDataSO);
 
         // Обновляем лучший счет
-        _bestScoreText.text = $"Лучший счет: {_scoreDataSO.HighScore}";
+        _bestScoreText.text = $"Лучший счет: {YG2.saves.HighScore}";
 
         // Заполняем ScrollView
         UpdateScoreList();
@@ -40,7 +36,7 @@ public class ScorePanelUI : MonoBehaviour
     {
         ClearScrollView(); // очищаем предыдущие записи
 
-        foreach (var attempt in _scoreDataSO.Attempts)
+        foreach (var attempt in YG2.saves.Attempts)
         {
             GameObject entry = GetPooledEntry();
             entry.transform.SetParent(_scrollView.content, false);

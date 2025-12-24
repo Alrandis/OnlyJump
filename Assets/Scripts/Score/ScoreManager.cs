@@ -1,10 +1,9 @@
 using UnityEngine;
+using YG;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
-
-    [SerializeField] private GameDataSO _gameData;
 
     private float _startTime;
     private int _maxHeight;
@@ -19,9 +18,6 @@ public class ScoreManager : MonoBehaviour
     {
         _startTime = Time.time;
         _maxHeight = 0;
-
-        // Загружаем данные из JSON при старте игры
-        SaveSystem.Load(_gameData);
 
         Health.OnPlayerDead += SaveAttempt;
     }
@@ -56,9 +52,9 @@ public class ScoreManager : MonoBehaviour
     public void SaveAttempt()
     {
         var attempt = GetCurrentAttempt();
-        _gameData.AddAttempt(attempt.score, attempt.height, attempt.time);
+        YG2.saves.AddAttempt(attempt.score, attempt.height, attempt.time);
 
-        // Сохраняем JSON на диск
-        SaveSystem.Save(_gameData);
+        // Сохраняем
+        YG2.SaveProgress();
     }
 }
