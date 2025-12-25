@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public class LevelCompleteHandler : MonoBehaviour
 {
     public static LevelCompleteHandler Instance { get; private set; }
 
+    public event Action LevelComplited;
 
     private void Awake()
     {
@@ -16,8 +18,12 @@ public class LevelCompleteHandler : MonoBehaviour
         Instance = this;
     }
 
-    public void CompleteLevel(string levelName)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        if (collision.CompareTag("Player"))
+        {
+            LevelComplited?.Invoke();
+            Debug.Log("Test touch");
+        }
     }
 }

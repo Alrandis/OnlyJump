@@ -8,6 +8,7 @@ public class SettingMenu : MonoBehaviour
     [SerializeField] private Slider _soundSlider;
     [SerializeField] private LanguagesSO _languageSO;
 
+
     private void Start()
     {
         _soundSlider.value = YG2.saves.SoundVolume;
@@ -17,28 +18,28 @@ public class SettingMenu : MonoBehaviour
     {
         YG2.saves.SelectedLanguage = Language.Russians;
         Save();
-        YG2.saves.Changed();
+        YG2.saves.LangChanged();
     }
 
     public void SetEnglish()
     {
         YG2.saves.SelectedLanguage = Language.English;
         Save();
-        YG2.saves.Changed();
+        YG2.saves.LangChanged();
     }
 
     public void SetBelorussian()
     {
         YG2.saves.SelectedLanguage = Language.Belorussian;
         Save();
-        YG2.saves.Changed();
+        YG2.saves.LangChanged();
     }
 
     public void SetGermany()
     {
         YG2.saves.SelectedLanguage = Language.Germany;
         Save();
-        YG2.saves.Changed();
+        YG2.saves.LangChanged();
     }
 
     public void SoundChange(float soundValue)
@@ -47,6 +48,7 @@ public class SettingMenu : MonoBehaviour
         YG2.saves.SoundVolume = soundValue;
         Debug.Log("Громкость после изменения " + YG2.saves.SoundVolume);
         Save();
+        YG2.saves.SoundVolumeChanged();
     }
 
     public void Save()

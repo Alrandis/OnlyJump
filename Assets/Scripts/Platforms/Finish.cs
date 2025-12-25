@@ -19,7 +19,5 @@ public class Finish : MonoBehaviour
             return;
 
         _isTriggered = true;
-
-        LevelCompleteHandler.Instance.CompleteLevel(_nextLevel);
     }
 }

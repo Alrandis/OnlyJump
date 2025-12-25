@@ -14,10 +14,16 @@ namespace YG
         public List<Attempt> Attempts = new List<Attempt>();
 
         public event Action LanguageChanged;
+        public event Action SoundVolumChanged;
 
-        public void Changed()
+        public void LangChanged()
         {
             LanguageChanged?.Invoke();
+        }
+
+        public void SoundVolumeChanged()
+        {
+            SoundVolumChanged?.Invoke();
         }
 
         public void AddAttempt(int score, int height, int time)
@@ -54,7 +60,14 @@ public class Attempt
 [Serializable]
 public class Level
 {
-    public int LevelID = 0;
-    public bool IsOpen = false;
-    public int StarCount = 0;
+    public int LevelID;
+    public bool IsOpen;
+    public int StarCount;
+
+    public Level(int id)
+    {
+        LevelID = id;
+        IsOpen = false;
+        StarCount = 3;
+    }
 }
