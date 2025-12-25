@@ -68,6 +68,6 @@ public class Level
     {
         LevelID = id;
         IsOpen = false;
-        StarCount = 3;
+        StarCount = 0;
     }
 }

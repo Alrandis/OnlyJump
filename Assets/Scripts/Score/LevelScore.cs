@@ -84,6 +84,7 @@ public class LevelScore : MonoBehaviour
         if (YG2.saves.Levels[_levelId + 1].IsOpen == false) 
             YG2.saves.Levels[_levelId + 1].IsOpen = true;
 
+        YG2.SaveProgress();
 
     }
 }
