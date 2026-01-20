@@ -53,7 +53,8 @@ public class ScoreManager : MonoBehaviour
     {
         var attempt = GetCurrentAttempt();
         YG2.saves.AddAttempt(attempt.score, attempt.height, attempt.time);
-
+        if(YG2.saves.MaxHeight < attempt.height)
+            YG2.saves.MaxHeight = attempt.height;
         // Сохраняем
         YG2.SaveProgress();
     }

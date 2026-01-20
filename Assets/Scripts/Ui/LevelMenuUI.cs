@@ -1,19 +1,24 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class LevelMenuUI : MonoBehaviour
 {
     [SerializeField] private string _nextLevel;
-
+    [SerializeField] private int _health = 3;
     [SerializeField] private GameObject _panelMenu;
     [SerializeField] private GameObject _heatlhBar;
     [SerializeField] private GameObject _panelLose;
     [SerializeField] private GameObject _panelWin;
     [SerializeField] private GameObject _buttonMenu;
+    private float _startTime;
+    private int _countRestart = 0;
 
     private void Start()
     {
+        _startTime = Time.time;
+
         _panelLose.SetActive(false);
         _panelWin.SetActive(false);
         _heatlhBar.SetActive(true);
@@ -24,6 +29,11 @@ public class LevelMenuUI : MonoBehaviour
     private void OnEnable()
     {
         Health.OnPlayerDead += OpenDeathPanel;
+        Health.OnHealthChanged += GetHealth;
+    }
+    public void GetHealth(int value)
+    {
+        _health = value;
     }
 
     private void OnDisable()
@@ -71,6 +81,22 @@ public class LevelMenuUI : MonoBehaviour
 
     public void OnRestart()
     {
+        int timeSpent = Mathf.FloorToInt(Time.time - _startTime);
+        if(timeSpent <= 4)
+        {
+            _countRestart++;
+            if(_countRestart >= 5)
+            {
+                YG2.saves.IsRestart = true;
+            }
+        }
+        else
+        {
+            _countRestart = 0;
+        }
+
+        YG2.saves.Levels[SceneManager.GetActiveScene().buildIndex].TryCount++;
+        YG2.SaveProgress();
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

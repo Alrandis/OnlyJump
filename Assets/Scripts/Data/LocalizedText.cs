@@ -4,10 +4,10 @@ using YG;
 
 public class LocalizedText : MonoBehaviour
 {
-    [SerializeField] private string _russianText;
-    [SerializeField] private string _englishText;
-    [SerializeField] private string _belorussianText;
-    [SerializeField] private string _germanyText;
+    [TextArea][SerializeField] private string _russianText;
+    [TextArea][SerializeField] private string _englishText;
+    [TextArea][SerializeField] private string _belorussianText;
+    [TextArea][SerializeField] private string _germanyText;
 
     private TMP_Text _text;
 

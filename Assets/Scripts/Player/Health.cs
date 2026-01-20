@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Health : MonoBehaviour
@@ -55,6 +56,11 @@ public class Health : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         OnPlayerDead?.Invoke();
+        YG2.saves.DeathCount++;
+        if(SceneManager.GetActiveScene().name != "EternalLevel")
+            YG2.saves.Levels[SceneManager.GetActiveScene().buildIndex].TryCount++;
+
+        YG2.SaveProgress();
 
         gameObject.SetActive(false);
     }

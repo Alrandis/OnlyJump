@@ -1,4 +1,5 @@
 using UnityEngine;
+using YG;
 
 [RequireComponent(typeof(Collider2D))]
 public class LavaController : MonoBehaviour
@@ -30,12 +31,13 @@ public class LavaController : MonoBehaviour
         {
             // наносим 3 урона (гарантированный смертельный удар)
             health.TakeDamage(3);
+            YG2.saves.DeathLava++;
+            YG2.SaveProgress();
         }
 
         var playerAirControl = other.GetComponent<PlayerAirControl>();
         if (playerAirControl != null)
         {
-            // наносим 3 урона (гарантированный смертельный удар)
             playerAirControl.Bounce(10);
         }
     }
