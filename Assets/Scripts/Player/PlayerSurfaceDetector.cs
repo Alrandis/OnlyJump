@@ -65,7 +65,7 @@ public class PlayerSurfaceDetector : MonoBehaviour
                     // сбросить горизонтальную скорость при контакте
                     _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
 
-                    _playerData.IsJumping = false;
+                    //_playerData.IsJumping = false;
                 }
             }
         }

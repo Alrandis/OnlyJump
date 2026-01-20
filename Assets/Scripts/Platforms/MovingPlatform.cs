@@ -3,6 +3,7 @@ using UnityEngine;
 public class MovingPlatform : PlatformBase
 {
     [SerializeField] private float _speed = 2f;
+    private float _speedOfset = 0f;
     [SerializeField] private float _distance = 3f;
 
     private Vector3 _startPos;
@@ -11,13 +12,13 @@ public class MovingPlatform : PlatformBase
     public override void ResetPlatform()
     {
         _startPos = transform.position;
-        
+        _speedOfset = Random.value;
         _direction = 1;
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.right * _direction * _speed * Time.deltaTime);
+        transform.Translate(Vector3.right * _direction * (_speed + _speedOfset) * Time.deltaTime);
 
         if (Mathf.Abs(transform.position.x - _startPos.x) >= _distance)
             _direction *= -1;

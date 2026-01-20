@@ -45,7 +45,12 @@ public class FallingPlatform : MonoBehaviour
                 _isTriggered = false;
                
                 GetComponent<Collider2D>().enabled = false;
-                GetComponentInChildren<SpriteRenderer>().enabled = false; 
+                SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer sprite in sprites)
+                {
+                    sprite.enabled = false;
+                }
+                //GetComponentInChildren<SpriteRenderer>().enabled = false; 
             }
         }
     }
