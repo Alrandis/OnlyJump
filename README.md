@@ -9,16 +9,18 @@
 - Начало новой игры скидывает счет. Сам счет зачитывается после каждой смерти.
 - Если прыгнуть на врага сверху, то ты не получишь урон и подлетишь вверх для преодоления нескольких платформ за раз.
 - Лава сразу отнимает всё здоровье, по этому попадание в нее смертельно.
-- Данные в игре хранятся в scriptable object. Между сессиями сохраняются в json.
-
-# Запуск проекта
-- В папке Build есть скомпилированная версия мобильного приложения пригодная для тестирования
+- Данные в игре хранятся в scriptable object. Между сессиями сохраняются в Яндекс плагин.
+- Есть 30 проходимых уровней, за каждый можно получить 3 звезды
+- Можно выбрать язык в меню настроек, а так же повысить/понизить громкость игры
+- Создана панель достижений. Всего 15 штук
   
 # Скриншоты и геймплей
 ![MainMenu](Screenshots/MainMenu.png) 
 ![Score](Screenshots/Score.png) 
 ![DeathMenu](Screenshots/DeathMenu.png)
+![Achive](Screenshots/Achive.png)
+![LevelSelection](Screenshots/LevelSelection.png)
+![Setting](Screenshots/Setting.png)
 
-![Score Gif](Screenshots/Score.gif) 
 ![DeathFromEnemy Gif](Screenshots/DeathFromEnemy.gif) 
 ![DeathFromLava Gif](Screenshots/DeathFromLava.gif)
