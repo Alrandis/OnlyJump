@@ -15,8 +15,6 @@
 - Создана панель достижений. Всего 15 штук
   
 # Скриншоты и геймплей
-![MainMenu](Screenshots/MainMenu.png) 
-![Score](Screenshots/Score.png) 
 ![DeathMenu](Screenshots/DeathMenu.png)
 ![Achive](Screenshots/Achive.png)
 ![LevelSelection](Screenshots/LevelSelection.png)
