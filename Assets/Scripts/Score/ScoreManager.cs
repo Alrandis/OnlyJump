@@ -57,5 +57,8 @@ public class ScoreManager : MonoBehaviour
             YG2.saves.MaxHeight = attempt.height;
         // Сохраняем
         YG2.SaveProgress();
+        AchiveManager.Instance.HeightCheck();
+        AchiveManager.Instance.ScoreCheck();
+        AchiveManager.Instance.TimeCheck();
     }
 }

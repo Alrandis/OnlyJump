@@ -18,9 +18,12 @@ public class LevelScore : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _time;
 
+    [SerializeField] private int _damageCount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _damageCount = YG2.saves.DamageCount;
+
         _startTime = Time.time;
         _star1.SetActive(false);
         _star2.SetActive(false);
@@ -28,6 +31,9 @@ public class LevelScore : MonoBehaviour
 
         LevelCompleteHandler.Instance.LevelComplited += SetStars;
         LevelCompleteHandler.Instance.LevelComplited += GetSecret;
+
+        AchiveManager.Instance.RestartCheck();
+        AchiveManager.Instance.TryCheck();
     }
 
     private void OnEnable()
@@ -53,13 +59,14 @@ public class LevelScore : MonoBehaviour
     {
         _health = value;
 
-        if(YG2.saves.DamageCount < 10)
+        if(YG2.saves.DamageCount < 15)
         {
             int timeSpent = Mathf.FloorToInt(Time.time - _startTime);
-            if (timeSpent < 4)
+            if (timeSpent <= 4)
             {
                 YG2.saves.DamageCount++;
                 YG2.SaveProgress();
+                AchiveManager.Instance.PainCheck();
             }
         }
 
@@ -72,6 +79,7 @@ public class LevelScore : MonoBehaviour
         {
             YG2.saves.IsSecret = true;
             YG2.SaveProgress();
+            AchiveManager.Instance.SecretCheck();
         }
     }
 
@@ -82,6 +90,7 @@ public class LevelScore : MonoBehaviour
         if(timeSpent <= _fastTime - 3)
         {
             YG2.saves.IsFast = true;
+            AchiveManager.Instance.SpeedCheck();
         }
 
         if (_health == 3)
@@ -127,6 +136,6 @@ public class LevelScore : MonoBehaviour
      
 
         YG2.SaveProgress();
-
+        AchiveManager.Instance.StarCheck();
     }
 }

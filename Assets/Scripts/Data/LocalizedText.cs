@@ -9,17 +9,17 @@ public class LocalizedText : MonoBehaviour
     [TextArea][SerializeField] private string _belorussianText;
     [TextArea][SerializeField] private string _germanyText;
 
-    private TMP_Text _text;
+    public TMP_Text Text;
 
     private void Awake()
     {
-        _text = GetComponent<TMP_Text>();
+        Text = GetComponent<TMP_Text>();
     }
 
     private void OnEnable()
     {
-        UpdateText();
         YG2.saves.LanguageChanged += UpdateText;
+        UpdateText();
     }
 
     private void OnDisable()
@@ -29,17 +29,17 @@ public class LocalizedText : MonoBehaviour
 
     private void UpdateText()
     {
-        _text.text = GetLine(YG2.saves.SelectedLanguage);
+        Text.text = GetLine(YG2.saves.SelectedLanguage);
     }
 
-    private string GetLine(Language language)
+    private string GetLine(string language)
     {
         return language switch
         {
-            Language.Russians => _russianText,
-            Language.English =>_englishText,
-            Language.Belorussian => _belorussianText,
-            Language.Germany => _germanyText,
+            "ru" => _russianText,
+            "en" => _englishText,
+            "be" => _belorussianText,
+            "de" => _germanyText,
             _ => "MISSING"
         };
     }

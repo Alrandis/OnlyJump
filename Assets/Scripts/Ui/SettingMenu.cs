@@ -16,28 +16,28 @@ public class SettingMenu : MonoBehaviour
 
     public void SetRussian()
     {
-        YG2.saves.SelectedLanguage = Language.Russians;
+        YG2.saves.SelectedLanguage = "ru";
         Save();
         YG2.saves.LangChanged();
     }
 
     public void SetEnglish()
     {
-        YG2.saves.SelectedLanguage = Language.English;
+        YG2.saves.SelectedLanguage = "en";
         Save();
         YG2.saves.LangChanged();
     }
 
     public void SetBelorussian()
     {
-        YG2.saves.SelectedLanguage = Language.Belorussian;
+        YG2.saves.SelectedLanguage = "be";
         Save();
         YG2.saves.LangChanged();
     }
 
     public void SetGermany()
     {
-        YG2.saves.SelectedLanguage = Language.Germany;
+        YG2.saves.SelectedLanguage = "de";
         Save();
         YG2.saves.LangChanged();
     }
@@ -61,12 +61,4 @@ public class SettingMenu : MonoBehaviour
         gameObject.SetActive(false);
         _menuPanel.SetActive(true);
     }
-}
-
-public enum Language
-{
-    Russians,
-    English,
-    Belorussian,
-    Germany
 }

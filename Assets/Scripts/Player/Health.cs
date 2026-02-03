@@ -61,7 +61,7 @@ public class Health : MonoBehaviour
             YG2.saves.Levels[SceneManager.GetActiveScene().buildIndex].TryCount++;
 
         YG2.SaveProgress();
-
+        AchiveManager.Instance.DeathCheck();
         gameObject.SetActive(false);
     }
 }

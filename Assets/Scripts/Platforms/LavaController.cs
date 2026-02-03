@@ -33,6 +33,7 @@ public class LavaController : MonoBehaviour
             health.TakeDamage(3);
             YG2.saves.DeathLava++;
             YG2.SaveProgress();
+            AchiveManager.Instance.DeathLavaCheck();
         }
 
         var playerAirControl = other.GetComponent<PlayerAirControl>();

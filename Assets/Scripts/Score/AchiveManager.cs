@@ -1,11 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
 public class AchiveManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static AchiveManager Instance;
+
+    [SerializeField] private GameObject _achiveUI;
+    [SerializeField] private List<bool> Achives = new List<bool>();
+
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
+        Achives = YG2.saves.Achives;
+        if (YG2.saves.Levels == null) return;
         DeathCheck();
         StarCheck();
         HeightCheck();
@@ -17,12 +41,19 @@ public class AchiveManager : MonoBehaviour
         SpeedCheck();
         RestartCheck();
         BossCheck();
+        PainCheck();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowAchive()
     {
-        
+        StartCoroutine(WaiteForShow());
+    }
+
+    IEnumerator WaiteForShow()  
+    {
+        _achiveUI.SetActive(true);
+        yield return new WaitForSecondsRealtime(3);
+        _achiveUI.SetActive(false);
     }
 
     public void BossCheck()
@@ -40,6 +71,7 @@ public class AchiveManager : MonoBehaviour
         if (counter == 14)
         {
             YG2.saves.Achives[12] = true;
+            ShowAchive();
         }
         else
         {
@@ -51,9 +83,10 @@ public class AchiveManager : MonoBehaviour
     {
         if (YG2.saves.Achives[14] == true) return;
 
-        if (YG2.saves.IsRestart == true)
+        if (YG2.saves.CountRestart >= 10)
         {
             YG2.saves.Achives[14] = true;
+            ShowAchive();
         }
         else
         {
@@ -65,9 +98,10 @@ public class AchiveManager : MonoBehaviour
     {
         if (YG2.saves.Achives[13] == true) return;
 
-        if (YG2.saves.DamageCount == 10)
+        if (YG2.saves.DamageCount >= 10)
         {
             YG2.saves.Achives[13] = true;
+            ShowAchive();
         }
         else
         {
@@ -82,6 +116,7 @@ public class AchiveManager : MonoBehaviour
         if (YG2.saves.IsSecret == true)
         {
             YG2.saves.Achives[9] = true;
+            ShowAchive();
         }
         else
         {
@@ -96,6 +131,7 @@ public class AchiveManager : MonoBehaviour
         if (YG2.saves.MaxHeight >= 300)
         {
             YG2.saves.Achives[4] = true;
+            ShowAchive();
         }
         else
         {
@@ -110,6 +146,7 @@ public class AchiveManager : MonoBehaviour
         if (YG2.saves.HighTime >= 100)
         {
             YG2.saves.Achives[5] = true;
+            ShowAchive();
         }
         else
         {
@@ -124,6 +161,7 @@ public class AchiveManager : MonoBehaviour
         if (YG2.saves.IsFast == true)
         {
             YG2.saves.Achives[10] = true;
+            ShowAchive();
         }
         else
         {
@@ -135,9 +173,10 @@ public class AchiveManager : MonoBehaviour
     {
         if (YG2.saves.Achives[6] == true) return;
 
-        if (YG2.saves.HighScore >= 200)
+        if (YG2.saves.HighScore >= 300)
         {
             YG2.saves.Achives[6] = true;
+            ShowAchive();
         }
         else
         {
@@ -154,6 +193,8 @@ public class AchiveManager : MonoBehaviour
             if(level.TryCount >= 10)
             {
                 YG2.saves.Achives[3] = true;
+                ShowAchive();
+                break;
             }
             else
             {
@@ -167,8 +208,9 @@ public class AchiveManager : MonoBehaviour
         if (YG2.saves.Achives[8] == true
             && YG2.saves.Achives[11] == true) return;
 
-        if (YG2.saves.DeathCount >= 30)
+        if (YG2.saves.DeathCount >= 20 && YG2.saves.Achives[8] == false)
         {
+            ShowAchive();
             YG2.saves.Achives[8] = true;
         }
         else
@@ -176,9 +218,10 @@ public class AchiveManager : MonoBehaviour
             YG2.saves.Achives[8] = false;
         }
 
-        if (YG2.saves.DeathCount >= 60)
+        if (YG2.saves.DeathCount >= 40)
         {
             YG2.saves.Achives[11] = true;
+            ShowAchive();
         }
         else
         {
@@ -193,6 +236,7 @@ public class AchiveManager : MonoBehaviour
         if (YG2.saves.DeathLava >= 10)
         {
             YG2.saves.Achives[7] = true;
+            ShowAchive();
         }
         else
         {
@@ -212,17 +256,20 @@ public class AchiveManager : MonoBehaviour
             starCount += level.StarCount;
         }
        
-        if (starCount == 30)
+        if (starCount >= 30 && YG2.saves.Achives[0] == false)
         {
             YG2.saves.Achives[0] = true;
+            ShowAchive();
         }
-        else if(starCount == 60)
+        if(starCount >= 60 && YG2.saves.Achives[1] == false)
         {
             YG2.saves.Achives[1] = true;
+            ShowAchive();
         }
-        else if (starCount == 90)
+        if (starCount == 90 && YG2.saves.Achives[2] == false)
         {
             YG2.saves.Achives[2] = true;
+            ShowAchive();
         }
 
         YG2.SaveProgress();

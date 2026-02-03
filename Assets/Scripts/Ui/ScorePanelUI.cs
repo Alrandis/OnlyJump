@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,11 +20,30 @@ public class ScorePanelUI : MonoBehaviour
     // Object Pool
     private Queue<GameObject> _entryPool = new Queue<GameObject>();
 
+    private string _text;
+
     private void OnEnable()
     {
 
+        switch (YG2.saves.SelectedLanguage)
+        {
+            case "ru":
+                _text = "Лучший счет:";
+                break;
+            case "en":
+                _text = "Best score:";
+                break;
+            case "be":
+                _text = "Лепшы рахунак:";
+                break;
+            case "de":
+                _text = "Beste Punktzahl:";
+                break;
+        }
+            
+
         // Обновляем лучший счет
-        _bestScoreText.text = $"Лучший счет: {YG2.saves.HighScore}";
+        _bestScoreText.text = $"{_text} {YG2.saves.HighScore}";
 
         // Заполняем ScrollView
         UpdateScoreList();

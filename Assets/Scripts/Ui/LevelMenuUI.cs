@@ -84,16 +84,10 @@ public class LevelMenuUI : MonoBehaviour
         int timeSpent = Mathf.FloorToInt(Time.time - _startTime);
         if(timeSpent <= 4)
         {
-            _countRestart++;
-            if(_countRestart >= 5)
-            {
-                YG2.saves.IsRestart = true;
-            }
+            YG2.saves.CountRestart++;
+            YG2.SaveProgress();
         }
-        else
-        {
-            _countRestart = 0;
-        }
+
 
         YG2.saves.Levels[SceneManager.GetActiveScene().buildIndex].TryCount++;
         YG2.SaveProgress();

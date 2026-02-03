@@ -45,7 +45,8 @@ public class AchivePanelUI : MonoBehaviour
         // Предположим, что мы хотим назначить id от 0 до количества кнопок-1
         for (int i = 0; i < _achiveButtons.Count; i++)
         {
-            _achiveButtons[i].onClick.AddListener(() => OpenInfo(i));
+            int id = i;
+            _achiveButtons[i].onClick.AddListener(() => OpenInfo(id));
         }
     }
     public void BackToMenu()
@@ -74,20 +75,20 @@ public class AchivePanelUI : MonoBehaviour
         _achiveInfo.SetActive(true);
         switch (YG2.saves.SelectedLanguage)
         {
-            case Language.Russians:
+            case "ru":
                 _textInfo.text = _infoList[id].list[0];
                 break;
-            case Language.English:
+            case "en":
                 _textInfo.text = _infoList[id].list[1];
                 break;
-            case Language.Belorussian:
+            case "be":
                 _textInfo.text = _infoList[id].list[2];
                 break;
-            case Language.Germany:
+            case "de":
                 _textInfo.text = _infoList[id].list[3];
                 break;
         }
-        if(id == 9 && YG2.saves.Achives[9] == false)// && условие секретное
+        if (id == 9 && YG2.saves.Achives[9] == false)// && условие секретное
         {
             _textInfo.text = "???";
         }
