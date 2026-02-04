@@ -18,6 +18,13 @@ public class LevelGenerator : MonoBehaviour
     public GameObject SpikesPlatform;
     public GameObject FlyingPlatform;
     public GameObject VerticalPlatform;
+    [Header("Short Platforms")]
+    public GameObject ShortPlatform;
+    public GameObject ShortDisapearPlatform;
+    public GameObject ShortSpikePlatform;
+
+    [Header("Vertical Platforms")]
+    public GameObject VerticalPlatformLong;
 
     private List<GameObject> _activePlatforms = new List<GameObject>();
     private float _lastPlatformY = 0f;
@@ -45,6 +52,11 @@ public class LevelGenerator : MonoBehaviour
         }
 
         CleanupPlatforms();
+    }
+
+    private bool IsShortPlatform(GameObject prefab)
+    {
+        return prefab.GetComponent<IsShort>() != null;
     }
 
     private void GenerateNextPlatform()
@@ -86,7 +98,7 @@ public class LevelGenerator : MonoBehaviour
         // --- ¬џ«ќ¬ SPAWN FOR PLATFORM (тандем с генерацией платформы) ---
         if (MonsterSpawner != null)
         {
-            MonsterSpawner.SpawnForPlatform(platformObj);
+            MonsterSpawner.SpawnForPlatform(platformObj, IsShortPlatform(platformObj));
         }
 
         _lastPlatformY += PlatformSpacingY;
@@ -100,31 +112,91 @@ public class LevelGenerator : MonoBehaviour
 
     private GameObject ChoosePlatformPrefab(float height)
     {
-        if (height < 40f) return NormalPlatform;
-        else if (height < 100f) return Random.value < 0.7f ? NormalPlatform : SpikesPlatform;
+        float r = Random.value;
+
+        // 0Ц50: только обучение
+        if (height < 50f)
+        {
+            return NormalPlatform;
+        }
+
+        // 50Ц100: обычные + короткие
+        else if (height < 100f)
+        {
+            return r < 0.7f ? NormalPlatform : ShortPlatform;
+        }
+
+        // 100Ц150: добавл€ютс€ шипы
         else if (height < 150f)
         {
-            float r = Random.value;
-            if (r < 0.7f) return DisappearingPlatform;
+            if (r < 0.5f) return NormalPlatform;
+            if (r < 0.8f) return ShortPlatform;
             return SpikesPlatform;
         }
+
+        // 150Ц200: обычные исчезают, по€вл€ютс€ короткие с шипами
         else if (height < 200f)
         {
-            float r2 = Random.value;
-            if (r2 < 0.4f) return DisappearingPlatform;
-            return SpikesPlatform;
+            if (r < 0.5f) return ShortPlatform;
+            if (r < 0.8f) return SpikesPlatform;
+            return ShortSpikePlatform;
         }
+
+        // 200Ц250: исчезающие
         else if (height < 250f)
         {
-            float r2 = Random.value;
-            if (r2 < 0.4f) return DisappearingPlatform;
+            if (r < 0.6f) return DisappearingPlatform;
+            if (r < 0.85f) return SpikesPlatform;
             return FlyingPlatform;
         }
+
+        // 250Ц300: исчезающие + шипы
+        else if (height < 300f)
+        {
+            if (r < 0.5f) return DisappearingPlatform;
+            if (r < 0.75f) return SpikesPlatform;
+            return FlyingPlatform;
+        }
+
+        // 300Ц350: короткие исчезающие
+        else if (height < 350f)
+        {
+            if (r < 0.6f) return ShortDisapearPlatform;
+            if (r < 0.85f) return DisappearingPlatform;
+            return FlyingPlatform;
+        }
+
+        // 350Ц400: короткие исчезающие + короткие шипы
+        else if (height < 400f)
+        {
+            if (r < 0.5f) return ShortDisapearPlatform;
+            if (r < 0.8f) return ShortSpikePlatform;
+            return FlyingPlatform;
+        }
+
+        // 400Ц450: вертикальное мышление
+        else if (height < 450f)
+        {
+            if (r < 0.5f) return VerticalPlatform;
+            if (r < 0.8f) return ShortSpikePlatform;
+            return FlyingPlatform;
+        }
+
+        // 450Ц500: длинные вертикали + наказание
+        else if (height < 500f)
+        {
+            if (r < 0.5f) return VerticalPlatformLong;
+            if (r < 0.75f) return ShortSpikePlatform;
+            return FlyingPlatform;
+        }
+
+        // 500Ц600: поздн€€ фаза Ч всЄ, кроме хал€вы
         else
         {
-            float r2 = Random.value;
-            if (r2 < 0.4f) return SpikesPlatform;
-            return VerticalPlatform; // нова€ вертикальна€ платформа
+            if (r < 0.25f) return VerticalPlatformLong;
+            if (r < 0.45f) return ShortDisapearPlatform;
+            if (r < 0.7f) return ShortSpikePlatform;
+            return FlyingPlatform;
         }
     }
 

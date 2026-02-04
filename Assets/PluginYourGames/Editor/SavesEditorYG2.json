@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 306,
+    "idSave": 325,
     "SoundVolume": 0.0,
     "SelectedLanguage": "ru",
     "Levels": [
@@ -254,7 +254,7 @@
     "StarCount": 0,
     "MaxHeight": 338,
     "DeathCount": 14,
-    "DeathLava": 162,
+    "DeathLava": 171,
     "HighScore": 404,
     "DamageCount": 9,
     "CountRestart": 2,

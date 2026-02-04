@@ -4314,6 +4314,10 @@ MonoBehaviour:
   SpikesPlatform: {fileID: 4357621558041775060, guid: 5251bc3ee86eb3c4a97f273f81240b22, type: 3}
   FlyingPlatform: {fileID: 4357621558041775060, guid: 9a452be99d911e94086edb21cc7e19ef, type: 3}
   VerticalPlatform: {fileID: 5394405522839577087, guid: 53ff5665c4e70c6498bb1c78bf51c044, type: 3}
+  ShortPlatform: {fileID: 4357621558041775060, guid: b0c7c797faca05e4ca00d8827dd6a781, type: 3}
+  ShortDisapearPlatform: {fileID: 7039794430361871585, guid: e98eeb195a2f0ab439e3ee2f337225f8, type: 3}
+  ShortSpikePlatform: {fileID: 2162682585755519556, guid: 0b5cecb2ec115f04b90161de7e9dd20a, type: 3}
+  VerticalPlatformLong: {fileID: 5394405522839577087, guid: 1d5e772144c3da14e8bcaa7ab5f9c3ea, type: 3}
   MonsterSpawner: {fileID: 1847077420}
 --- !u!4 &1378494098
 Transform:
@@ -5715,6 +5719,18 @@ MonoBehaviour:
     Expandable: 1
   - Prefab: {fileID: 3518317332710520880, guid: 4db900c698cdbcd4e8f419cf03a69490, type: 3}
     InitialSize: 5
+    Expandable: 1
+  - Prefab: {fileID: 4357621558041775060, guid: b0c7c797faca05e4ca00d8827dd6a781, type: 3}
+    InitialSize: 10
+    Expandable: 1
+  - Prefab: {fileID: 7039794430361871585, guid: e98eeb195a2f0ab439e3ee2f337225f8, type: 3}
+    InitialSize: 10
+    Expandable: 1
+  - Prefab: {fileID: 2162682585755519556, guid: 0b5cecb2ec115f04b90161de7e9dd20a, type: 3}
+    InitialSize: 10
+    Expandable: 1
+  - Prefab: {fileID: 5394405522839577087, guid: 1d5e772144c3da14e8bcaa7ab5f9c3ea, type: 3}
+    InitialSize: 10
     Expandable: 1
 --- !u!4 &1927531417
 Transform:

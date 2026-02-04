@@ -22,11 +22,12 @@ public class MonsterSpawner : MonoBehaviour
     // Словарь платформ -> список монстров на ней
     private Dictionary<GameObject, List<GameObject>> _platformMonsters = new Dictionary<GameObject, List<GameObject>>();
 
-    public void SpawnForPlatform(GameObject platformObj)
+    public void SpawnForPlatform(GameObject platformObj, bool isShort)
     {
         if (platformObj == null) return;
         if (_platformMonsters.ContainsKey(platformObj)) return; // уже спавнили монстра
         if (!CanSpawnOnPlatform(platformObj)) return;
+        if (isShort == true) return;
 
         // Шанс спавна
         if (Random.value > SpawnChancePerPlatform) return; // пропускаем платформу
