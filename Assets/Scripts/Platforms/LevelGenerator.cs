@@ -148,4 +148,6 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
+    public List<GameObject> GetActivePlatforms() => _activePlatforms;
+
 }

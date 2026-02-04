@@ -4,12 +4,14 @@ using UnityEngine;
 public class PlayerWallSlide : MonoBehaviour
 {
     [SerializeField] private PlayerDataSO _playerData;
+    private PlayerAirControl _airControl;
 
     private Rigidbody2D _rb;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+
     }
 
     private void FixedUpdate()
@@ -19,7 +21,12 @@ public class PlayerWallSlide : MonoBehaviour
         // 2. Не на земле
         // 3. Не прыгает
         // 4. Падает вниз
-        if (_playerData.IsTouchingWall && !_playerData.IsGrounded && _rb.linearVelocity.y < 0)
+        if (_playerData.IsKnockedBack)
+            return;
+
+        if (_playerData.IsTouchingWall &&
+            !_playerData.IsGrounded &&
+            _rb.linearVelocity.y < 0)
         {
             _rb.linearVelocity = new Vector2(0, -_playerData.WallSlideSpeed);
         }

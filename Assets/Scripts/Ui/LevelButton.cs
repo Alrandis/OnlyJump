@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,11 +20,6 @@ public class LevelButton : MonoBehaviour
 
         _levButton.interactable = YG2.saves.Levels[_levelId].IsOpen ? true : false;
         SetStars();
-    }
-
-    private void OnEnable()
-    {
-
     }
 
     public void SetStars()
@@ -53,6 +49,13 @@ public class LevelButton : MonoBehaviour
 
     public void OpenLevel()
     {
+        StartCoroutine(LoadLevel());
+    }
+
+    IEnumerator LoadLevel()
+    {
+        yield return StartCoroutine(InterstitialAdvManager.Instance.ShowAdsAndWait());
+
         SceneManager.LoadScene(_levelName);
     }
 }

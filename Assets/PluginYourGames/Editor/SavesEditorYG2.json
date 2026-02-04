@@ -7,15 +7,15 @@
         false,
         false
     ],
-    "idSave": 24,
-    "SoundVolume": 0.02265247330069542,
+    "idSave": 39,
+    "SoundVolume": 0.0,
     "SelectedLanguage": "ru",
     "Levels": [
         {
             "LevelID": 0,
             "IsOpen": true,
             "StarCount": 3,
-            "TryCount": 1
+            "TryCount": 3
         },
         {
             "LevelID": 1,
@@ -192,7 +192,23 @@
             "TryCount": 0
         }
     ],
-    "Attempts": [],
+    "Attempts": [
+        {
+            "Score": 8,
+            "Height": 8,
+            "Time": 4
+        },
+        {
+            "Score": 88,
+            "Height": 68,
+            "Time": 24
+        },
+        {
+            "Score": 10,
+            "Height": 10,
+            "Time": 5
+        }
+    ],
     "Achives": [
         false,
         false,
@@ -211,13 +227,13 @@
         false
     ],
     "StarCount": 0,
-    "MaxHeight": 0,
-    "DeathCount": 0,
+    "MaxHeight": 68,
+    "DeathCount": 1,
     "DeathLava": 0,
-    "HighScore": 0,
+    "HighScore": 88,
     "DamageCount": 0,
-    "CountRestart": 0,
-    "HighTime": 0,
+    "CountRestart": 2,
+    "HighTime": 24,
     "IsSecret": false,
     "IsFast": true
 }

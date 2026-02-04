@@ -3,10 +3,13 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System;
-
+using YG;
 
 public class MenuUI : MonoBehaviour
 {
+
+    [SerializeField] private Health _playerHealth;
+
     [SerializeField] private GameObject _panelMenu;
     [SerializeField] private GameObject _heatlhBar;
     [SerializeField] private GameObject _panelDeath;
@@ -18,21 +21,30 @@ public class MenuUI : MonoBehaviour
 
     private bool _isMenuOpen = false;
 
+    [SerializeField] private GameObject _btnRestart;
+    [SerializeField] private GameObject _btnYes;
+    [SerializeField] private GameObject _btnNo;
+    [SerializeField] private GameObject _btnBack;
+    [SerializeField] private GameObject _imgReward;
+
     private void Start()
     {
         _panelMenu.SetActive(false);
         _panelDeath.SetActive(false);
         _heatlhBar.SetActive(true);
+
+        _btnRestart.SetActive(false);
+        _btnBack.SetActive(false);
     }
 
     private void OnEnable()
     {
-        Health.OnPlayerDead += OpenDeathPanel;
+        Health.OnPlayerDown += OpenDeathPanel;
     }
 
     private void OnDisable()
     {
-        Health.OnPlayerDead -= OpenDeathPanel;
+        Health.OnPlayerDown -= OpenDeathPanel;
     }
 
     private void OpenDeathPanel()
@@ -81,14 +93,46 @@ public class MenuUI : MonoBehaviour
 
     public void OnRestart()
     {
+        StartCoroutine(InterstitialAdvManager.Instance.ShowAdsAndWait());
+
+        ScoreManager.Instance.SaveAttempt();
+
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void OnBackToMenu()
     {
+        StartCoroutine(InterstitialAdvManager.Instance.ShowAdsAndWait());
+
+        ScoreManager.Instance.SaveAttempt();
+
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu"); // название твоей сцены меню
+    }
+
+    public void ShowAdvReward()
+    {
+        string id = "retry"; // Передача id требуется для внутренней работы плагина
+        YG2.RewardedAdvShow(id, ScoreManager.Instance.Reward);
+
+        _panelDeath.SetActive(false);
+        _panelCommon.SetActive(false);
+        ToggleMenu();
+        _buttonMenu.SetActive(true);
+        _heatlhBar.SetActive(true);
+    }
+
+    public void OnNo() 
+    {
+        _playerHealth.ConfirmDeath();
+
+        _btnYes.SetActive(false);
+        _imgReward.SetActive(false);
+        _btnNo.SetActive(false);
+
+        _btnRestart.SetActive(true);
+        _btnBack.SetActive(true);
     }
 
 }

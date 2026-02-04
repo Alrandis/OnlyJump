@@ -53,6 +53,9 @@ public class PlayerSurfaceDetector : MonoBehaviour
 
     private void DetectWall(Collision2D collision)
     {
+        if (_playerData.IsKnockedBack)
+            return;
+
         if (((1 << collision.gameObject.layer) & _wallLayer) != 0)
         {
             _playerAirControl.ResetAirControl();

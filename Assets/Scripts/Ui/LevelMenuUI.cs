@@ -28,7 +28,7 @@ public class LevelMenuUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Health.OnPlayerDead += OpenDeathPanel;
+        Health.OnPlayerDown += OpenDeathPanel;
         Health.OnHealthChanged += GetHealth;
     }
     public void GetHealth(int value)
@@ -38,7 +38,7 @@ public class LevelMenuUI : MonoBehaviour
 
     private void OnDisable()
     {
-        Health.OnPlayerDead -= OpenDeathPanel;
+        Health.OnPlayerDown -= OpenDeathPanel;
         LevelCompleteHandler.Instance.LevelComplited -= OpenWinPanel;
     }
 
@@ -67,6 +67,8 @@ public class LevelMenuUI : MonoBehaviour
 
     public void OnNextLevel()
     {
+        StartCoroutine(InterstitialAdvManager.Instance.ShowAdsAndWait());
+
         Time.timeScale = 1f;
         SceneManager.LoadScene(_nextLevel);
     }
@@ -91,12 +93,19 @@ public class LevelMenuUI : MonoBehaviour
 
         YG2.saves.Levels[SceneManager.GetActiveScene().buildIndex].TryCount++;
         YG2.SaveProgress();
+
+        StartCoroutine(InterstitialAdvManager.Instance.ShowAdsAndWait());
+
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+
+
     public void OnBackToMenu()
     {
+        StartCoroutine(InterstitialAdvManager.Instance.ShowAdsAndWait());
+
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu"); // название твоей сцены меню
     }

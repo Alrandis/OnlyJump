@@ -8,7 +8,7 @@ namespace YG
 {
     public partial class SavesYG
     {
-        public float SoundVolume = 0f;
+        public float SoundVolume = 0.5f;
         public string SelectedLanguage = "";
         public List<Level> Levels = new List<Level>();
         public List<Attempt> Attempts = new List<Attempt>();
@@ -43,12 +43,22 @@ namespace YG
 
         public void AddAttempt(int score, int height, int time)
         {
+            bool exists = Attempts.Any(a =>
+                a.Score == score &&
+                a.Height == height &&
+                a.Time == time);
+
+            if (exists)
+                return;
+
             var attempt = new Attempt(score, height, time);
             Attempts.Insert(0, attempt);
 
             HighScore = Mathf.Max(HighScore, score);
             HighTime = Mathf.Max(HighTime, time);
             MaxHeight = Mathf.Max(MaxHeight, height);
+
+            YG2.SetLeaderboard("LeaderBord", HighScore);
 
             if (Attempts.Count > 20)
             {

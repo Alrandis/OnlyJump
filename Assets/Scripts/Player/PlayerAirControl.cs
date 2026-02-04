@@ -12,6 +12,8 @@ public class PlayerAirControl : MonoBehaviour
     private Vector2 _knockbackVelocity;
 
     private Animator _animator;
+    [SerializeField] private PlayerDataSO _playerData;
+    public bool IsInAirControl => _isBouncingVertically || _isKnockedBack;
 
     private void Awake()
     {
@@ -55,8 +57,13 @@ public class PlayerAirControl : MonoBehaviour
     public void Knockback(Vector2 knockbackImpulse)
     {
         _rb.linearVelocity = knockbackImpulse;
+
+        _playerData.IsKnockedBack = true;
+        _playerData.IsJumping = false;
+
         _isKnockedBack = true;
         _isBouncingVertically = false;
+
         _knockbackVelocity = new Vector2(_rb.linearVelocity.x, 0);
         if (_animator != null)
             _animator.SetTrigger("Hurt");
@@ -67,6 +74,9 @@ public class PlayerAirControl : MonoBehaviour
     {
         _isBouncingVertically = false;
         _isKnockedBack = false;
+
+        _playerData.IsKnockedBack = false;
+
         _knockbackVelocity = Vector2.zero;
     }
 }
