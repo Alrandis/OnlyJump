@@ -9,19 +9,38 @@ public class MovingPlatform : PlatformBase
     private Vector3 _startPos;
     private int _direction = 1;
 
+    private float speed = 0f;
+    private float newX = 0f;
+    private float minX = 0f;
+    private float maxX = 0f;
+
     public override void ResetPlatform()
     {
         _startPos = transform.position;
-        _speedOfset = Random.value;
-        _direction = 1;
+        _speedOfset = Random.Range(0f, 0.5f);
+        _direction = Random.value < 0.5f ? 1 : -1;
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.right * _direction * (_speed + _speedOfset) * Time.deltaTime);
+        speed = (_speed + _speedOfset) * _direction;
+        newX = transform.position.x + speed * Time.deltaTime;
 
-        if (Mathf.Abs(transform.position.x - _startPos.x) >= _distance)
-            _direction *= -1;
+        minX = _startPos.x - _distance;
+        maxX = _startPos.x + _distance;
+
+        if (newX > maxX)
+        {
+            newX = maxX;
+            _direction = -1;
+        }
+        else if (newX < minX)
+        {
+            newX = minX;
+            _direction = 1;
+        }
+
+        transform.position = new Vector3(newX, transform.position.y, transform.position.z);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
