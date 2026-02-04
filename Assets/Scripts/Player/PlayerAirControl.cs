@@ -24,22 +24,27 @@ public class PlayerAirControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isBouncingVertically || _isKnockedBack)
+
+        if ((_isKnockedBack || _isBouncingVertically) && _rb.linearVelocity.y <= 0f)
         {
-            float inputX = 0f;
-
-            if (Input.GetMouseButton(0))
-            {
-                Vector2 mousePos = Input.mousePosition;
-
-                inputX = mousePos.x < Screen.width / 2 ? -1f : 1f;
-            }
-
-            _rb.linearVelocity = new Vector2(
-                inputX * _airMoveSpeed + _knockbackVelocity.x,
-                _knockbackVelocity.y + _rb.linearVelocity.y
-            );
+            ResetAirControl();
         }
+
+        if (!_isBouncingVertically && !_isKnockedBack)
+            return;
+
+        float inputX = 0f;
+
+        if (Input.GetMouseButton(0))
+        {
+            float mouseX = Input.mousePosition.x;
+            inputX = mouseX < Screen.width * 0.5f ? -1f : 1f;
+        }
+
+        _rb.linearVelocity = new Vector2(
+            inputX * _airMoveSpeed + _knockbackVelocity.x,
+            _rb.linearVelocity.y // ÍÅ ÒÐÎÃÀÅÌ Y
+        );
     }
 
     public void Bounce(float bounceForce)
@@ -47,6 +52,9 @@ public class PlayerAirControl : MonoBehaviour
         _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, bounceForce);
         _isBouncingVertically = true;
         _isKnockedBack = false;
+
+        _playerData.IsKnockedBack = false;
+
         _knockbackVelocity = Vector2.zero;
 
         if (_animator != null)

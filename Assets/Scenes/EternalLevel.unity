@@ -575,6 +575,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 518937942238019978, guid: 06851463240dfe44ca744ce229440aa9, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9443817
+      objectReference: {fileID: 0}
+    - target: {fileID: 518937942238019978, guid: 06851463240dfe44ca744ce229440aa9, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.027809143
+      objectReference: {fileID: 0}
     - target: {fileID: 541961855417973928, guid: 06851463240dfe44ca744ce229440aa9, type: 3}
       propertyPath: _camera
       value: 
@@ -623,6 +631,30 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1647078987}
+    - target: {fileID: 7791087283835921181, guid: 06851463240dfe44ca744ce229440aa9, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9472873
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791087283835921181, guid: 06851463240dfe44ca744ce229440aa9, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.02635634
+      objectReference: {fileID: 0}
+    - target: {fileID: 8910482298616680503, guid: 06851463240dfe44ca744ce229440aa9, type: 3}
+      propertyPath: m_Size.x
+      value: 0.86630726
+      objectReference: {fileID: 0}
+    - target: {fileID: 8910482298616680503, guid: 06851463240dfe44ca744ce229440aa9, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.02289176
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110796992439361196, guid: 06851463240dfe44ca744ce229440aa9, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8708091
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110796992439361196, guid: 06851463240dfe44ca744ce229440aa9, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.02064085
+      objectReference: {fileID: 0}
     - target: {fileID: 9211353529786493454, guid: 06851463240dfe44ca744ce229440aa9, type: 3}
       propertyPath: m_Name
       value: Walls
