@@ -18,6 +18,9 @@ public class LevelScore : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _time;
 
+    [SerializeField] private TextMeshProUGUI _fastTimeUI;
+    [SerializeField] private TextMeshProUGUI _midleTimeUI;
+
     [SerializeField] private int _damageCount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,6 +31,9 @@ public class LevelScore : MonoBehaviour
         _star1.SetActive(false);
         _star2.SetActive(false);
         _star3.SetActive(false);
+
+        _fastTimeUI.text = _fastTime.ToString();
+        _midleTimeUI.text = _midleTime.ToString();
 
         LevelCompleteHandler.Instance.LevelComplited += SetStars;
         LevelCompleteHandler.Instance.LevelComplited += GetSecret;

@@ -7,9 +7,9 @@
         false,
         false
     ],
-    "idSave": 475,
+    "idSave": 490,
     "SoundVolume": 0.0,
-    "SelectedLanguage": "be",
+    "SelectedLanguage": "ru",
     "Levels": [
         {
             "LevelID": 0,
@@ -21,7 +21,7 @@
             "LevelID": 1,
             "IsOpen": true,
             "StarCount": 3,
-            "TryCount": 0
+            "TryCount": 3
         },
         {
             "LevelID": 2,
@@ -293,11 +293,11 @@
     ],
     "StarCount": 0,
     "MaxHeight": 1239,
-    "DeathCount": 22,
-    "DeathLava": 257,
+    "DeathCount": 23,
+    "DeathLava": 258,
     "HighScore": 1518,
     "DamageCount": 13,
-    "CountRestart": 3,
+    "CountRestart": 4,
     "HighTime": 480,
     "IsSecret": false,
     "IsFast": true
