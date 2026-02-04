@@ -1,25 +1,49 @@
 using UnityEngine;
 
-public class WallsFollower : MonoBehaviour
+public class FollowWall : MonoBehaviour
 {
-    [SerializeField] private Transform _player;
-    [SerializeField] private Transform _leftWall;
-    [SerializeField] private Transform _rightWall;
+    [SerializeField] private Transform _camera;
+    [SerializeField] private Transform _spriteA;
+    [SerializeField] private Transform _spriteB;
 
-    [SerializeField] private float _verticalOffset = 5f; // запас сверху
-    [SerializeField] private float _moveSpeed = 3f;      // скорость плавного движени€
+    private float _spriteHeight;
 
-    private void Update()
+    private void Awake()
     {
-        // целева€ позици€ Y всегда = позици€ игрока + offset
-        float targetY = _player.position.y + _verticalOffset;
+        _spriteHeight = _spriteA.GetComponent<SpriteRenderer>().bounds.size.y;
+    }
 
-        // обновл€ем позиции стен
-        Vector3 leftTarget = new Vector3(_leftWall.position.x, targetY, _leftWall.position.z);
-        Vector3 rightTarget = new Vector3(_rightWall.position.x, targetY, _rightWall.position.z);
+    private void LateUpdate()
+    {
+        float camY = _camera.position.y;
 
-        // плавно т€нем стены
-        _leftWall.position = Vector3.Lerp(_leftWall.position, leftTarget, _moveSpeed * Time.deltaTime);
-        _rightWall.position = Vector3.Lerp(_rightWall.position, rightTarget, _moveSpeed * Time.deltaTime);
+        float middleY = (_spriteA.position.y + _spriteB.position.y) * 0.5f;
+
+        //  амера ушла вверх
+        if (camY > middleY + _spriteHeight / 2f)
+        {
+            MoveLowestUp();
+        }
+        //  амера ушла вниз
+        else if (camY < middleY - _spriteHeight / 2f)
+        {
+            MoveHighestDown();
+        }
+    }
+
+    private void MoveLowestUp()
+    {
+        Transform lowest = _spriteA.position.y < _spriteB.position.y ? _spriteA : _spriteB;
+        Transform highest = lowest == _spriteA ? _spriteB : _spriteA;
+
+        lowest.position = highest.position + Vector3.up * _spriteHeight;
+    }
+
+    private void MoveHighestDown()
+    {
+        Transform highest = _spriteA.position.y > _spriteB.position.y ? _spriteA : _spriteB;
+        Transform lowest = highest == _spriteA ? _spriteB : _spriteA;
+
+        highest.position = lowest.position - Vector3.up * _spriteHeight;
     }
 }
