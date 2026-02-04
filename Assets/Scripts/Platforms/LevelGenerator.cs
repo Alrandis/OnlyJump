@@ -153,8 +153,9 @@ public class LevelGenerator : MonoBehaviour
         // 250Ц300: исчезающие + шипы
         else if (height < 300f)
         {
-            if (r < 0.5f) return DisappearingPlatform;
-            if (r < 0.75f) return SpikesPlatform;
+            if (r < 0.20f) return SpikesPlatform;
+            if (r < 0.5f) return ShortDisapearPlatform;
+            if (r < 0.75f) return ShortPlatform;
             return FlyingPlatform;
         }
 
@@ -169,32 +170,56 @@ public class LevelGenerator : MonoBehaviour
         // 350Ц400: короткие исчезающие + короткие шипы
         else if (height < 400f)
         {
+            if (r < 0.2f) return ShortSpikePlatform;
             if (r < 0.5f) return ShortDisapearPlatform;
-            if (r < 0.8f) return ShortSpikePlatform;
             return FlyingPlatform;
         }
 
         // 400Ц450: вертикальное мышление
         else if (height < 450f)
         {
+            if (r < 0.3f) return ShortSpikePlatform;
             if (r < 0.5f) return VerticalPlatform;
-            if (r < 0.8f) return ShortSpikePlatform;
+            if (r < 0.8f) return NormalPlatform;
             return FlyingPlatform;
         }
 
         // 450Ц500: длинные вертикали + наказание
         else if (height < 500f)
         {
-            if (r < 0.5f) return VerticalPlatformLong;
-            if (r < 0.75f) return ShortSpikePlatform;
+            if (r < 0.4f) return SpikesPlatform;
+            if (r < 0.6f) return VerticalPlatformLong;
+            if (r < 0.75f) return ShortDisapearPlatform;
             return FlyingPlatform;
         }
 
-        // 500Ц600: поздн€€ фаза Ч всЄ, кроме хал€вы
+        
+        else if (height < 600f)
+        {
+            if (r < 0.25f) return VerticalPlatformLong;
+            if (r < 0.5f) return VerticalPlatform;
+            if (r < 0.65f) return ShortSpikePlatform;
+            if (r < 0.75f) return SpikesPlatform;
+            return FlyingPlatform;
+        }
+
+        
+        else if (height < 700f)
+        {
+            if (r < 0.15f) return ShortDisapearPlatform;
+            if (r < 0.25f) return VerticalPlatformLong;
+            if (r < 0.5f) return VerticalPlatform;
+            if (r < 0.75f) return ShortSpikePlatform;
+            if (r < 0.85f) return SpikesPlatform;
+            return FlyingPlatform;
+        }
+
+        // поздн€€ фаза Ч всЄ, кроме хал€вы
         else
         {
             if (r < 0.25f) return VerticalPlatformLong;
             if (r < 0.45f) return ShortDisapearPlatform;
+            if (r < 0.65f) return ShortPlatform;
             if (r < 0.7f) return ShortSpikePlatform;
             return FlyingPlatform;
         }

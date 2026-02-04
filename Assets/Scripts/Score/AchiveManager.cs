@@ -28,6 +28,10 @@ public class AchiveManager : MonoBehaviour
 
     void Start()
     {
+        YG2.saves.SelectedLanguage = YG2.lang;
+        YG2.SaveProgress();
+        YG2.saves.LangChanged();
+
         Achives = YG2.saves.Achives;
         if (YG2.saves.Levels == null) return;
         DeathCheck();

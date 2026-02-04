@@ -16,10 +16,6 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        YG2.saves.SelectedLanguage = YG2.lang;
-        YG2.SaveProgress();
-        YG2.saves.LangChanged();
-
         if (YG2.saves.Levels.Count == 0)
         {
             for (int i = 0; i < 30; i++)

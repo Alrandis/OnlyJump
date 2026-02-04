@@ -11,7 +11,7 @@ public class ScoreManager : MonoBehaviour
 
     private float _startTime;
     private int _maxHeight;
-    private float _maxReachedY;
+    private float _maxReachedY = 0;
 
     [SerializeField] private LevelGenerator _levelGenerator; // Перетащи генератор в инспекторе
     [SerializeField] private Health _playerHealth;         // Перетащи игрока (Health) в инспекторе
@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour
     {
         _startTime = Time.time;
         _maxHeight = 0;
-        _maxReachedY = _playerHealth.transform.position.y;
+        //_maxReachedY = _playerHealth.transform.position.y;
 
         Health.OnPlayerDeadConfirmed += SaveAttempt;
     }
