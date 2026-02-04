@@ -19,6 +19,7 @@ public class PlatformTracker : MonoBehaviour
         {
             int height = Mathf.FloorToInt(transform.position.y);
             ScoreManager.Instance.RegisterPlatformHeight(height);
+            ScoreManager.Instance.RegisterReachedY(transform.position.y);
             _touched = true; // чтобы не считать повторно
         }
     }

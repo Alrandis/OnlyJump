@@ -11,6 +11,8 @@ public class ScoreManager : MonoBehaviour
 
     private float _startTime;
     private int _maxHeight;
+    private float _maxReachedY;
+
     [SerializeField] private LevelGenerator _levelGenerator; // Перетащи генератор в инспекторе
     [SerializeField] private Health _playerHealth;         // Перетащи игрока (Health) в инспекторе
     private void Awake()
@@ -23,6 +25,7 @@ public class ScoreManager : MonoBehaviour
     {
         _startTime = Time.time;
         _maxHeight = 0;
+        _maxReachedY = _playerHealth.transform.position.y;
 
         Health.OnPlayerDeadConfirmed += SaveAttempt;
     }
@@ -38,6 +41,11 @@ public class ScoreManager : MonoBehaviour
             _maxHeight = height;
     }
 
+    public void RegisterReachedY(float worldY)
+    {
+        if (worldY > _maxReachedY)
+            _maxReachedY = worldY;
+    }
     public (int score, int height, int time) GetCurrentAttempt()
     {
         int timeSpent = Mathf.FloorToInt(Time.time - _startTime);
@@ -77,25 +85,27 @@ public class ScoreManager : MonoBehaviour
         // 1. Которая активна
         // 2. Которая НЕ является шипами (проверяем по имени префаба или тегу)
         // 3. Которая ближе всего к (MaxHeight + интервал)
+
+        float targetY = _maxReachedY + _levelGenerator.PlatformSpacingY * 0.5f;
+
         var targetPlatform = _levelGenerator.GetActivePlatforms()
             .Where(p => p != null && p.activeInHierarchy)
-            // Исключаем платформы с шипами, чтобы не умереть сразу
-            .Where(p => p.GetComponentInChildren<SpikeDamage>() == null &&
-                        p.GetComponent<VerticalPlatform>() == null)
-            .OrderBy(p => Mathf.Abs(p.transform.position.y - (_maxHeight + _levelGenerator.PlatformSpacingY)))
+ 
+            .OrderBy(p => Mathf.Abs(p.transform.position.y - (_maxReachedY + _levelGenerator.PlatformSpacingY * 0.5f)))
             .FirstOrDefault();
 
         Vector3 spawnPosition;
-
-        if (targetPlatform != null)
+       
+                        
+        if (targetPlatform.GetComponent<VerticalPlatform>() == null && targetPlatform != null)
         {
-            spawnPosition = targetPlatform.transform.position + Vector3.up * 1.5f;
+            spawnPosition = targetPlatform.transform.position + Vector3.up * 3f;
         }
         else
         {
             // Резервный вариант, если подходящих платформ рядом нет
-            spawnPosition = new Vector3(0, _maxHeight + 2f, 0);
-            _levelGenerator.ForceSpawnSafePlatformAt(_maxHeight + 1);
+            spawnPosition = new Vector3(0, targetPlatform.transform.position.y + 3f, 0);
+            _levelGenerator.ForceSpawnSafePlatformAt(targetPlatform.transform.position.y + 1f);
         }
 
         _playerHealth.transform.position = spawnPosition;

@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
     [Header("Параметры подбрасывания")]
     [SerializeField] private float _knockbackForce = 5f; // сила отброса
 
-    private bool _isInvulnerable = false;
+    public bool IsInvulnerable = false;
 
     public static Action OnPlayerDown;          // показ экрана смерти
     public static Action OnPlayerDeadConfirmed; // финальная смерть
@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
     // Применяем урон и knockback
     public void TakeDamage(int damage)
     {
-        if (_isInvulnerable || _deathPending) return;
+        if (IsInvulnerable || _deathPending) return;
 
         CurrentHealth -= damage;
         OnHealthChanged?.Invoke(CurrentHealth);
@@ -75,15 +75,15 @@ public class Health : MonoBehaviour
 
     private IEnumerator BeInvulnerable()
     {
-        _isInvulnerable = true;
+        IsInvulnerable = true;
         yield return new WaitForSeconds(1);
-        _isInvulnerable = false;
+        IsInvulnerable = false;
     }
 
     public void RestoreHealth()
     {
         _deathPending = false;
-        _isInvulnerable = false; 
+      
 
         CurrentHealth = _maxHealth;
         OnHealthChanged?.Invoke(CurrentHealth);
@@ -103,6 +103,8 @@ public class Health : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.simulated = true;
         }
+
+        StartCoroutine(BeInvulnerable());
     }
 
     private void Death()

@@ -10,7 +10,7 @@ public class SpikeDamage : MonoBehaviour
         {
             Health hp = other.GetComponent<Health>();
             PlayerAirControl playerAirControl = other.GetComponent<PlayerAirControl>();   
-            if (hp != null && playerAirControl != null)
+            if (hp != null && playerAirControl != null && !hp.IsInvulnerable)
             {
                 hp.TakeDamage(_damage);
                 Vector2 knockback = new Vector2(

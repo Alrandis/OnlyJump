@@ -150,7 +150,7 @@ public class LevelGenerator : MonoBehaviour
 
     public List<GameObject> GetActivePlatforms() => _activePlatforms;
 
-    public void ForceSpawnSafePlatformAt(int height) 
+    public void ForceSpawnSafePlatformAt(float height) 
     {
         if (NormalPlatform == null)
         {

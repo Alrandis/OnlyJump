@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 170,
+    "idSave": 288,
     "SoundVolume": 0.0,
     "SelectedLanguage": "ru",
     "Levels": [
@@ -194,6 +194,16 @@
     ],
     "Attempts": [
         {
+            "Score": 404,
+            "Height": 285,
+            "Time": 83
+        },
+        {
+            "Score": 394,
+            "Height": 338,
+            "Time": 141
+        },
+        {
             "Score": 338,
             "Height": 251,
             "Time": 82
@@ -229,7 +239,7 @@
         false,
         false,
         false,
-        false,
+        true,
         true,
         true,
         true,
@@ -242,13 +252,13 @@
         false
     ],
     "StarCount": 0,
-    "MaxHeight": 291,
-    "DeathCount": 13,
-    "DeathLava": 58,
-    "HighScore": 348,
+    "MaxHeight": 338,
+    "DeathCount": 14,
+    "DeathLava": 148,
+    "HighScore": 404,
     "DamageCount": 9,
     "CountRestart": 2,
-    "HighTime": 117,
+    "HighTime": 141,
     "IsSecret": false,
     "IsFast": true
 }

@@ -36,6 +36,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
+            if (_playerHealth.IsInvulnerable) return;
             // Игрок получает урон
             _playerHealth.TakeDamage(Damage);
 
