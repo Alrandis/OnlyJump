@@ -150,4 +150,36 @@ public class LevelGenerator : MonoBehaviour
 
     public List<GameObject> GetActivePlatforms() => _activePlatforms;
 
+    public void ForceSpawnSafePlatformAt(int height) 
+    {
+        if (NormalPlatform == null)
+        {
+            Debug.LogWarning("NormalPlatform не назначен Ч невозможно заспавнить safe-платформу");
+            return;
+        }
+
+        // выбираем X так же, как у обычных платформ
+        float xPos = ChooseXSlot(NormalPlatform);
+
+        Vector3 spawnPos = new Vector3(xPos, height, 0f);
+
+        GameObject platformObj = PoolManager.Instance.GetObject(
+            NormalPlatform,
+            spawnPos,
+            NormalPlatform.transform.rotation
+        );
+
+        if (platformObj == null)
+            return;
+
+        _activePlatforms.Add(platformObj);
+
+        // если вдруг на префабе есть FallingPlatform Ч принудительно сбрасываем
+        if (platformObj.TryGetComponent<FallingPlatform>(out var falling))
+        {
+            falling.ResetPlatform();
+        }
+
+    }
+
 }

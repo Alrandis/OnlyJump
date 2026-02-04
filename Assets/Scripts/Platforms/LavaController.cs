@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using YG;
 
@@ -5,31 +6,62 @@ using YG;
 public class LavaController : MonoBehaviour
 {
     [Header("Движение лавы")]
-    [SerializeField] private float _baseSpeed = 0.5f;   // базовая скорость
-    [SerializeField] private float _speedIncrease = 0.03f; // на сколько ускоряется с ростом игрока
-    [SerializeField] private Transform _player;         // игрок для отслеживания высоты
-    [SerializeField] private float _currentSpeed;
+    [SerializeField] private float _baseSpeed = 0.5f;
+    [SerializeField] private float _speedIncrease = 0.03f;
+    [SerializeField] private Transform _player;
 
-    private float _maxSpeed = 2.8f;
+    [Header("Ограничения")]
+    [SerializeField] private float _maxSpeed = 2.8f;
+
+    [Header("Параметры воскрешения")]
+    [SerializeField] private float _reviveOffsetY = 6f;     // насколько опустить лаву
+    [SerializeField] private float _slowMultiplier = 0.5f; // замедление в 2 раза
+    [SerializeField] private float _slowDuration = 3f;     // сколько секунд действует
+
+    private float _currentSpeed;
+    private bool _isSlowed = false;
 
     private void Update()
     {
         if (_player == null) return;
 
-        // скорость зависит от высоты игрока
-        _currentSpeed = (_currentSpeed < _maxSpeed) ? _baseSpeed + _player.position.y * _speedIncrease : _maxSpeed;
+        float targetSpeed = _baseSpeed + _player.position.y * _speedIncrease;
+        targetSpeed = Mathf.Min(targetSpeed, _maxSpeed);
 
-        // движем лаву вверх
+        if (_isSlowed)
+            targetSpeed *= _slowMultiplier;
+
+        _currentSpeed = targetSpeed;
+
         transform.Translate(Vector3.up * _currentSpeed * Time.deltaTime);
+    }
+
+    /// <summary>
+    /// Вызывается при воскрешении игрока
+    /// </summary>
+    public void OnPlayerRevived(float playerY)
+    {
+        StopAllCoroutines();
+
+        // сдвигаем лаву ниже игрока
+        float newY = Mathf.Min(transform.position.y, playerY - _reviveOffsetY);
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+
+        StartCoroutine(SlowLavaTemporarily());
+    }
+
+    private IEnumerator SlowLavaTemporarily()
+    {
+        _isSlowed = true;
+        yield return new WaitForSeconds(_slowDuration);
+        _isSlowed = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // проверяем игрока
         var health = other.GetComponent<Health>();
         if (health != null)
         {
-            // наносим 3 урона (гарантированный смертельный удар)
             health.TakeDamage(3);
             YG2.saves.DeathLava++;
             YG2.SaveProgress();

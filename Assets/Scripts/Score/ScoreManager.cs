@@ -7,6 +7,8 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
+    [SerializeField] private LavaController _lava;
+
     private float _startTime;
     private int _maxHeight;
     [SerializeField] private LevelGenerator _levelGenerator; // Перетащи генератор в инспекторе
@@ -78,7 +80,8 @@ public class ScoreManager : MonoBehaviour
         var targetPlatform = _levelGenerator.GetActivePlatforms()
             .Where(p => p != null && p.activeInHierarchy)
             // Исключаем платформы с шипами, чтобы не умереть сразу
-            .Where(p => !p.GetComponentInChildren<SpikeDamage>() || !p.GetComponent<VerticalPlatform>())
+            .Where(p => p.GetComponentInChildren<SpikeDamage>() == null &&
+                        p.GetComponent<VerticalPlatform>() == null)
             .OrderBy(p => Mathf.Abs(p.transform.position.y - (_maxHeight + _levelGenerator.PlatformSpacingY)))
             .FirstOrDefault();
 
@@ -92,9 +95,12 @@ public class ScoreManager : MonoBehaviour
         {
             // Резервный вариант, если подходящих платформ рядом нет
             spawnPosition = new Vector3(0, _maxHeight + 2f, 0);
+            _levelGenerator.ForceSpawnSafePlatformAt(_maxHeight + 1);
         }
 
         _playerHealth.transform.position = spawnPosition;
         _playerHealth.RestoreHealth();
+        _lava?.OnPlayerRevived(_playerHealth.transform.position.y);
+
     }
 }

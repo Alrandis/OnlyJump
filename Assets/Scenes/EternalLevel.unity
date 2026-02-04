@@ -1806,6 +1806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133dc56bd2e8c194bb5d1ad703f01277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lava: {fileID: 2077658964}
   _levelGenerator: {fileID: 1378494097}
   _playerHealth: {fileID: 3414580441926066720}
 --- !u!4 &675752933
@@ -6108,7 +6109,10 @@ MonoBehaviour:
   _baseSpeed: 0.5
   _speedIncrease: 0.05
   _player: {fileID: 168834288}
-  _currentSpeed: 0
+  _maxSpeed: 2.8
+  _reviveOffsetY: 20
+  _slowMultiplier: 0.5
+  _slowDuration: 3
 --- !u!61 &2077658965
 BoxCollider2D:
   m_ObjectHideFlags: 0
