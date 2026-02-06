@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -67,10 +68,7 @@ public class LevelMenuUI : MonoBehaviour
 
     public void OnNextLevel()
     {
-        StartCoroutine(InterstitialAdvManager.Instance.ShowAdsAndWait());
-
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(_nextLevel);
+        StartCoroutine(ShowAdsAndLoadScene(_nextLevel));
     }
 
     public void OpenMenu()
@@ -94,20 +92,31 @@ public class LevelMenuUI : MonoBehaviour
         YG2.saves.Levels[SceneManager.GetActiveScene().buildIndex].TryCount++;
         YG2.SaveProgress();
 
-        StartCoroutine(InterstitialAdvManager.Instance.ShowAdsAndWait());
-
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        StartCoroutine(ShowAdsAndLoadScene(SceneManager.GetActiveScene().buildIndex));
     }
-
-
 
     public void OnBackToMenu()
     {
-        StartCoroutine(InterstitialAdvManager.Instance.ShowAdsAndWait());
+        StartCoroutine(ShowAdsAndLoadScene("MainMenu"));
+    }
+
+    IEnumerator ShowAdsAndLoadScene(string scene)
+    {
+        yield return StartCoroutine(
+            InterstitialAdvManager.Instance.ShowAdsAndWait()
+        );
 
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu"); // название твоей сцены меню
+        SceneManager.LoadScene(scene);
+    }
+    IEnumerator ShowAdsAndLoadScene(int scene)
+    {
+        yield return StartCoroutine(
+            InterstitialAdvManager.Instance.ShowAdsAndWait()
+        );
+
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(scene);
     }
 
 }

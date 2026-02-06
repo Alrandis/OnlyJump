@@ -132,7 +132,7 @@ public class AchiveManager : MonoBehaviour
     {
         if (YG2.saves.Achives[4] == true) return;
 
-        if (YG2.saves.MaxHeight >= 300)
+        if (YG2.saves.MaxHeight >= 800)
         {
             YG2.saves.Achives[4] = true;
             ShowAchive();
@@ -147,7 +147,7 @@ public class AchiveManager : MonoBehaviour
     {
         if (YG2.saves.Achives[5] == true) return;
 
-        if (YG2.saves.HighTime >= 100)
+        if (YG2.saves.HighTime >= 240)
         {
             YG2.saves.Achives[5] = true;
             ShowAchive();
@@ -177,7 +177,7 @@ public class AchiveManager : MonoBehaviour
     {
         if (YG2.saves.Achives[6] == true) return;
 
-        if (YG2.saves.HighScore >= 300)
+        if (YG2.saves.HighScore >= 1000)
         {
             YG2.saves.Achives[6] = true;
             ShowAchive();
@@ -212,7 +212,7 @@ public class AchiveManager : MonoBehaviour
         if (YG2.saves.Achives[8] == true
             && YG2.saves.Achives[11] == true) return;
 
-        if (YG2.saves.DeathCount >= 20 && YG2.saves.Achives[8] == false)
+        if (YG2.saves.DeathCount >= 30 && YG2.saves.Achives[8] == false)
         {
             ShowAchive();
             YG2.saves.Achives[8] = true;
@@ -222,7 +222,7 @@ public class AchiveManager : MonoBehaviour
             YG2.saves.Achives[8] = false;
         }
 
-        if (YG2.saves.DeathCount >= 40)
+        if (YG2.saves.DeathCount >= 60)
         {
             YG2.saves.Achives[11] = true;
             ShowAchive();
@@ -237,7 +237,7 @@ public class AchiveManager : MonoBehaviour
     {
         if (YG2.saves.Achives[7] == true) return;
 
-        if (YG2.saves.DeathLava >= 10)
+        if (YG2.saves.DeathLava >= 15)
         {
             YG2.saves.Achives[7] = true;
             ShowAchive();

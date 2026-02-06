@@ -21,6 +21,10 @@ public class LavaController : MonoBehaviour
     private float _currentSpeed;
     private bool _isSlowed = false;
 
+    private void Start()
+    {
+        _player = FindFirstObjectByType<PlayerAirControl>().gameObject.transform;
+    }
     private void Update()
     {
         if (_player == null) return;

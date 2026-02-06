@@ -23,12 +23,6 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    //private void OnDestroy()
-    //{
-    //    YG2.saves.SoundVolumChanged -= () => _volumSource.volume = YG2.saves.SoundVolume;
-
-    //}
-
     private void ValueChange()
     {
         _volumSource.volume = YG2.saves.SoundVolume;

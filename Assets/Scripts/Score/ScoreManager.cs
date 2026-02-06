@@ -1,11 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
-using System.Linq; // Нужно для поиска в списке
+using System.Linq;
+using System.Collections;
+using System; // Нужно для поиска в списке
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
+
+    [SerializeField] private float _reviveCountdown = 2f;
+    [SerializeField] private ReviveCountdownUI _reviveUI;
 
     [SerializeField] private LavaController _lava;
 
@@ -15,6 +20,7 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private LevelGenerator _levelGenerator; // Перетащи генератор в инспекторе
     [SerializeField] private Health _playerHealth;         // Перетащи игрока (Health) в инспекторе
+    
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -99,12 +105,12 @@ public class ScoreManager : MonoBehaviour
                         
         if (targetPlatform.GetComponent<VerticalPlatform>() == null && targetPlatform != null)
         {
-            spawnPosition = targetPlatform.transform.position + Vector3.up * 3f;
+            spawnPosition = targetPlatform.transform.position + Vector3.up * 1f;
         }
         else
         {
             // Резервный вариант, если подходящих платформ рядом нет
-            spawnPosition = new Vector3(0, targetPlatform.transform.position.y + 3f, 0);
+            spawnPosition = new Vector3(0, targetPlatform.transform.position.y + 2f, 0);
             _levelGenerator.ForceSpawnSafePlatformAt(targetPlatform.transform.position.y + 1f);
         }
 
@@ -112,5 +118,30 @@ public class ScoreManager : MonoBehaviour
         _playerHealth.RestoreHealth();
         _lava?.OnPlayerRevived(_playerHealth.transform.position.y);
 
+        StartCoroutine(ReviveWithPauseRoutine());
     }
+
+    private IEnumerator ReviveWithPauseRoutine()
+    {
+        //while (YG2.nowRewardAdv) { yield return null; }
+        // 3. Включаем паузу
+        Time.timeScale = 0f;
+
+        // 4. Показываем UI
+        _reviveUI?.Show(_reviveCountdown);
+
+        // 5. Ждём НЕЗАВИСИМО от timeScale
+        float timer = _reviveCountdown;
+        while (timer > 0f)
+        {
+            timer -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        // 6. Снимаем паузу
+        Time.timeScale = 1f;
+
+        _reviveUI?.Hide();
+    }
+
 }

@@ -4138,7 +4138,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -5131,45 +5131,45 @@ MonoBehaviour:
     - "Mehr als 10 Versuche f\xFCr ein Level ben\xF6tigen"
   - list:
     - "\u0414\u043E\u0441\u0442\u0438\u0447 \u0432\u044B\u0441\u043E\u0442\u044B
-      \u0432 300 \u043E\u0447\u043A\u043E\u0432 \u0432 \u0431\u0435\u0441\u043A\u043E\u043D\u0435\u0447\u043D\u043E\u043C
+      \u0432 800 \u043E\u0447\u043A\u043E\u0432 \u0432 \u0431\u0435\u0441\u043A\u043E\u043D\u0435\u0447\u043D\u043E\u043C
       \u0440\u0435\u0436\u0438\u043C\u0435"
-    - Reach a height of 300 points in endless mode
+    - Reach a height of 800 points in endless mode
     - "\u0414\u0430\u0441\u044F\u0433\u043D\u0456 \u0432\u044B\u0448\u044B\u043D\u0456
-      \u045E 300 \u0430\u0447\u043A\u043E\u045E \u0443 \u0431\u044F\u0441\u043A\u043E\u043D\u0446\u044B\u043C
+      \u045E 800 \u0430\u0447\u043A\u043E\u045E \u0443 \u0431\u044F\u0441\u043A\u043E\u043D\u0446\u044B\u043C
       \u0440\u044D\u0436\u044B\u043C\u0435"
-    - "Erreiche im Endlosmodus eine H\xF6he von 300 Punkten."
+    - "Erreiche im Endlosmodus eine H\xF6he von 800 Punkten."
   - list:
     - "\u041F\u0440\u043E\u0436\u0438\u0442\u044C \u0432 \u0431\u0435\u0441\u043A\u043E\u043D\u0435\u0447\u043D\u043E\u043C
-      \u0440\u0435\u0436\u0438\u043C\u0435 \u0431\u043E\u043B\u0435\u0435 100 \u0441\u0435\u043A\u0443\u043D\u0434"
-    - Survive in endless mode for more than 100 seconds
+      \u0440\u0435\u0436\u0438\u043C\u0435 \u0431\u043E\u043B\u0435\u0435 240 \u0441\u0435\u043A\u0443\u043D\u0434"
+    - Survive in endless mode for more than 240 seconds
     - "\u041F\u0440\u0430\u0436\u044B\u0446\u044C \u0443 \u0431\u044F\u0441\u043A\u043E\u043D\u0446\u044B\u043C
       \u0440\u044D\u0436\u044B\u043C\u0435 \u0431\u043E\u043B\u044C\u0448 \u0437\u0430
-      100 \u0441\u0435\u043A\u0443\u043D\u0434"
-    - "\xDCberlebe im Endlosmodus l\xE4nger als 100 Sekunden."
+      240 \u0441\u0435\u043A\u0443\u043D\u0434"
+    - "\xDCberlebe im Endlosmodus l\xE4nger als 240 Sekunden."
   - list:
     - "\u0414\u043E\u0441\u0442\u0438\u0447\u044C \u0431\u043E\u043B\u0435\u0435
-      200 \u043E\u0447\u043A\u043E\u0432 \u0432 \u0431\u0435\u0441\u043A\u043E\u043D\u0435\u0447\u043D\u043E\u043C
+      1000 \u043E\u0447\u043A\u043E\u0432 \u0432 \u0431\u0435\u0441\u043A\u043E\u043D\u0435\u0447\u043D\u043E\u043C
       \u0440\u0435\u0436\u0438\u043C\u0435 "
-    - "Reach over 200 points in Endless Mode\r"
+    - "Reach over 1000 points in Endless Mode\r"
     - "\u0412\u0430\u0437\u044C\u043C\u0456\u0446\u0435 \u0431\u043E\u043B\u044C\u0448
-      \u0437\u0430 200 \u0430\u0447\u043A\u043E\u045E \u0443 \u0431\u044F\u0441\u043A\u043E\u043D\u0446\u044B\u043C
+      \u0437\u0430 1000 \u0430\u0447\u043A\u043E\u045E \u0443 \u0431\u044F\u0441\u043A\u043E\u043D\u0446\u044B\u043C
       \u0440\u044D\u0436\u044B\u043C\u0435"
-    - "Erreiche im Endlosmodus \xFCber 200 Punkte."
+    - "Erreiche im Endlosmodus \xFCber 1000 Punkte."
   - list:
     - "\u0423\u043F\u0430\u0441\u0442\u044C \u0432 \u043B\u0430\u0432\u0443 \u0431\u043E\u043B\u044C\u0448\u0435
-      10 \u0440\u0430\u0437"
-    - Fall into lava more than 10 times
+      15 \u0440\u0430\u0437"
+    - Fall into lava more than 15 times
     - "\u0423\u043F\u0430\u0441\u0446\u0456 \u045E \u043B\u0430\u0432\u0443 \u0431\u043E\u043B\u044C\u0448
-      \u0437\u0430 10 \u0440\u0430\u0437\u043E\u045E"
-    - Mehr als 10 Mal in Lava fallen
+      \u0437\u0430 15 \u0440\u0430\u0437\u043E\u045E"
+    - Mehr als 15 Mal in Lava fallen
   - list:
     - "\u041F\u0440\u043E\u0438\u0433\u0440\u0430\u0442\u044C \u0431\u043E\u043B\u0435\u0435
-      20 \u0440\u0430\u0437 \u0437\u0430 \u0432\u0441\u044E \u0438\u0433\u0440\u0443"
-    - Lose more than 20 times in the entire game
+      30 \u0440\u0430\u0437 \u0437\u0430 \u0432\u0441\u044E \u0438\u0433\u0440\u0443"
+    - Lose more than 30 times in the entire game
     - "\u041F\u0440\u0430\u0439\u0433\u0440\u0430\u0446\u044C \u0431\u043E\u043B\u044C\u0448
-      \u0437\u0430 20 \u0440\u0430\u0437\u043E\u045E \u0437\u0430 \u045E\u0441\u044E
+      \u0437\u0430 30 \u0440\u0430\u0437\u043E\u045E \u0437\u0430 \u045E\u0441\u044E
       \u0433\u0443\u043B\u044C\u043D\u044E"
-    - Verliere im gesamten Spiel mehr als 20 Mal
+    - Verliere im gesamten Spiel mehr als 30 Mal
   - list:
     - "\u041F\u0440\u043E\u0439\u0442\u0438 \u0443\u0440\u043E\u0432\u0435\u043D\u044C
       \u043D\u0430 \u043B\u0443\u0447\u0448\u0435\u0435 \u0432\u0440\u0435\u043C\u044F
@@ -5190,12 +5190,12 @@ MonoBehaviour:
     - "Schlie\xDFe das Level 3 Sekunden schneller ab als die Bestzeit"
   - list:
     - "\u041F\u0440\u043E\u0438\u0433\u0440\u0430\u0442\u044C \u0431\u043E\u043B\u0435\u0435
-      40 \u0440\u0430\u0437 \u0437\u0430 \u0432\u0441\u044E \u0438\u0433\u0440\u0443"
-    - Lose more than 40 times in the entire game
+      60 \u0440\u0430\u0437 \u0437\u0430 \u0432\u0441\u044E \u0438\u0433\u0440\u0443"
+    - Lose more than 60 times in the entire game
     - "\u041F\u0440\u0430\u0439\u0433\u0440\u0430\u0446\u044C \u0431\u043E\u043B\u044C\u0448
-      \u0437\u0430 40 \u0440\u0430\u0437\u043E\u045E \u0437\u0430 \u045E\u0441\u044E
+      \u0437\u0430 60 \u0440\u0430\u0437\u043E\u045E \u0437\u0430 \u045E\u0441\u044E
       \u0433\u0443\u043B\u044C\u043D\u044E"
-    - Verliere im gesamten Spiel mehr als 40 Mal
+    - Verliere im gesamten Spiel mehr als 60 Mal
   - list:
     - "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u044C 14 \u0434\u043E\u0441\u0442\u0438\u0436\u0435\u043D\u0438\u0439"
     - Get 14 achievements

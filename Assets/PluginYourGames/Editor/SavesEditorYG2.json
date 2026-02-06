@@ -7,21 +7,21 @@
         false,
         false
     ],
-    "idSave": 490,
-    "SoundVolume": 0.0,
+    "idSave": 817,
+    "SoundVolume": 0.46239376068115237,
     "SelectedLanguage": "ru",
     "Levels": [
         {
             "LevelID": 0,
             "IsOpen": true,
-            "StarCount": 1,
+            "StarCount": 3,
             "TryCount": 8
         },
         {
             "LevelID": 1,
             "IsOpen": true,
             "StarCount": 3,
-            "TryCount": 3
+            "TryCount": 8
         },
         {
             "LevelID": 2,
@@ -33,29 +33,29 @@
             "LevelID": 3,
             "IsOpen": true,
             "StarCount": 3,
-            "TryCount": 0
+            "TryCount": 5
         },
         {
             "LevelID": 4,
             "IsOpen": true,
             "StarCount": 2,
-            "TryCount": 3
+            "TryCount": 4
         },
         {
             "LevelID": 5,
             "IsOpen": true,
             "StarCount": 3,
-            "TryCount": 13
+            "TryCount": 14
         },
         {
             "LevelID": 6,
             "IsOpen": true,
-            "StarCount": 0,
+            "StarCount": 1,
             "TryCount": 0
         },
         {
             "LevelID": 7,
-            "IsOpen": false,
+            "IsOpen": true,
             "StarCount": 0,
             "TryCount": 0
         },
@@ -74,14 +74,14 @@
         {
             "LevelID": 10,
             "IsOpen": false,
-            "StarCount": 0,
+            "StarCount": 1,
             "TryCount": 0
         },
         {
             "LevelID": 11,
-            "IsOpen": false,
+            "IsOpen": true,
             "StarCount": 0,
-            "TryCount": 0
+            "TryCount": 1
         },
         {
             "LevelID": 12,
@@ -140,14 +140,14 @@
         {
             "LevelID": 21,
             "IsOpen": false,
-            "StarCount": 0,
+            "StarCount": 1,
             "TryCount": 0
         },
         {
             "LevelID": 22,
-            "IsOpen": false,
+            "IsOpen": true,
             "StarCount": 0,
-            "TryCount": 0
+            "TryCount": 4
         },
         {
             "LevelID": 23,
@@ -171,7 +171,7 @@
             "LevelID": 26,
             "IsOpen": false,
             "StarCount": 0,
-            "TryCount": 0
+            "TryCount": 2
         },
         {
             "LevelID": 27,
@@ -189,10 +189,45 @@
             "LevelID": 29,
             "IsOpen": false,
             "StarCount": 0,
-            "TryCount": 0
+            "TryCount": 29
         }
     ],
     "Attempts": [
+        {
+            "Score": 1,
+            "Height": 1,
+            "Time": 4
+        },
+        {
+            "Score": 308,
+            "Height": 215,
+            "Time": 61
+        },
+        {
+            "Score": 586,
+            "Height": 415,
+            "Time": 122
+        },
+        {
+            "Score": 744,
+            "Height": 581,
+            "Time": 209
+        },
+        {
+            "Score": 646,
+            "Height": 498,
+            "Time": 175
+        },
+        {
+            "Score": 1,
+            "Height": 1,
+            "Time": 1
+        },
+        {
+            "Score": 746,
+            "Height": 638,
+            "Time": 265
+        },
         {
             "Score": 3,
             "Height": 3,
@@ -257,21 +292,6 @@
             "Score": 316,
             "Height": 210,
             "Time": 52
-        },
-        {
-            "Score": 8,
-            "Height": 8,
-            "Time": 4
-        },
-        {
-            "Score": 88,
-            "Height": 68,
-            "Time": 24
-        },
-        {
-            "Score": 10,
-            "Height": 10,
-            "Time": 5
         }
     ],
     "Achives": [
@@ -283,8 +303,8 @@
         true,
         true,
         true,
-        false,
-        false,
+        true,
+        true,
         true,
         false,
         false,
@@ -293,12 +313,12 @@
     ],
     "StarCount": 0,
     "MaxHeight": 1239,
-    "DeathCount": 23,
-    "DeathLava": 258,
+    "DeathCount": 50,
+    "DeathLava": 349,
     "HighScore": 1518,
-    "DamageCount": 13,
-    "CountRestart": 4,
+    "DamageCount": 15,
+    "CountRestart": 9,
     "HighTime": 480,
-    "IsSecret": false,
+    "IsSecret": true,
     "IsFast": true
 }

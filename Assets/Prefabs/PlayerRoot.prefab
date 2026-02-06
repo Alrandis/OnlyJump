@@ -291,6 +291,7 @@ MonoBehaviour:
   _maxHealth: 3
   CurrentHealth: 0
   _knockbackForce: 5
+  IsInvulnerable: 0
 --- !u!1 &5809121430094513315
 GameObject:
   m_ObjectHideFlags: 0

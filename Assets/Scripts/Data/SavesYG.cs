@@ -58,7 +58,7 @@ namespace YG
             HighTime = Mathf.Max(HighTime, time);
             MaxHeight = Mathf.Max(MaxHeight, height);
 
-            YG2.SetLeaderboard("LeaderBord", HighScore);
+            YG2.SetLeaderboard("LeaderBoard", HighScore);
 
             if (Attempts.Count > 20)
             {

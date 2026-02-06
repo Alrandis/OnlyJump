@@ -5,7 +5,6 @@ using YG;
 public class InterstitialAdvManager : MonoBehaviour
 {
     public static InterstitialAdvManager Instance;
-    private bool _isAdClosed;
     private float _currValue = 0;
     private void Awake()
     {
@@ -21,37 +20,19 @@ public class InterstitialAdvManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void OnEnable()
-    {
-        YG2.onCloseInterAdv += OnAdClosed;
-    }
-
-    private void OnDisable()
-    {
-        YG2.onCloseInterAdv -= OnAdClosed;
-    }
-
-    private void OnAdClosed()
-    {
-        _isAdClosed = true;
-    }
-
     public IEnumerator ShowAdsAndWait()
     {
         if (!YG2.isTimerAdvCompleted) yield break;
 
-        _isAdClosed = false;
-
-        _currValue = YG2.saves.SoundVolume;
-        YG2.saves.SoundVolume = 0;
-        YG2.saves.SoundVolumeChanged();
+        AudioListener.pause = true;
 
         YG2.InterstitialAdvShow();
 
-        // ∆дЄм, пока реклама не будет закрыта
-        yield return new WaitUntil(() => _isAdClosed);
+        yield return new WaitForSecondsRealtime(0.4f);
 
-        YG2.saves.SoundVolume = _currValue;
-        YG2.saves.SoundVolumeChanged();
+        // ∆дЄм, пока реклама не будет закрыта
+        while (YG2.nowInterAdv) { yield return null; }
+
+        AudioListener.pause = false;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System;
 using YG;
+using System.Collections;
 
 public class MenuUI : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class MenuUI : MonoBehaviour
     [SerializeField] private GameObject _btnNo;
     [SerializeField] private GameObject _btnBack;
     [SerializeField] private GameObject _imgReward;
+
+    private bool _waitingForReward;
+    private bool _rewardReceived;
 
     private void Start()
     {
@@ -93,34 +97,58 @@ public class MenuUI : MonoBehaviour
 
     public void OnRestart()
     {
-        StartCoroutine(InterstitialAdvManager.Instance.ShowAdsAndWait());
+        StartCoroutine(ShowAdsAndLoadScene(SceneManager.GetActiveScene().buildIndex));
 
         ScoreManager.Instance.SaveAttempt();
-
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void OnBackToMenu()
     {
-        StartCoroutine(InterstitialAdvManager.Instance.ShowAdsAndWait());
+        StartCoroutine(ShowAdsAndLoadScene("MainMenu"));
 
         ScoreManager.Instance.SaveAttempt();
-
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu"); // название твоей сцены меню
     }
 
     public void ShowAdvReward()
     {
-        string id = "retry"; // Передача id требуется для внутренней работы плагина
-        YG2.RewardedAdvShow(id, ScoreManager.Instance.Reward);
+        _waitingForReward = true;
+        _rewardReceived = false;
 
-        _panelDeath.SetActive(false);
-        _panelCommon.SetActive(false);
-        ToggleMenu();
-        _buttonMenu.SetActive(true);
-        _heatlhBar.SetActive(true);
+        string id = "retry"; // Передача id требуется для внутренней работы плагина
+        YG2.RewardedAdvShow(id, OnRewardReceived);
+
+        StartCoroutine(WaitRewardResultRoutine());
+    }
+
+    private void OnRewardReceived()
+    {
+        _rewardReceived = true;
+    }
+
+    private IEnumerator WaitRewardResultRoutine()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        // ждём, пока реклама закончится ЛЮБЫМ способом
+        while (YG2.nowRewardAdv)
+            yield return null;
+
+        _waitingForReward = false;
+
+        if (_rewardReceived)
+        {
+            _panelDeath.SetActive(false);
+            _panelCommon.SetActive(false);
+            ToggleMenu();
+            _buttonMenu.SetActive(true);
+            _heatlhBar.SetActive(true);
+
+            ScoreManager.Instance.Reward();
+            YG2.SkipNextInterAdCall();
+        }
+        else
+        {
+            OnNo();
+        }
     }
 
     public void OnNo() 
@@ -133,6 +161,25 @@ public class MenuUI : MonoBehaviour
 
         _btnRestart.SetActive(true);
         _btnBack.SetActive(true);
+    }
+
+    IEnumerator ShowAdsAndLoadScene(string scene)
+    {
+        yield return StartCoroutine(
+            InterstitialAdvManager.Instance.ShowAdsAndWait()
+        );
+
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(scene);
+    }
+    IEnumerator ShowAdsAndLoadScene(int scene)
+    {
+        yield return StartCoroutine(
+            InterstitialAdvManager.Instance.ShowAdsAndWait()
+        );
+
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(scene);
     }
 
 }

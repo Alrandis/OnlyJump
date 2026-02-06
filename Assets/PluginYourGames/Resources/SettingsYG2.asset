@@ -201,7 +201,7 @@ MonoBehaviour:
     loadSceneIfSDKLate: 0
     loadSceneIndex: 0
     initDelaySimulation: 0
-    buildNumber: 0
+    buildNumber: 9
   Simulation:
     device: 0
     language: ru
@@ -210,32 +210,32 @@ MonoBehaviour:
     loadAdv: 0
     testFailAds: 0
   Templates:
-    logoImageFormat: 0
+    logoImageFormat: 1
     backgroundImgFormat: 3
     gradientBackgroundByLoadGame:
       radial: 0
       angleInclination: 140
-      color1: {r: 1, g: 0.831, b: 0.149, a: 1}
-      color2: {r: 0.36, g: 0.09, b: 1, a: 1}
+      color1: {r: 0.4792453, g: 0.3723789, b: 0.20887859, a: 1}
+      color2: {r: 0.37570658, g: 0.20088992, b: 0.78867924, a: 1}
     customProgressBar: 1
     progressBarSettigs:
       round: 1
       roundAngle: 10
-      width: 30
-      height: 24
-      color1: {r: 0.25, g: 0.6392, b: 1, a: 1}
-      color2: {r: 1, g: 0.831, b: 0.149, a: 0.7}
+      width: 20
+      height: 16
+      color1: {r: 0.40274122, g: 0.509434, b: 0.5052737, a: 1}
+      color2: {r: 0.12450689, g: 0.6791552, b: 0.7584905, a: 0.7}
     fixedAspectRatio: 1
     aspectRatio: 9/16
-    disableForMobile: 1
+    disableForMobile: 0
     fillBackground: 1
     imageBackground: 1
-    imageName: background.jpg
+    imageName: back.jpg
     gradientBackgroundByAspectRatio:
       radial: 0
       angleInclination: 140
-      color1: {r: 1, g: 0.831, b: 0.149, a: 1}
-      color2: {r: 0.36, g: 0.09, b: 1, a: 1}
+      color1: {r: 0.21960786, g: 0.13725491, b: 0.0627451, a: 1}
+      color2: {r: 0.16226411, g: 0.09277356, b: 0.032758977, a: 1}
     pixelRatioEnable: 0
     pixelRatioValue: 1.3
     developerBuild: 0

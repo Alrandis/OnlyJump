@@ -38,7 +38,7 @@ public class CameraFollow : MonoBehaviour
         transform.position = Vector3.Lerp(
             currentPos,
             targetPos,
-            _smoothSpeed * Time.deltaTime
+            _smoothSpeed * Time.unscaledDeltaTime
         );
     }
 
