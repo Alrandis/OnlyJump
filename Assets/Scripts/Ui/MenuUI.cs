@@ -127,7 +127,7 @@ public class MenuUI : MonoBehaviour
 
     private IEnumerator WaitRewardResultRoutine()
     {
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(3);
         // ждём, пока реклама закончится ЛЮБЫМ способом
         while (YG2.nowRewardAdv)
             yield return null;

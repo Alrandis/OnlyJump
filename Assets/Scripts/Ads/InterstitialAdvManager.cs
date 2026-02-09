@@ -28,7 +28,7 @@ public class InterstitialAdvManager : MonoBehaviour
 
         YG2.InterstitialAdvShow();
 
-        yield return new WaitForSecondsRealtime(0.4f);
+        yield return new WaitForSecondsRealtime(0.5f);
 
         // ∆дЄм, пока реклама не будет закрыта
         while (YG2.nowInterAdv) { yield return null; }

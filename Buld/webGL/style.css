@@ -16,6 +16,8 @@ canvas {
 
 body {
     margin: 0;
+    overflow: hidden !important;
+    touch-action: none !important;
 }
 
 #unity-container {

@@ -8,6 +8,12 @@
 
     <!-- Yandex Games SDK -->
     <script src="/sdk.js"></script>
+    <script>
+        window.addEventListener('scroll', function(event) {
+            window.scrollTo(0, 0);
+            event.preventDefault();
+        }, false);
+    </script>
 
     <style>
         canvas:focus {
@@ -17,7 +23,8 @@
         html, body {
             padding: 0;
             margin: 0;
-            overflow: hidden;
+            overflow: hidden !important;
+            touch-action: none !important;
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             -khtml-user-select: none;
@@ -315,7 +322,7 @@ LogStyledMessage('Init Storage ysdk');
         }
 
         // Additional script modules
-LogStyledMessage('[PluginYG2 v2.007] [Build: 11] [Platform: YandexGames]');
+LogStyledMessage('[PluginYG2 v2.007] [Build: 17] [Platform: YandexGames]');
 
 var cloudSaves = NO_DATA;
 
