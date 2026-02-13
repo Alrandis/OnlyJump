@@ -89,7 +89,7 @@ public class LevelMenuUI : MonoBehaviour
         }
 
 
-        YG2.saves.Levels[SceneManager.GetActiveScene().buildIndex].TryCount++;
+        YG2.saves.Levels[SceneManager.GetActiveScene().buildIndex - 1].TryCount++;
         YG2.SaveProgress();
 
         StartCoroutine(ShowAdsAndLoadScene(SceneManager.GetActiveScene().buildIndex));

@@ -32,6 +32,7 @@ public class EnemyController : MonoBehaviour
             Die();
 
             // Игрок отскакивает вверх
+
             _playerAirControl.Bounce(BounceForce);
         }
         else

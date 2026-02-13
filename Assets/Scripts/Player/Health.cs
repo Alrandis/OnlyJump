@@ -115,7 +115,7 @@ public class Health : MonoBehaviour
 
         YG2.saves.DeathCount++;
         if(SceneManager.GetActiveScene().name != "EternalLevel")
-            YG2.saves.Levels[SceneManager.GetActiveScene().buildIndex].TryCount++;
+            YG2.saves.Levels[SceneManager.GetActiveScene().buildIndex - 1].TryCount++;
 
         YG2.SaveProgress();
         AchiveManager.Instance.DeathCheck();

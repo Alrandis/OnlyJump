@@ -30,7 +30,7 @@ public class MenuUI : MonoBehaviour
 
     private bool _waitingForReward;
     private bool _rewardReceived;
-
+    private bool _isRewarded = false;
     private void Start()
     {
         _panelMenu.SetActive(false);
@@ -39,6 +39,8 @@ public class MenuUI : MonoBehaviour
 
         _btnRestart.SetActive(false);
         _btnBack.SetActive(false);
+
+        _isRewarded = false;
     }
 
     private void OnEnable()
@@ -56,6 +58,19 @@ public class MenuUI : MonoBehaviour
         _buttonMenu.SetActive(false);
         _panelCommon.SetActive(true);
         _panelDeath.SetActive(true);
+
+        if (_isRewarded)
+        {
+            _playerHealth.ConfirmDeath();
+
+            _btnYes.SetActive(false);
+            _imgReward.SetActive(false);
+            _btnNo.SetActive(false);
+
+            _btnRestart.SetActive(true);
+            _btnBack.SetActive(true);
+        }
+
         ToggleMenu();
     }
 
@@ -116,7 +131,7 @@ public class MenuUI : MonoBehaviour
 
         string id = "retry"; // Передача id требуется для внутренней работы плагина
         YG2.RewardedAdvShow(id, OnRewardReceived);
-
+        _isRewarded = true;
         StartCoroutine(WaitRewardResultRoutine());
     }
 

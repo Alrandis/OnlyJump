@@ -12,6 +12,8 @@ public class LevelGenerator : MonoBehaviour
     public int PlatformsBuffer = 5;
     public float MaxFallY = 10f;
 
+    public Transform LavaTransform;
+
     [Header("Platform Prefabs")]
     public GameObject NormalPlatform;
     public GameObject DisappearingPlatform;
@@ -178,8 +180,8 @@ public class LevelGenerator : MonoBehaviour
         // 400Ц450: вертикальное мышление
         else if (height < 450f)
         {
-            if (r < 0.3f) return ShortSpikePlatform;
-            if (r < 0.5f) return VerticalPlatform;
+            if (r < 0.1f) return ShortSpikePlatform;
+            if (r < 0.3f) return VerticalPlatform;
             if (r < 0.8f) return NormalPlatform;
             return FlyingPlatform;
         }
@@ -187,10 +189,10 @@ public class LevelGenerator : MonoBehaviour
         // 450Ц500: длинные вертикали + наказание
         else if (height < 500f)
         {
-            if (r < 0.4f) return SpikesPlatform;
-            if (r < 0.6f) return VerticalPlatformLong;
-            if (r < 0.75f) return ShortDisapearPlatform;
-            return FlyingPlatform;
+            if (r < 0.25f) return SpikesPlatform;
+            if (r < 0.4f) return VerticalPlatformLong;
+            if (r < 0.65f) return ShortDisapearPlatform;
+            else return ShortPlatform;
         }
 
         
@@ -198,30 +200,31 @@ public class LevelGenerator : MonoBehaviour
         {
             if (r < 0.25f) return VerticalPlatformLong;
             if (r < 0.5f) return VerticalPlatform;
-            if (r < 0.65f) return ShortSpikePlatform;
-            if (r < 0.75f) return SpikesPlatform;
+            if (r < 0.65f) return ShortDisapearPlatform;
+            if (r < 0.75f) return DisappearingPlatform;
             return FlyingPlatform;
         }
 
         
         else if (height < 700f)
         {
-            if (r < 0.15f) return ShortDisapearPlatform;
             if (r < 0.25f) return VerticalPlatformLong;
-            if (r < 0.5f) return VerticalPlatform;
-            if (r < 0.75f) return ShortSpikePlatform;
-            if (r < 0.85f) return SpikesPlatform;
+            if (r < 0.45f) return ShortDisapearPlatform;
+            if (r < 0.7f) return SpikesPlatform;
+            if (r < 0.85f) return NormalPlatform;
             return FlyingPlatform;
         }
 
         // поздн€€ фаза Ч всЄ, кроме хал€вы
         else
         {
+            if (r < 0.15f) return ShortDisapearPlatform;
             if (r < 0.25f) return VerticalPlatformLong;
-            if (r < 0.45f) return ShortDisapearPlatform;
-            if (r < 0.65f) return ShortPlatform;
-            if (r < 0.7f) return ShortSpikePlatform;
-            return FlyingPlatform;
+            if (r < 0.5f) return VerticalPlatform;
+            if (r < 0.7f) return DisappearingPlatform;
+            if (r < 0.8f) return ShortPlatform;
+            if (r < 0.9f) return ShortSpikePlatform;
+            return SpikesPlatform;
         }
     }
 
@@ -232,8 +235,7 @@ public class LevelGenerator : MonoBehaviour
             var platform = _activePlatforms[i];
             var falling = platform.GetComponent<FallingPlatform>();
 
-            if (platform.transform.position.y < Player.position.y - MaxFallY
-                || (falling != null && falling.MarkedForRemoval))
+            if (platform.transform.position.y <= LavaTransform.position.y)
             {
                 // перед возвратом сбрасываем состо€ние
                 falling?.ResetPlatform();

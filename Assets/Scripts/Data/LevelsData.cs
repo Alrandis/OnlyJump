@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YG;
 
@@ -17,7 +18,7 @@ public class LevelsData : MonoBehaviour
         _levelsPanel[index].SetActive(false);
         index--;
         if(index < 0)
-            index = 5;
+            index = _levelsPanel.Count - 1;
         _levelsPanel[index].SetActive(true);
     }
 
@@ -25,8 +26,13 @@ public class LevelsData : MonoBehaviour
     {
         _levelsPanel[index].SetActive(false);
         index++;
-        if(index > 5)
+        if(index >= _levelsPanel.Count)
             index = 0;
         _levelsPanel[index].SetActive(true);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

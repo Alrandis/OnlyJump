@@ -3695,6 +3695,7 @@ MonoBehaviour:
   PlatformSpacingX: 1.15
   PlatformsBuffer: 5
   MaxFallY: 10
+  LavaTransform: {fileID: 1443021287}
   NormalPlatform: {fileID: 4357621558041775060, guid: 29cd13865e2cb914c9cefa42af22d77c, type: 3}
   DisappearingPlatform: {fileID: 2010576501425868346, guid: 413ff381798f4ea40b197a63bac92c3d, type: 3}
   SpikesPlatform: {fileID: 4357621558041775060, guid: 5251bc3ee86eb3c4a97f273f81240b22, type: 3}
@@ -3877,6 +3878,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e385a59191988b1409ab2b318d9d841c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1443021287 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 258570195697882992, guid: 5acbe6917a20a794dbb1b9de3c026b9d, type: 3}
+  m_PrefabInstance: {fileID: 1443021285}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1500913739
 GameObject:
   m_ObjectHideFlags: 0

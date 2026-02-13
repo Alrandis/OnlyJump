@@ -7,55 +7,55 @@
         false,
         false
     ],
-    "idSave": 823,
-    "SoundVolume": 0.10510431230068207,
+    "idSave": 207,
+    "SoundVolume": 0.5,
     "SelectedLanguage": "ru",
     "Levels": [
         {
             "LevelID": 0,
             "IsOpen": true,
-            "StarCount": 3,
-            "TryCount": 8
+            "StarCount": 0,
+            "TryCount": 0
         },
         {
             "LevelID": 1,
-            "IsOpen": true,
-            "StarCount": 3,
-            "TryCount": 8
+            "IsOpen": false,
+            "StarCount": 0,
+            "TryCount": 0
         },
         {
             "LevelID": 2,
-            "IsOpen": true,
-            "StarCount": 1,
+            "IsOpen": false,
+            "StarCount": 0,
             "TryCount": 0
         },
         {
             "LevelID": 3,
-            "IsOpen": true,
-            "StarCount": 3,
-            "TryCount": 5
+            "IsOpen": false,
+            "StarCount": 0,
+            "TryCount": 0
         },
         {
             "LevelID": 4,
-            "IsOpen": true,
-            "StarCount": 2,
-            "TryCount": 4
+            "IsOpen": false,
+            "StarCount": 0,
+            "TryCount": 0
         },
         {
             "LevelID": 5,
-            "IsOpen": true,
-            "StarCount": 3,
-            "TryCount": 14
+            "IsOpen": false,
+            "StarCount": 0,
+            "TryCount": 0
         },
         {
             "LevelID": 6,
-            "IsOpen": true,
-            "StarCount": 1,
+            "IsOpen": false,
+            "StarCount": 0,
             "TryCount": 0
         },
         {
             "LevelID": 7,
-            "IsOpen": true,
+            "IsOpen": false,
             "StarCount": 0,
             "TryCount": 0
         },
@@ -63,25 +63,25 @@
             "LevelID": 8,
             "IsOpen": false,
             "StarCount": 0,
-            "TryCount": 4
+            "TryCount": 0
         },
         {
             "LevelID": 9,
             "IsOpen": false,
             "StarCount": 0,
-            "TryCount": 1
+            "TryCount": 0
         },
         {
             "LevelID": 10,
             "IsOpen": false,
-            "StarCount": 1,
+            "StarCount": 0,
             "TryCount": 0
         },
         {
             "LevelID": 11,
-            "IsOpen": true,
+            "IsOpen": false,
             "StarCount": 0,
-            "TryCount": 1
+            "TryCount": 0
         },
         {
             "LevelID": 12,
@@ -117,7 +117,7 @@
             "LevelID": 17,
             "IsOpen": false,
             "StarCount": 0,
-            "TryCount": 1
+            "TryCount": 0
         },
         {
             "LevelID": 18,
@@ -129,7 +129,7 @@
             "LevelID": 19,
             "IsOpen": false,
             "StarCount": 0,
-            "TryCount": 1
+            "TryCount": 0
         },
         {
             "LevelID": 20,
@@ -140,14 +140,14 @@
         {
             "LevelID": 21,
             "IsOpen": false,
-            "StarCount": 1,
+            "StarCount": 0,
             "TryCount": 0
         },
         {
             "LevelID": 22,
-            "IsOpen": true,
+            "IsOpen": false,
             "StarCount": 0,
-            "TryCount": 4
+            "TryCount": 0
         },
         {
             "LevelID": 23,
@@ -171,7 +171,7 @@
             "LevelID": 26,
             "IsOpen": false,
             "StarCount": 0,
-            "TryCount": 2
+            "TryCount": 0
         },
         {
             "LevelID": 27,
@@ -189,136 +189,65 @@
             "LevelID": 29,
             "IsOpen": false,
             "StarCount": 0,
-            "TryCount": 29
+            "TryCount": 0
+        },
+        {
+            "LevelID": 30,
+            "IsOpen": true,
+            "StarCount": 1,
+            "TryCount": 0
+        },
+        {
+            "LevelID": 31,
+            "IsOpen": true,
+            "StarCount": 1,
+            "TryCount": 34
+        },
+        {
+            "LevelID": 32,
+            "IsOpen": true,
+            "StarCount": 1,
+            "TryCount": 20
+        },
+        {
+            "LevelID": 33,
+            "IsOpen": true,
+            "StarCount": 1,
+            "TryCount": 6
+        },
+        {
+            "LevelID": 34,
+            "IsOpen": true,
+            "StarCount": 2,
+            "TryCount": 33
         }
     ],
-    "Attempts": [
-        {
-            "Score": 1,
-            "Height": 1,
-            "Time": 4
-        },
-        {
-            "Score": 308,
-            "Height": 215,
-            "Time": 61
-        },
-        {
-            "Score": 586,
-            "Height": 415,
-            "Time": 122
-        },
-        {
-            "Score": 744,
-            "Height": 581,
-            "Time": 209
-        },
-        {
-            "Score": 646,
-            "Height": 498,
-            "Time": 175
-        },
-        {
-            "Score": 1,
-            "Height": 1,
-            "Time": 1
-        },
-        {
-            "Score": 746,
-            "Height": 638,
-            "Time": 265
-        },
-        {
-            "Score": 3,
-            "Height": 3,
-            "Time": 3
-        },
-        {
-            "Score": 168,
-            "Height": 113,
-            "Time": 29
-        },
-        {
-            "Score": 0,
-            "Height": 0,
-            "Time": 1
-        },
-        {
-            "Score": 382,
-            "Height": 264,
-            "Time": 73
-        },
-        {
-            "Score": 1518,
-            "Height": 1239,
-            "Time": 480
-        },
-        {
-            "Score": 536,
-            "Height": 372,
-            "Time": 104
-        },
-        {
-            "Score": 602,
-            "Height": 478,
-            "Time": 177
-        },
-        {
-            "Score": 926,
-            "Height": 905,
-            "Time": 442
-        },
-        {
-            "Score": 404,
-            "Height": 285,
-            "Time": 83
-        },
-        {
-            "Score": 394,
-            "Height": 338,
-            "Time": 141
-        },
-        {
-            "Score": 338,
-            "Height": 251,
-            "Time": 82
-        },
-        {
-            "Score": 348,
-            "Height": 291,
-            "Time": 117
-        },
-        {
-            "Score": 316,
-            "Height": 210,
-            "Time": 52
-        }
-    ],
+    "Attempts": [],
     "Achives": [
         false,
         false,
         false,
         true,
-        true,
-        true,
-        true,
-        true,
+        false,
+        false,
         false,
         true,
         true,
         false,
+        true,
+        false,
         false,
         true,
-        false
+        true
     ],
     "StarCount": 0,
-    "MaxHeight": 1239,
-    "DeathCount": 50,
-    "DeathLava": 350,
-    "HighScore": 1518,
-    "DamageCount": 15,
-    "CountRestart": 9,
-    "HighTime": 480,
-    "IsSecret": true,
+    "MaxHeight": 0,
+    "DeathCount": 34,
+    "DeathLava": 22,
+    "HighScore": 0,
+    "DamageCount": 13,
+    "CountRestart": 16,
+    "HighTime": 0,
+    "IsSecret": false,
     "IsFast": true
 }

@@ -35,25 +35,37 @@ public class MonsterSpawner : MonoBehaviour
         float platformY = platformObj.transform.position.y;
         List<GameObject> spawnedMonsters = new List<GameObject>();
 
+        float r = Random.value;
         // --- Спавн по высоте ---
         if (platformY >= 20f && platformY < 80f)
         {
             SpawnMonsterOnPlatform(StandingMonsterPrefab, platformObj, Vector3.up * 0.5f, spawnedMonsters);
+            //if (r < 0.5f) return ShortPlatform;
+            //if (r < 0.8f) return SpikesPlatform;
+            //return ShortSpikePlatform;
         }
-        else if (platformY >= 80f && platformY < 120f)
+        else if (platformY >= 80f && platformY < 150f)
         {
-            SpawnMonsterOnPlatform(WalkingMonsterPrefab, platformObj, Vector3.up * 0.5f, spawnedMonsters);
+            if (r < 0.6f) SpawnMonsterOnPlatform(StandingMonsterPrefab, platformObj, Vector3.up * 0.5f, spawnedMonsters);
+
+            else SpawnMonsterOnPlatform(WalkingMonsterPrefab, platformObj, Vector3.up * 0.5f, spawnedMonsters);
         }
         else if (platformY >= 120f && platformY < 180f)
         {
             float wallX = HorizontalOffset; // правая стена
             Vector3 pos = new Vector3(wallX, platformY + ShootingOffsetY, 0f);
+            if (r < 0.6f)
+            {
+                SpawnMonsterOnPlatform(StandingMonsterPrefab, platformObj, Vector3.up * 0.5f, spawnedMonsters);
+                return;
+            }
+
             SpawnMonsterOnPlatform(ShootingMonsterPrefab, platformObj, pos - platformObj.transform.position, spawnedMonsters);
         }
         else if (platformY >= 180f)
         {
             Vector3 pos = new Vector3(0f, platformY + FlyingOffsetY, 0f);
-            SpawnMonsterOnPlatform(FlyingMonsterPrefab, platformObj, pos + new Vector3(0, 1.2f, 0) - platformObj.transform.position , spawnedMonsters);
+            if (r < 0.2f) SpawnMonsterOnPlatform(FlyingMonsterPrefab, platformObj, pos + new Vector3(0, 1.2f, 0) - platformObj.transform.position , spawnedMonsters);
         }
 
         if (spawnedMonsters.Count > 0)

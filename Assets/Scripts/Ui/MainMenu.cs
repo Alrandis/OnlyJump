@@ -18,20 +18,21 @@ public class MainMenu : MonoBehaviour
     {
         if (YG2.saves.Levels.Count == 0)
         {
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 35; i++)
             {
                 _levels.Add(new Level(i));
             }
             _levels[0].IsOpen = true;
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 35; i++)
             {
                 YG2.saves.Levels.Add(_levels[i]);
             }
+            YG2.SaveProgress();
         }
         else
         {
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 35; i++)
             {
                 _levels.Add(YG2.saves.Levels[i]);
             }

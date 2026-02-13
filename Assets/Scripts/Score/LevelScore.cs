@@ -132,7 +132,7 @@ public class LevelScore : MonoBehaviour
 
         YG2.saves.Levels[_levelId].StarCount = _stars;
         
-        if(_levelId != 29)
+        if(_levelId != 34)
         {
             if (YG2.saves.Levels[_levelId + 1].IsOpen == false)
                 YG2.saves.Levels[_levelId + 1].IsOpen = true;

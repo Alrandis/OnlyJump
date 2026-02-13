@@ -6,6 +6,7 @@ TagManager:
   tags:
   - VerticalPlatform
   - SpikePlatform
+  - Lava
   layers:
   - Default
   - TransparentFX

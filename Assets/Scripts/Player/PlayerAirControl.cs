@@ -58,7 +58,7 @@ public class PlayerAirControl : MonoBehaviour
         _knockbackVelocity = Vector2.zero;
 
         if (_animator != null)
-            _animator.SetTrigger("Hurt");
+            _animator.SetTrigger("Attack");
     }
 
 
