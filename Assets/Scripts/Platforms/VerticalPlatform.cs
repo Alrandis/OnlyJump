@@ -9,10 +9,6 @@ public class VerticalPlatform : PlatformBase
 
     private Vector3 _startPos;
 
-    //protected override void OnInit()
-    //{
-        
-    //}
 
     public override void ResetPlatform()
     {

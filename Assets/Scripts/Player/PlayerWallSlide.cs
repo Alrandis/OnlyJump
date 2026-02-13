@@ -26,7 +26,7 @@ public class PlayerWallSlide : MonoBehaviour
 
         if (_playerData.IsTouchingWall &&
             !_playerData.IsGrounded &&
-            _rb.linearVelocity.y < 0)
+            _rb.linearVelocity.y <= 0.1)
         {
             _rb.linearVelocity = new Vector2(0, -_playerData.WallSlideSpeed);
         }

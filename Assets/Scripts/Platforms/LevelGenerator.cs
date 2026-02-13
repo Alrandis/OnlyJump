@@ -220,7 +220,9 @@ public class LevelGenerator : MonoBehaviour
         {
             if (r < 0.15f) return ShortDisapearPlatform;
             if (r < 0.25f) return VerticalPlatformLong;
+            if (r < 0.35f) return FlyingPlatform;
             if (r < 0.5f) return VerticalPlatform;
+            if (r < 0.6f) return NormalPlatform;
             if (r < 0.7f) return DisappearingPlatform;
             if (r < 0.8f) return ShortPlatform;
             if (r < 0.9f) return ShortSpikePlatform;

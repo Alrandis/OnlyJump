@@ -12,8 +12,10 @@ public class PlayerSurfaceDetector : MonoBehaviour
 
     [Header("Wall Check")]
     [SerializeField] private LayerMask _wallLayer;
+    [SerializeField] private float _wallCheckDistance = 0.1f;
 
     private Rigidbody2D _rb;
+    private Collider2D _collider;
     private PlayerAirControl _playerAirControl;
     private Animator _animator;
 
@@ -22,56 +24,73 @@ public class PlayerSurfaceDetector : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _playerAirControl = GetComponent<PlayerAirControl>();
         _animator = GetComponentInChildren<Animator>();
-
+        _collider = GetComponent<Collider2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        // Проверка земли
-        _playerData.IsGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundRadius, _groundLayer);
+        CheckGround();
+        CheckWall();
+    }
+
+    private void CheckGround()
+    {
+        _playerData.IsGrounded = Physics2D.OverlapCircle(
+            _groundCheck.position,
+            _groundRadius,
+            _groundLayer
+        );
+
         if (_playerData.IsGrounded)
         {
             _playerAirControl.ResetAirControl();
+
             if (_animator != null)
                 _animator.SetTrigger("Idle");
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        DetectWall(collision);
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        // если игрок оторвался от стены
-        if (((1 << collision.gameObject.layer) & _wallLayer) != 0)
-        {
-            _playerData.IsTouchingWall = false;
-        }
-    }
-
-    private void DetectWall(Collision2D collision)
+    private void CheckWall()
     {
         if (_playerData.IsKnockedBack)
+        {
+            _playerData.IsTouchingWall = false;
             return;
+        }
 
-        if (((1 << collision.gameObject.layer) & _wallLayer) != 0)
+        Bounds bounds = _collider.bounds;
+
+        Vector2 leftOrigin = new Vector2(bounds.min.x, bounds.center.y);
+        Vector2 rightOrigin = new Vector2(bounds.max.x, bounds.center.y);
+
+        RaycastHit2D hitLeft = Physics2D.Raycast(
+            leftOrigin,
+            Vector2.left,
+            _wallCheckDistance,
+            _wallLayer
+        );
+
+        RaycastHit2D hitRight = Physics2D.Raycast(
+            rightOrigin,
+            Vector2.right,
+            _wallCheckDistance,
+            _wallLayer
+        );
+
+        bool touchingWall = hitLeft.collider != null || hitRight.collider != null;
+
+        _playerData.IsTouchingWall = touchingWall;
+
+        if (touchingWall)
         {
             _playerAirControl.ResetAirControl();
-            foreach (ContactPoint2D contact in collision.contacts)
-            {
-                if (Mathf.Abs(contact.normal.x) > 0.9f)
-                {
-                    _playerData.IsTouchingWall = true;
-                   
-                    // сбросить горизонтальную скорость при контакте
-                    _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
 
-                    //_playerData.IsJumping = false;
-                }
+            // обнуляем X только если игрок НЕ начал прыжок
+            if (!_playerData.IsJumping)
+            {
+                _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
             }
         }
     }
-
 }
+  

@@ -121,4 +121,12 @@ public class Health : MonoBehaviour
         AchiveManager.Instance.DeathCheck();
         gameObject.SetActive(false);
     }
+
+    public void Heal()
+    {
+        if (CurrentHealth == 3) return;
+
+        CurrentHealth++;
+        OnHealthChanged?.Invoke(CurrentHealth);
+    }
 }

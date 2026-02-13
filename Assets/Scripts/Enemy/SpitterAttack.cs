@@ -23,6 +23,8 @@ public class SpitterAttack : MonoBehaviour
     {
         GameObject proj = Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.identity);
         Rigidbody2D rb = proj.GetComponent<Rigidbody2D>();
-        rb.linearVelocity = Vector2.left * ProjectileSpeed; // стреляет влево (можно сделать гибко)
+
+        float direction = Mathf.Sign(-transform.localScale.x); // направление взгляда
+        rb.linearVelocity = new Vector2(direction * ProjectileSpeed, 0f);
     }
 }

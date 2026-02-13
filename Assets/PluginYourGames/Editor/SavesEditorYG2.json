@@ -7,8 +7,8 @@
         false,
         false
     ],
-    "idSave": 207,
-    "SoundVolume": 0.5,
+    "idSave": 305,
+    "SoundVolume": 0.0,
     "SelectedLanguage": "ru",
     "Levels": [
         {
@@ -188,7 +188,7 @@
         {
             "LevelID": 29,
             "IsOpen": false,
-            "StarCount": 0,
+            "StarCount": 1,
             "TryCount": 0
         },
         {
@@ -219,20 +219,81 @@
             "LevelID": 34,
             "IsOpen": true,
             "StarCount": 2,
-            "TryCount": 33
+            "TryCount": 45
         }
     ],
-    "Attempts": [],
+    "Attempts": [
+        {
+            "Score": 278,
+            "Height": 194,
+            "Time": 55
+        },
+        {
+            "Score": 506,
+            "Height": 368,
+            "Time": 115
+        },
+        {
+            "Score": 1384,
+            "Height": 978,
+            "Time": 286
+        },
+        {
+            "Score": 1046,
+            "Height": 746,
+            "Time": 223
+        },
+        {
+            "Score": 992,
+            "Height": 681,
+            "Time": 185
+        },
+        {
+            "Score": 1444,
+            "Height": 1014,
+            "Time": 292
+        },
+        {
+            "Score": 1068,
+            "Height": 797,
+            "Time": 263
+        },
+        {
+            "Score": 320,
+            "Height": 217,
+            "Time": 57
+        },
+        {
+            "Score": 0,
+            "Height": 0,
+            "Time": 1
+        },
+        {
+            "Score": 2730,
+            "Height": 1864,
+            "Time": 499
+        },
+        {
+            "Score": 1316,
+            "Height": 910,
+            "Time": 252
+        },
+        {
+            "Score": 716,
+            "Height": 564,
+            "Time": 206
+        }
+    ],
     "Achives": [
         false,
         false,
         false,
         true,
-        false,
-        false,
-        false,
         true,
         true,
+        true,
+        true,
+        false,
         false,
         true,
         false,
@@ -241,13 +302,13 @@
         true
     ],
     "StarCount": 0,
-    "MaxHeight": 0,
-    "DeathCount": 34,
-    "DeathLava": 22,
-    "HighScore": 0,
-    "DamageCount": 13,
+    "MaxHeight": 1864,
+    "DeathCount": 53,
+    "DeathLava": 32,
+    "HighScore": 2730,
+    "DamageCount": 15,
     "CountRestart": 16,
-    "HighTime": 0,
+    "HighTime": 499,
     "IsSecret": false,
     "IsFast": true
 }
