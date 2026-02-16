@@ -6,7 +6,6 @@ public class Heart : MonoBehaviour
     {
         if(other.TryGetComponent(out Health health))
         {
-            Debug.Log("Сердце подобрано");
             health.Heal();
             Destroy(this.gameObject);
         }

@@ -14,7 +14,7 @@ public class PlatformTracker : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (_touched || _curScene != "EternalLevel") return;
+        if (_touched || _curScene != "EndlessAdvances" && _curScene != "EndlessNormal") return;
 
         if (collision.gameObject.CompareTag("Player"))
         {

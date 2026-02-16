@@ -232,24 +232,17 @@ public class AchiveManager : MonoBehaviour
         if (YG2.saves.Achives[8] == true
             && YG2.saves.Achives[11] == true) return;
 
-        if (YG2.saves.DeathCount >= 30 && YG2.saves.Achives[8] == false)
+        if (YG2.saves.DeathCount == 30 && YG2.saves.Achives[8] == false)
         {
             ShowAchive(8);
             YG2.saves.Achives[8] = true;
         }
-        else
-        {
-            YG2.saves.Achives[8] = false;
-        }
+ 
 
-        if (YG2.saves.DeathCount >= 60)
+        if (YG2.saves.DeathCount == 60)
         {
             YG2.saves.Achives[11] = true;
             ShowAchive(11);
-        }
-        else
-        {
-            YG2.saves.Achives[11] = false;
         }
     }
 

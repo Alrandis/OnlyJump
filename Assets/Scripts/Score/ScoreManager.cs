@@ -13,6 +13,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private ReviveCountdownUI _reviveUI;
 
     [SerializeField] private LavaController _lava;
+    [SerializeField] private float _multiplier = 1f;
+
 
     private float _startTime;
     private int _maxHeight;
@@ -60,18 +62,17 @@ public class ScoreManager : MonoBehaviour
         float timePerHeight = 0.5f;
         float targetTime = _maxHeight * timePerHeight;
 
-        int bonus = 0;
+        float bonus = 0;
         if (timeSpent < targetTime)
-            bonus = Mathf.RoundToInt((targetTime - timeSpent) * 2f);
+            bonus = (targetTime - timeSpent) * 2f;
 
-        int finalScore = baseScore + bonus;
+        int finalScore = Mathf.RoundToInt((baseScore + bonus) * _multiplier);
         return (finalScore, _maxHeight, timeSpent);
     }
 
     public void SaveAttempt()
     {
-        if (SceneManager.GetActiveScene().name != "EternalLevel") return;
-        Debug.Log("Сработал SaveAttempt");
+        if (SceneManager.GetActiveScene().name != "EndlessAdvances" && SceneManager.GetActiveScene().name != "EndlessNormal") return;
         var attempt = GetCurrentAttempt();
         YG2.saves.AddAttempt(attempt.score, attempt.height, attempt.time);
         if(YG2.saves.MaxHeight < attempt.height)

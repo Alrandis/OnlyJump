@@ -48,7 +48,6 @@ public class PoolManager : MonoBehaviour
     {
         if (!_pools.TryGetValue(prefab, out var pool))
         {
-            Debug.LogWarning($"Нет пула для префаба {prefab.name}");
             return null;
         }
 

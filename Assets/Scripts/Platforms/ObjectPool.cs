@@ -55,7 +55,6 @@ public class ObjectPool : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Pool is empty and not expandable!");
                 return null;
             }
         }

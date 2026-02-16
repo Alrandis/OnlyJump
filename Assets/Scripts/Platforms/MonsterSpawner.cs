@@ -76,36 +76,36 @@ public class MonsterSpawner : MonoBehaviour
         float r = Random.value;
 
         // 0Ц50
-        if (y < 50f)
-            return StandingMonsterPrefab;
+        if (y < 20f)
+            return null;
 
-        // 50Ц100
-        if (y < 100f)
+        // 20Ц80
+        if (y < 80f)
             return r < 0.7f ? StandingMonsterPrefab : WalkingMonsterPrefab;
 
         // 100Ц150
         if (y < 150f)
         {
-            if (r < 0.5f) return StandingMonsterPrefab;
-            if (r < 0.85f) return WalkingMonsterPrefab;
+            if (r < 0.3f) return StandingMonsterPrefab;
+            if (r < 0.55f) return WalkingMonsterPrefab;
             return FrogMonsterPrefab;
         }
 
         // 150Ц250
         if (y < 250f)
         {
-            if (r < 0.15f) return StandingMonsterPrefab;
-            if (r < 0.45f) return WalkingMonsterPrefab;
-            if (r < 0.75f) return FrogMonsterPrefab;
-            return ShootingMonsterPrefab;
+            if (r < 0.15f) return ShootingMonsterPrefab; 
+            if (r < 0.35f) return StandingMonsterPrefab;
+            if (r < 0.60f) return WalkingMonsterPrefab;
+            return FrogMonsterPrefab;
         }
 
         // 250Ц400
         if (y < 400f)
         {
-            if (r < 0.15f) return WalkingMonsterPrefab;
-            if (r < 0.40f) return FrogMonsterPrefab;
-            if (r < 0.70f) return ShootingMonsterPrefab;
+            if (r < 0.25f) return WalkingMonsterPrefab;
+            if (r < 0.60f) return FrogMonsterPrefab;
+            if (r < 0.80f) return ShootingMonsterPrefab;
             return FlyingMonsterPrefab;
         }
 
@@ -114,15 +114,15 @@ public class MonsterSpawner : MonoBehaviour
         {
             if (r < 0.10f) return WalkingMonsterPrefab;
             if (r < 0.30f) return FrogMonsterPrefab;
-            if (r < 0.65f) return ShootingMonsterPrefab;
+            if (r < 0.65f) return StandingMonsterPrefab;
             return FlyingMonsterPrefab;
         }
 
         // 600+ Ч все доступны
-        if (r < 0.2f) return StandingMonsterPrefab;
-        if (r < 0.4f) return WalkingMonsterPrefab;
-        if (r < 0.6f) return FrogMonsterPrefab;
-        if (r < 0.8f) return ShootingMonsterPrefab;
+        if (r < 0.4f) return StandingMonsterPrefab;
+        if (r < 0.6f) return WalkingMonsterPrefab;
+        if (r < 0.8f) return FrogMonsterPrefab;
+        if (r < 0.9f) return ShootingMonsterPrefab;
         return FlyingMonsterPrefab;
     }
 
@@ -192,7 +192,7 @@ public class MonsterSpawner : MonoBehaviour
 
             spawnPos = new Vector3(
                 wallX,
-                platformY + ShootingOffsetY,
+                platformY,
                 0f);
         }
 

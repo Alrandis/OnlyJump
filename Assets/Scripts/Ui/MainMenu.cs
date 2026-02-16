@@ -8,6 +8,7 @@ using YG;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _scorePanel;
+    [SerializeField] private GameObject _choosePanel;
     [SerializeField] private GameObject _settingPanel;
     [SerializeField] private GameObject _achivePanel;
     [SerializeField] private string _sceneName = "";
@@ -57,9 +58,22 @@ public class MainMenu : MonoBehaviour
         _settingPanel.SetActive(true);
     }
 
-    public void OpenEndlesMode() 
+    public void OpenNormalMode() 
     {
-        SceneManager.LoadScene("EternalLevel");
+        SceneManager.LoadScene("EndlessNormal");
+    }
+    public void OpenAdvancedMode()
+    {
+        SceneManager.LoadScene("EndlessAdvances");
+    }
+
+    public void OpenChoosePanel()
+    {
+        _choosePanel.SetActive(true);
+    }
+    public void BackToMenu()
+    {
+        _choosePanel.SetActive(false);
     }
 
     public void OpenStorysMode()

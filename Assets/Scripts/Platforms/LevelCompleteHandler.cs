@@ -23,7 +23,6 @@ public class LevelCompleteHandler : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             LevelComplited?.Invoke();
-            Debug.Log("Test touch");
         }
     }
 }

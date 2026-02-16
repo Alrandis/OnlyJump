@@ -52,7 +52,6 @@ public class Health : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         _deathPending = true;
-        Debug.Log("Сработал EnterDeathState");
         if (TryGetComponent<Rigidbody2D>(out var rb))
         {
             rb.linearVelocity = Vector2.zero;
@@ -61,14 +60,13 @@ public class Health : MonoBehaviour
 
         OnPlayerDown?.Invoke();
 
-        if (SceneManager.GetActiveScene().name != "EternalLevel")
+        if (SceneManager.GetActiveScene().name != "EndlessAdvances" && SceneManager.GetActiveScene().name != "EndlessNormal")
             ConfirmDeath();
     }
 
     public void ConfirmDeath()
     {
         if (!_deathPending) return;
-        Debug.Log("Сработал ConfirmDeath");
         _deathPending = false;
         Death();
     }
@@ -110,11 +108,10 @@ public class Health : MonoBehaviour
     private void Death()
     {
         
-        Debug.Log("Сработал Death");
         OnPlayerDeadConfirmed?.Invoke();
 
         YG2.saves.DeathCount++;
-        if(SceneManager.GetActiveScene().name != "EternalLevel")
+         if (SceneManager.GetActiveScene().name != "EndlessAdvances" && SceneManager.GetActiveScene().name != "EndlessNormal")
             YG2.saves.Levels[SceneManager.GetActiveScene().buildIndex - 1].TryCount++;
 
         YG2.SaveProgress();

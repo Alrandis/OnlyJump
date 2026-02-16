@@ -44,9 +44,7 @@ public class SettingMenu : MonoBehaviour
 
     public void SoundChange(float soundValue)
     {
-        Debug.Log("Громкость до изменения " + YG2.saves.SoundVolume);
         YG2.saves.SoundVolume = soundValue;
-        Debug.Log("Громкость после изменения " + YG2.saves.SoundVolume);
         Save();
         YG2.saves.SoundVolumeChanged();
     }

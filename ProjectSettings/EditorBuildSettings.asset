@@ -114,8 +114,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Level35.unity
     guid: c4796c225444e1e4a887b93f2d6db538
   - enabled: 1
-    path: Assets/Scenes/EternalLevel.unity
+    path: Assets/Scenes/EndlessNormal.unity
     guid: e975c1ad969d12f42a34e4676062b152
+  - enabled: 1
+    path: Assets/Scenes/EndlessAdvances.unity
+    guid: 0eba95763b8e99242bc9d36470df350d
   - enabled: 1
     path: Assets/Scenes/LevelSelection.unity
     guid: be63bf0fbe9080643bb32076ef92253e

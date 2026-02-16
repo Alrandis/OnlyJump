@@ -10,6 +10,10 @@ public class PlayerJumpController : MonoBehaviour
 
     [SerializeField] private Vector2 _jumpTarget;
 
+    [SerializeField] private float _jumpBufferTime = 0.12f;
+    private float _jumpBufferCounter;
+
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -19,13 +23,26 @@ public class PlayerJumpController : MonoBehaviour
 
     private void Update()
     {
-        // Прыжок только если игрок на земле или у стены (данные берём из SO)
-        if (Input.GetMouseButtonDown(0) && (_playerData.IsGrounded || _playerData.IsTouchingWall))
+        // Если нажали — запускаем буфер
+        if (Input.GetMouseButtonDown(0))
+        {
+            _jumpBufferCounter = _jumpBufferTime;
+        }
+
+        // уменьшаем таймер
+        if (_jumpBufferCounter > 0)
+            _jumpBufferCounter -= Time.deltaTime;
+
+        // если есть буфер и игрок может прыгать
+        if (_jumpBufferCounter > 0 &&
+            (_playerData.IsGrounded || _playerData.IsTouchingWall))
         {
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 target = new Vector2(mouseWorldPos.x, mouseWorldPos.y);
 
             Jump(target);
+
+            _jumpBufferCounter = 0f; // очищаем буфер
         }
     }
 

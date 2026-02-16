@@ -9,21 +9,26 @@ public class MovingPlatform : PlatformBase
     private Vector3 _startPos;
     private int _direction = 1;
 
-    private float speed = 0f;
     private float newX = 0f;
     private float minX = 0f;
     private float maxX = 0f;
 
+    private Vector3 _lastPosition;
+
+    public Vector2 CurrentVelocity { get; private set; }
+
     public override void ResetPlatform()
     {
         _startPos = transform.position;
+        _lastPosition = transform.position;
+
         _speedOfset = Random.Range(0f, 0.5f);
         _direction = Random.value < 0.5f ? 1 : -1;
     }
 
     private void Update()
     {
-        speed = (_speed + _speedOfset) * _direction;
+        float speed = (_speed + _speedOfset) * _direction;
         newX = transform.position.x + speed * Time.deltaTime;
 
         minX = _startPos.x - _distance;
@@ -41,30 +46,10 @@ public class MovingPlatform : PlatformBase
         }
 
         transform.position = new Vector3(newX, transform.position.y, transform.position.z);
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            foreach (var contact in collision.contacts)
-            {
-                if (contact.normal.y < -0.5f) // игрок сверху
-                {
-                    // прикрепляем игрока к платформе
-                    collision.collider.transform.SetParent(transform);
-                    break;
-                }
-            }
-        }
-    }
+        // Вычисляем реальную скорость
+        CurrentVelocity = (transform.position - _lastPosition) / Time.deltaTime;
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            // убираем связь при уходе
-            collision.collider.transform.SetParent(null);
-        }
+        _lastPosition = transform.position;
     }
 }

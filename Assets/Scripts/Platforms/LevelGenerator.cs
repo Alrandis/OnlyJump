@@ -25,9 +25,6 @@ public class LevelGenerator : MonoBehaviour
     public GameObject ShortDisapearPlatform;
     public GameObject ShortSpikePlatform;
 
-    [Header("Vertical Platforms")]
-    public GameObject VerticalPlatformLong;
-
     private List<GameObject> _activePlatforms = new List<GameObject>();
     private float _lastPlatformY = 0f;
 
@@ -190,7 +187,6 @@ public class LevelGenerator : MonoBehaviour
         else if (height < 500f)
         {
             if (r < 0.25f) return SpikesPlatform;
-            if (r < 0.4f) return VerticalPlatformLong;
             if (r < 0.65f) return ShortDisapearPlatform;
             else return ShortPlatform;
         }
@@ -198,7 +194,6 @@ public class LevelGenerator : MonoBehaviour
         
         else if (height < 600f)
         {
-            if (r < 0.25f) return VerticalPlatformLong;
             if (r < 0.5f) return VerticalPlatform;
             if (r < 0.65f) return ShortDisapearPlatform;
             if (r < 0.75f) return DisappearingPlatform;
@@ -208,7 +203,6 @@ public class LevelGenerator : MonoBehaviour
         
         else if (height < 700f)
         {
-            if (r < 0.25f) return VerticalPlatformLong;
             if (r < 0.45f) return ShortDisapearPlatform;
             if (r < 0.7f) return SpikesPlatform;
             if (r < 0.85f) return NormalPlatform;
@@ -219,7 +213,6 @@ public class LevelGenerator : MonoBehaviour
         else
         {
             if (r < 0.15f) return ShortDisapearPlatform;
-            if (r < 0.25f) return VerticalPlatformLong;
             if (r < 0.35f) return FlyingPlatform;
             if (r < 0.5f) return VerticalPlatform;
             if (r < 0.6f) return NormalPlatform;
@@ -255,7 +248,6 @@ public class LevelGenerator : MonoBehaviour
     {
         if (NormalPlatform == null)
         {
-            Debug.LogWarning("NormalPlatform не назначен Ч невозможно заспавнить safe-платформу");
             return;
         }
 

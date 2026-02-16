@@ -19,6 +19,8 @@ public class PlayerSurfaceDetector : MonoBehaviour
     private PlayerAirControl _playerAirControl;
     private Animator _animator;
 
+    private MovingPlatform _currentMovingPlatform;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -31,15 +33,18 @@ public class PlayerSurfaceDetector : MonoBehaviour
     {
         CheckGround();
         CheckWall();
+        ApplyPlatformVelocity(); // добавили аккуратно в конец
     }
 
     private void CheckGround()
     {
-        _playerData.IsGrounded = Physics2D.OverlapCircle(
+        Collider2D groundCollider = Physics2D.OverlapCircle(
             _groundCheck.position,
             _groundRadius,
             _groundLayer
         );
+
+        _playerData.IsGrounded = groundCollider != null;
 
         if (_playerData.IsGrounded)
         {
@@ -47,8 +52,32 @@ public class PlayerSurfaceDetector : MonoBehaviour
 
             if (_animator != null)
                 _animator.SetTrigger("Idle");
+
+            // Проверяем, стоим ли на движущейся платформе
+            _currentMovingPlatform = groundCollider.GetComponent<MovingPlatform>();
+        }
+        else
+        {
+            _currentMovingPlatform = null;
         }
     }
+
+
+    private void ApplyPlatformVelocity()
+    {
+        if (_currentMovingPlatform == null)
+            return;
+
+        if (!_playerData.IsGrounded)
+            return;
+
+        // Не передаём скорость если игрок прыгает вверх
+        if (_playerData.IsJumping && _rb.linearVelocity.y > 0f)
+            return;
+
+        _rb.position += _currentMovingPlatform.CurrentVelocity * Time.fixedDeltaTime;
+    }
+
 
     private void CheckWall()
     {
